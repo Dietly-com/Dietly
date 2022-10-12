@@ -11,17 +11,291 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name  String
+  surname String
+  login String @unique
+  password  String
   email String  @unique
-  name  String?
-  posts Post[]
+  phone String?
+
+  userProfiles UserProfile[]
+  userSettings UserSettings[]
+  userBadges UserBadge[]
+  userPersonalBests UserPersonalBest[]
+  ownedDiets Diet[]
+  ownedProducts Product[]
+  ownedRecipes Recipe[]
+  userActiveDiets UserActiveDiet[]
+  userMeals UserMeal[]
 }
 
-model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User    @relation(fields: [authorId], references: [id])
-  authorId  Int
+model UserProfile {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  height Float
+  weight Float
+  bmi Float
+  activeLevel Int
+  file File @relation(fields: [fileId], references: [id])
+  fileId Int
+}
+
+model UserSettings {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  displayTheme String
+  displayLanguage String
+}
+
+model Badge {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name String
+  description String
+  file File @relation(fields: [fileId], references: [id])
+  fileId Int
+
+  userBadges UserBadge[]
+}
+
+model UserBadge {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  badge Badge @relation(fields: [badgeId], references: [id])
+  badgeId Int
+  time DateTime
+}
+
+model PersonalBest {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name String
+  description String
+  file File @relation(fields: [fileId], references: [id])
+  fileId Int
+
+  userPersonalBests UserPersonalBest[]
+}
+
+model UserPersonalBest {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  personalBest PersonalBest @relation(fields: [personalBestId], references: [id])
+  personalBestId Int
+}
+
+model UserActiveDiet {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  diet Diet @relation(fields: [dietId], references: [id])
+  dietId Int
+  startTime DateTime
+  endTime DateTime
+}
+
+model UserMeal {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  name String
+  time DateTime
+
+  userMealProduct UserMealProduct[]
+  userMealRecipe UserMealRecipe[]
+}
+
+model UserMealProduct {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  userMeal UserMeal @relation(fields: [userMealId], references: [id])
+  userMealId Int
+  product Product @relation(fields: [productId], references: [id])
+  productId Int
+  unit Unit @relation(fields: [unitId], references: [id])
+  unitId Int
+}
+
+model UserMealRecipe {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  userMeal UserMeal @relation(fields: [userMealId], references: [id])
+  userMealId Int
+  recipe Recipe @relation(fields: [recipeId], references: [id])
+  recipeId Int
+  unit Unit @relation(fields: [unitId], references: [id])
+  unitId Int
+}
+
+model Unit {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name String
+  quantity Float
+  shortcut String
+
+  product Product[]
+  recipes Recipe[]
+  userMealProduct UserMealProduct[]
+  userMealRecipe UserMealRecipe[]
+  recipeProduct RecipeProduct[]
+  dietMealRecipe DietMealRecipe[]
+  dietMealProduct DietMealProduct[]
+}
+
+model Nutrient {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name String
+  min Int
+  max Int
+
+  productNutrient ProductNutrient[]
+}
+
+model Product {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name String
+  description String
+  owner User @relation(fields: [ownerId], references: [id])
+  ownerId Int
+  file File @relation(fields: [fileId], references: [id])
+  fileId Int
+  unit Unit @relation(fields: [unitId], references: [id])
+  unitId Int
+
+  userMealProduct UserMealProduct[]
+  productNutrient ProductNutrient[]
+  recipeProduct RecipeProduct[]
+  dietMealProduct DietMealProduct[]
+}
+
+model ProductNutrient {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  product Product @relation(fields: [productId], references: [id])
+  productId Int
+  nutrient Nutrient @relation(fields: [nutrientId], references: [id])
+  nutrientId Int
+  quantity Float
+}
+
+model Recipe {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name String
+  description String
+  preparation String
+  owner User @relation(fields: [ownerId], references: [id])
+  ownerId Int
+  file File @relation(fields: [fileId], references: [id])
+  fileId Int
+  unit Unit @relation(fields: [unitId], references: [id])
+  unitId Int
+  quantity Float
+
+  userMealRecipe UserMealRecipe[]
+  recipeProduct RecipeProduct[]
+  dietMealRecipe DietMealRecipe[]
+}
+
+model RecipeProduct {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  recipe Recipe @relation(fields: [recipeId], references: [id])
+  recipeId Int
+  product Product @relation(fields: [productId], references: [id])
+  productId Int
+  unit Unit @relation(fields: [unitId], references: [id])
+  unitId Int
+  quantity Float
+}
+
+model Diet {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name String
+  description String
+  owner User @relation(fields: [ownerId], references: [id])
+  ownerId Int
+  file File @relation(fields: [fileId], references: [id])
+  fileId Int
+
+  userActiveDiets UserActiveDiet[]
+  dietMeal DietMeal[]
+}
+
+model DietMeal {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name String
+  hour DateTime
+  day Int
+  diet Diet @relation(fields: [dietId], references: [id])
+  dietId Int
+
+  dietMealRecipe DietMealRecipe[]
+  dietMealProduct DietMealProduct[]
+}
+
+model DietMealRecipe {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  dietMeal DietMeal @relation(fields: [dietMealId], references: [id])
+  dietMealId Int
+  recipe Recipe @relation(fields: [recipeId], references: [id])
+  recipeId Int
+  unit Unit @relation(fields: [unitId], references: [id])
+  unitId Int
+  quantity Float
+}
+
+model DietMealProduct {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  dietMeal DietMeal @relation(fields: [dietMealId], references: [id])
+  dietMealId Int
+  product Product @relation(fields: [productId], references: [id])
+  productId Int
+  unit Unit @relation(fields: [unitId], references: [id])
+  unitId Int
+  quantity Float
+}
+
+model Message {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  // fromUser User @relation(fields: [fromUserId], references: [id])
+  // fromUserId Int
+  // toUser User @relation(fields: [toUserId], references: [id])
+  // toUserId Int
+  time DateTime
+  content String
+}
+
+model File {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  type String
+  path String
+
+  userProfiles UserProfile[]
+  badges Badge[]
+  personalBests PersonalBest[]
+  diets Diet[]
+  products Product[]
+  recipes Recipe[]
 }
