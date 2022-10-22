@@ -1,4 +1,5 @@
 import { Router } from 'express';
+const bodyParser = require("body-parser");
 
 import { showStatus } from '../middlewares/DeveloperMiddleware';
 
@@ -58,6 +59,8 @@ const discoverRouter = Router()
   .use("/recipeProduct", recipeProductController);
 
 const standardRouter = Router()
+  .use(bodyParser.json())
+  .use(bodyParser.urlencoded({ extended: true }))
   .use(showStatus)
   .use(adminRouter)
   .use(userRouter)
