@@ -1,7 +1,6 @@
 import { Router } from 'express';
 
-import { verifyUser } from '../middlewares/UserMiddleware';
-
+const userController = require("../controllers/UserController");
 const fileController = require("../controllers/FileController");
 const badgeController = require("../controllers/BadgeController");
 const personalBestController = require("../controllers/PersonalBestController");
@@ -25,26 +24,25 @@ const userMealRecipeController = require("../controllers/UserMealRecipeControlle
 
 
 const adminRouter = Router()
-  .use(verifyUser)
   .use("/file", fileController)
   .use("/badge", badgeController)
   .use("/personalBest", personalBestController)
   .use("/unit", unitController)
   .use("/nutrient", nutrientController);
 
+const userRouter = Router()
+  .use("/user", userController);
+
 const userProfileRouter = Router()
-  .use(verifyUser)
   .use("/userBadge", userBadgeController)
   .use("/userPersonalBest", userPersonalBestController);
 
 const mealRouter = Router()
-  .use(verifyUser)
   .use("/userMeal", userMealController)
   .use("/userMealProduct", userMealProductController)
   .use("/userMealRecipe", userMealRecipeController);
 
 const dietRouter = Router()
-  .use(verifyUser)
   .use("/diet", dietController)
   .use("/dietMeal", dietMealController)
   .use("/dietMealRecipe", dietMealRecipeController)
@@ -52,7 +50,6 @@ const dietRouter = Router()
   .use("/userActiveDiet", userActiveDietController);
 
 const discoverRouter = Router()
-  .use(verifyUser)
   .use("/product", productController)
   .use("/productNutrient", productNutrientController)
   .use("/recipe", recipeController)
@@ -60,6 +57,7 @@ const discoverRouter = Router()
 
 const standardRouter = Router()
   .use(adminRouter)
+  .use(userRouter)
   .use(userProfileRouter)
   .use(mealRouter)
   .use(dietRouter)
