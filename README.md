@@ -15,7 +15,7 @@
 4. npm install prisma --save-dev
 
 
-## Fontend
+## Frontend
 
 ### Przydatne strony
 1. https://reactjs.org/
