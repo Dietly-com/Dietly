@@ -1,6 +1,7 @@
 import express, { Router } from 'express';
 import {createOne, findOne, findMany, updateOne, deleteOne } from '../services/StandardService';
 import { PrismaClient} from '@prisma/client';
+import { verifyUser } from '../middlewares/UserMiddleware';
 
 const object = new PrismaClient().userPersonalBest;
 const include = {
@@ -9,6 +10,7 @@ const include = {
 };
 
 const router: Router = express.Router();
+router.use(verifyUser)
 router.post("/", async (req, res) => {
     createOne(req, res, object);
 })
