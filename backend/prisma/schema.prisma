@@ -132,13 +132,13 @@ model Unit {
   quantity Float
   shortcut String
 
-  product Product[]
+  products Product[]
   recipes Recipe[]
-  userMealProduct UserMealProduct[]
-  userMealRecipe UserMealRecipe[]
-  recipeProduct RecipeProduct[]
-  dietMealRecipe DietMealRecipe[]
-  dietMealProduct DietMealProduct[]
+  userMealProducts UserMealProduct[]
+  userMealRecipes UserMealRecipe[]
+  recipeProducts RecipeProduct[]
+  dietMealRecipes DietMealRecipe[]
+  dietMealProducts DietMealProduct[]
 }
 
 model Nutrient {
@@ -148,7 +148,7 @@ model Nutrient {
   min Int?
   max Int?
 
-  productNutrient ProductNutrient[]
+  productNutrients ProductNutrient[]
 }
 
 model Product {
@@ -163,10 +163,10 @@ model Product {
   unit Unit @relation(fields: [unitId], references: [id])
   unitId Int
 
-  userMealProduct UserMealProduct[]
-  productNutrient ProductNutrient[]
-  recipeProduct RecipeProduct[]
-  dietMealProduct DietMealProduct[]
+  userMealProducts UserMealProduct[]
+  productNutrients ProductNutrient[]
+  recipeProducts RecipeProduct[]
+  dietMealProducts DietMealProduct[]
 }
 
 model ProductNutrient {
@@ -193,9 +193,9 @@ model Recipe {
   unitId Int
   quantity Float
 
-  userMealRecipe UserMealRecipe[]
-  recipeProduct RecipeProduct[]
-  dietMealRecipe DietMealRecipe[]
+  userMealRecipes UserMealRecipe[]
+  recipeProducts RecipeProduct[]
+  dietMealRecipes DietMealRecipe[]
 }
 
 model RecipeProduct {
@@ -221,7 +221,7 @@ model Diet {
   fileId Int?
 
   userActiveDiets UserActiveDiet[]
-  dietMeal DietMeal[]
+  dietMeals DietMeal[]
 }
 
 model DietMeal {
@@ -233,8 +233,8 @@ model DietMeal {
   diet Diet @relation(fields: [dietId], references: [id])
   dietId Int
 
-  dietMealRecipe DietMealRecipe[]
-  dietMealProduct DietMealProduct[]
+  dietMealRecipes DietMealRecipe[]
+  dietMealProducts DietMealProduct[]
 }
 
 model DietMealRecipe {

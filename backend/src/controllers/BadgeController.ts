@@ -9,7 +9,7 @@ const include = {
 };
 
 const router: Router = express.Router();
-router.use(verifyUser)
+router.use(verifyUser);
 router.post("/", async (req, res) => {
     createOne(req, res, object);
 })

@@ -5,12 +5,12 @@ import { verifyUser } from '../middlewares/UserMiddleware';
 
 const object = new PrismaClient().userActiveDiet;
 const include = {
-    diet:true,
+    diet:{include: {owner: true, file: true, dietMeals: {include: {dietMealRecipes: true, dietMealProducts: true}}}},
     user:true
 };
 
 const router: Router = express.Router();
-router.use(verifyUser)
+router.use(verifyUser);
 router.post("/", async (req, res) => {
     createOne(req, res, object);
 })
