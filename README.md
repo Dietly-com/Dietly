@@ -8,11 +8,23 @@
 3. https://www.prisma.io/
 4. https://hevodata.com/learn/rest-api-best-practices/
 
-### Komendy do inicjalizacji
-1. npm init
-2. npm install typescript ts-node @types/node --save-dev
-3. npm install express --save
-4. npm install prisma --save-dev
+### Inicjalizacja
+1. cd backend
+2. npm init
+
+### Instalowanie pakietów
+1. npm install typescript ts-node @types/node --save-dev
+2. npm install express --save
+3. npm install prisma --save-dev
+4. npm install dotenv
+5. npm i joi
+6. npm i bcrypt 
+
+### Migracja bazy danych
+1. npx prisma migrate dev --name "init" --preview-feature
+
+### Uruchamianie
+1. npx ts-node backend.ts
 
 
 ## Fontend
@@ -24,9 +36,17 @@
 4. https://axios-http.com/
 5. https://fonts.google.com/
 
-### Komendy do inicjalizacji
-1. npm init
-2. npm install react
+### Inicjalizacja
+1. cd frontend
+2. npm init
+
+### Instalowanie pakietów
+1. npm install react
+2. npm install react-router-dom
 3. npm install react-dom
 4. npm install @mui/material @emotion/react @emotion/styled
-5. npm install axios
+5. npm install --save react-toastify
+6. npm install axios
+7. npm install react-markdown
+
+### Uruchamianie

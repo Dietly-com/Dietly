@@ -1,14 +1,16 @@
 const express = require('express')
 const app = express();
-const port = process.env.PORT as string;
+const port = 8080;
 const userRoute = require('./src/routes/UserRoute');
+const fileRoute = require('./src/routes/FileRoute');
 
 import dotenv from 'dotenv';
 dotenv.config();
 
 app.use('/user', userRoute);
+app.use('/file', fileRoute);
 
 
 app.listen(port, () => {
-    console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
+    console.log(`⚡️[Backend]: Server is running at http://localhost:${port}`);
 });

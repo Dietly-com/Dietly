@@ -20,15 +20,15 @@ model User {
   email String  @unique
   phone String?
 
-  height Float
-  weight Float
-  bmi Float
-  activeLevel Int
-  file File @relation(fields: [fileId], references: [id])
-  fileId Int
+  height Float?
+  weight Float?
+  bmi Float?
+  activeLevel Int?
+  file File? @relation(fields: [fileId], references: [id])
+  fileId Int?
 
-  displayTheme String
-  displayLanguage String
+  displayTheme String?
+  displayLanguage String?
 
   userBadges UserBadge[]
   userPersonalBests UserPersonalBest[]
@@ -43,9 +43,9 @@ model Badge {
   id    Int     @id @default(autoincrement())
   createdAt DateTime @default(now())
   name String
-  description String
-  file File @relation(fields: [fileId], references: [id])
-  fileId Int
+  description String?
+  file File? @relation(fields: [fileId], references: [id])
+  fileId Int?
 
   userBadges UserBadge[]
 }
@@ -57,7 +57,7 @@ model UserBadge {
   userId Int
   badge Badge @relation(fields: [badgeId], references: [id])
   badgeId Int
-  time DateTime
+  time DateTime @default(now())
 }
 
 model PersonalBest {
@@ -259,17 +259,6 @@ model DietMealProduct {
   unit Unit @relation(fields: [unitId], references: [id])
   unitId Int
   quantity Float
-}
-
-model Message {
-  id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  // fromUser User @relation(fields: [fromUserId], references: [id])
-  // fromUserId Int
-  // toUser User @relation(fields: [toUserId], references: [id])
-  // toUserId Int
-  time DateTime
-  content String
 }
 
 model File {

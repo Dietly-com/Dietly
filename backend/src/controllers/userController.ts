@@ -29,11 +29,11 @@ export const createUser = async (req: Request, res: Response) => {
     }
 }
 
-export const selectUser = async (req:Request, res:Response) => {
+export const findUser = async (req:Request, res:Response) => {
     try {
         const user = await prisma.user.findUnique({
           where: {
-            id: Number(req.params.userid),
+            id: Number(req.params.id),
           },
         });
         if (!user)
@@ -46,7 +46,7 @@ export const selectUser = async (req:Request, res:Response) => {
     }
 }
 
-export const selectUsers = async (req:Request, res:Response) => {
+export const findUsers = async (req:Request, res:Response) => {
     try {
         const users = await prisma.user.findMany();
         res.send({ success: true, message: "Wyszukano użytkowników", users: users })

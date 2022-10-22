@@ -38,7 +38,7 @@ export const findOne = async (req: Request, res: Response, object:any) => {
     }
 }
 
-export const finMany = async (req: Request, res: Response, object:any) => {
+export const findMany = async (req: Request, res: Response, object:any) => {
     try {
         const records = await object.findMany();
         res.status(201).send({data: records, success: true, message: "Znaleziono rekordy"});
