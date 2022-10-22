@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/user", userRoute);
 app.use("/file", fileRoute);
-app.use("/user", badgeRoute);
+app.use("/badge", badgeRoute);
 app.use("/personalBest", personalBestRoute);
 app.use("/userBadge", userBadgeRoute);
 app.use("/userMealProduct", userMealProductRoute);

@@ -24,13 +24,14 @@ export const updateOne = async (req: Request, res: Response, object:any) => {
     }
 }
 
-export const findOne = async (req: Request, res: Response, object:any) => {
+export const findOne = async (req: Request, res: Response, object:any, include:any = {}) => {
     try {
         const { id } = req.params
         const record = await object.findOne({
             where: {
                 id: Number(id),
             },
+            include: include,
         })
         res.status(201).send({data: record, success: true, message: "Znaleziono rekord"});
     } catch (error) {
@@ -38,9 +39,11 @@ export const findOne = async (req: Request, res: Response, object:any) => {
     }
 }
 
-export const findMany = async (req: Request, res: Response, object:any) => {
+export const findMany = async (req: Request, res: Response, object:any, include:any = {}) => {
     try {
-        const records = await object.findMany();
+        const records = await object.findMany({
+            include: include
+        });
         res.status(201).send({data: records, success: true, message: "Znaleziono rekordy"});
     } catch (error) {
         res.status(500).send({ success: false, message: "Wewnętrzny błąd serwera"});

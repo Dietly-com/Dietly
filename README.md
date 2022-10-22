@@ -17,8 +17,8 @@
 2. npm install express --save
 3. npm install prisma --save-dev
 4. npm install dotenv
-5. npm i joi
-6. npm i bcrypt 
+5. npm install joi
+6. npm install bcrypt 
 7. npm install jsonwebtoken
 
 ### Migracja bazy danych
