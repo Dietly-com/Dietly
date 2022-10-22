@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
-import {generateAccessToken } from '../utils/UserUtils';
+import { generateAccessToken } from '../utils/UserUtils';
 
 export const createUser = async (req: Request, res: Response) => {
     try {

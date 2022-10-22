@@ -64,9 +64,9 @@ model PersonalBest {
   id    Int     @id @default(autoincrement())
   createdAt DateTime @default(now())
   name String
-  description String
-  file File @relation(fields: [fileId], references: [id])
-  fileId Int
+  description String?
+  file File? @relation(fields: [fileId], references: [id])
+  fileId Int?
 
   userPersonalBests UserPersonalBest[]
 }
@@ -145,8 +145,8 @@ model Nutrient {
   id    Int     @id @default(autoincrement())
   createdAt DateTime @default(now())
   name String
-  min Int
-  max Int
+  min Int?
+  max Int?
 
   productNutrient ProductNutrient[]
 }
@@ -155,11 +155,11 @@ model Product {
   id    Int     @id @default(autoincrement())
   createdAt DateTime @default(now())
   name String
-  description String
-  owner User @relation(fields: [ownerId], references: [id])
-  ownerId Int
-  file File @relation(fields: [fileId], references: [id])
-  fileId Int
+  description String?
+  owner User? @relation(fields: [ownerId], references: [id])
+  ownerId Int?
+  file File? @relation(fields: [fileId], references: [id])
+  fileId Int?
   unit Unit @relation(fields: [unitId], references: [id])
   unitId Int
 
@@ -183,12 +183,12 @@ model Recipe {
   id    Int     @id @default(autoincrement())
   createdAt DateTime @default(now())
   name String
-  description String
-  preparation String
-  owner User @relation(fields: [ownerId], references: [id])
-  ownerId Int
-  file File @relation(fields: [fileId], references: [id])
-  fileId Int
+  description String?
+  preparation String?
+  owner User? @relation(fields: [ownerId], references: [id])
+  ownerId Int?
+  file File? @relation(fields: [fileId], references: [id])
+  fileId Int?
   unit Unit @relation(fields: [unitId], references: [id])
   unitId Int
   quantity Float
@@ -214,11 +214,11 @@ model Diet {
   id    Int     @id @default(autoincrement())
   createdAt DateTime @default(now())
   name String
-  description String
-  owner User @relation(fields: [ownerId], references: [id])
-  ownerId Int
-  file File @relation(fields: [fileId], references: [id])
-  fileId Int
+  description String?
+  owner User? @relation(fields: [ownerId], references: [id])
+  ownerId Int?
+  file File? @relation(fields: [fileId], references: [id])
+  fileId Int?
 
   userActiveDiets UserActiveDiet[]
   dietMeal DietMeal[]
@@ -264,7 +264,7 @@ model DietMealProduct {
 model File {
   id    Int     @id @default(autoincrement())
   createdAt DateTime @default(now())
-  type String
+  type String?
   path String
 
   users User[]
