@@ -1,5 +1,7 @@
 import { Router } from 'express';
 
+import { showStatus } from '../middlewares/DeveloperMiddleware';
+
 const userController = require("../controllers/UserController");
 const fileController = require("../controllers/FileController");
 const badgeController = require("../controllers/BadgeController");
@@ -56,6 +58,7 @@ const discoverRouter = Router()
   .use("/recipeProduct", recipeProductController);
 
 const standardRouter = Router()
+  .use(showStatus)
   .use(adminRouter)
   .use(userRouter)
   .use(userProfileRouter)
