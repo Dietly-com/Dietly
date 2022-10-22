@@ -1,11 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-import { PrismaClient, Prisma } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
-const userUtils = require("../utils/UserUtils");
-
+import {generateAccessToken } from '../utils/UserUtils';
 
 export const createUser = async (req: Request, res: Response) => {
     try {
@@ -62,22 +61,29 @@ export const authUser = async (req:Request, res:Response) => {
             password: Joi.string().required().label("Password"),
         })
         const { error } = schema.validate(req.body);
-        if (error)
-            return res.status(400).send({ success: false, message: error.details[0].message})
+        if (error){
+            console.log(error);
+           return res.status(400).send({ success: false, message: error.details[0].message}) 
+        }
+        
         const user = await prisma.user.findUnique({
             where: {
               email: req.body.email,
             },
           });
-        if (!user)
-            return res.status(401).send({ success: false, message: "Błędny email lub hasło!"})
+        if (!user){
+           return res.status(401).send({ success: false, message: "Błędny email lub hasło!"}) 
+        }
+            
         const validPassword = await bcrypt.compare(
             req.body.password,
             user.password
         )
-        if (!validPassword)
+        if (!validPassword){
             return res.status(401).send({ success: false, message: "Błędny email lub hasło!"})
-        const token = userUtils.generateAccessToken(user.id);
+        }
+            
+        const token = generateAccessToken(user.id);
         res.status(200).send({ success: true, message: "Zalogowano!", data: token, user: {_id: user.id}})
     } catch (error) {
         res.status(500).send({ success: false, message: "Wewnętrzny błąd serwera"})

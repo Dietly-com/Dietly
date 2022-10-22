@@ -19,6 +19,7 @@
 4. npm install dotenv
 5. npm i joi
 6. npm i bcrypt 
+7. npm install jsonwebtoken
 
 ### Migracja bazy danych
 1. npx prisma migrate dev --name "init" --preview-feature
