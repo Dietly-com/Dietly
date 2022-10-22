@@ -20,8 +20,16 @@ model User {
   email String  @unique
   phone String?
 
-  userProfiles UserProfile[]
-  userSettings UserSettings[]
+  height Float
+  weight Float
+  bmi Float
+  activeLevel Int
+  file File @relation(fields: [fileId], references: [id])
+  fileId Int
+
+  displayTheme String
+  displayLanguage String
+
   userBadges UserBadge[]
   userPersonalBests UserPersonalBest[]
   ownedDiets Diet[]
@@ -29,28 +37,6 @@ model User {
   ownedRecipes Recipe[]
   userActiveDiets UserActiveDiet[]
   userMeals UserMeal[]
-}
-
-model UserProfile {
-  id Int @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  user User @relation(fields: [userId], references: [id])
-  userId Int
-  height Float
-  weight Float
-  bmi Float
-  activeLevel Int
-  file File @relation(fields: [fileId], references: [id])
-  fileId Int
-}
-
-model UserSettings {
-  id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  user User @relation(fields: [userId], references: [id])
-  userId Int
-  displayTheme String
-  displayLanguage String
 }
 
 model Badge {
@@ -292,7 +278,7 @@ model File {
   type String
   path String
 
-  userProfiles UserProfile[]
+  users User[]
   badges Badge[]
   personalBests PersonalBest[]
   diets Diet[]
