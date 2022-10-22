@@ -99,8 +99,8 @@ model UserMeal {
   name String
   time DateTime
 
-  userMealProduct UserMealProduct[]
-  userMealRecipe UserMealRecipe[]
+  userMealProducts UserMealProduct[]
+  userMealRecipes UserMealRecipe[]
 }
 
 model UserMealProduct {

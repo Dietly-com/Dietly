@@ -1,13 +1,10 @@
 import express, { Router } from 'express';
-import {verifyUser } from '../middlewares/UserMiddleware';
-import {createOne, findOne, findMany, updateOne, deleteOne } from '../controllers/StandardController';
+import {createOne, findOne, findMany, updateOne, deleteOne } from '../services/StandardService';
 import { PrismaClient} from '@prisma/client';
 
-const object = new PrismaClient().userMealRecipe;
+const object = new PrismaClient().product;
+
 const router: Router = express.Router();
-
-router.use(verifyUser);
-
 router.post("/", async (req, res) => {
     createOne(req, res, object);
 })

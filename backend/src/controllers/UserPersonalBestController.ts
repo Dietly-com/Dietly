@@ -1,23 +1,24 @@
 import express, { Router } from 'express';
-import {verifyUser } from '../middlewares/UserMiddleware';
-import {createOne, findOne, findMany, updateOne, deleteOne } from '../controllers/StandardController';
+import {createOne, findOne, findMany, updateOne, deleteOne } from '../services/StandardService';
 import { PrismaClient} from '@prisma/client';
 
-const object = new PrismaClient().file;
+const object = new PrismaClient().userPersonalBest;
+const include = {
+    personalBest:{include:{file:true}},
+    user:true
+};
+
 const router: Router = express.Router();
-
-router.use(verifyUser);
-
 router.post("/", async (req, res) => {
     createOne(req, res, object);
 })
 
 router.get("/:id",  async (req, res) => {
-    findOne(req, res, object);
+    findOne(req, res, object, include);
 })
 
 router.get("/",  async (req, res) => {
-    findMany(req, res, object);
+    findMany(req, res, object, include);
 })
 
 router.patch("/",  async (req, res) => {
