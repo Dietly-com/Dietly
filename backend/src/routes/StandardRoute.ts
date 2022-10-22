@@ -2,7 +2,6 @@ import { Router } from 'express';
 
 import { verifyUser } from '../middlewares/UserMiddleware';
 
-const userController = require("../controllers/UserController");
 const fileController = require("../controllers/FileController");
 const badgeController = require("../controllers/BadgeController");
 const personalBestController = require("../controllers/PersonalBestController");
@@ -33,9 +32,6 @@ const adminRouter = Router()
   .use("/unit", unitController)
   .use("/nutrient", nutrientController);
 
-const userRouter = Router()
-  .use("/user", userController);
-
 const userProfileRouter = Router()
   .use(verifyUser)
   .use("/userBadge", userBadgeController)
@@ -63,5 +59,9 @@ const discoverRouter = Router()
   .use("/recipeProduct", recipeProductController);
 
 const standardRouter = Router()
-  .use("/api/v1", [adminRouter, userRouter, userProfileRouter, mealRouter, dietRouter, discoverRouter])
+  .use(adminRouter)
+  .use(userProfileRouter)
+  .use(mealRouter)
+  .use(dietRouter)
+  .use(discoverRouter);
 export default standardRouter;

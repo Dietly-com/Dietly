@@ -1,12 +1,14 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const port = 8080;
-import routes from './src/routes/Routes';
+import standardRoute from './src/routes/StandardRoute';
+import userRoute from './src/routes/UserRoute';
 import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-app.use(routes)
+app.use('/api/v1', standardRoute)
+app.use('/api/v1', userRoute)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.listen(port, () => {
