@@ -2,26 +2,26 @@ import { Router } from 'express';
 
 import { verifyUser } from '../middlewares/UserMiddleware';
 
-const userController = require("./src/controllers/UserController");
-const fileController = require("./src/controllers/FileController");
-const badgeController = require("./src/controllers/BadgeController");
-const personalBestController = require("./src/controllers/PersonalBestController");
-const userBadgeController = require("./src/controllers/UserBadgeController");
-const userMealProductController = require("./src/controllers/UserMealProductController");
-const userMealController = require("./src/controllers/UserMealController");
-const userPersonalBestController = require("./src/controllers/UserPersonalBestController");
-const unitController = require("./src/controllers/UnitController");
-const nutrientController = require("./src/controllers/NutrientController");
-const productController = require("./src/controllers/ProductController");
-const productNutrientController = require("./src/controllers/ProductNutrientController");
-const recipeController = require("./src/controllers/RecipeController");
-const recipeProductController = require("./src/controllers/RecipeProductController");
-const dietController = require("./src/controllers/DietController");
-const dietMealController = require("./src/controllers/DietMealController");
-const dietMealRecipeController = require("./src/controllers/DietMealRecipeController");
-const dietMealProductController = require("./src/controllers/DietMealProductController");
-const userActiveDietController = require("./src/controllers/UserActiveDietController");
-const userMealRecipeController = require("./src/controllers/UserMealRecipeController");
+const userController = require("../controllers/UserController");
+const fileController = require("../controllers/FileController");
+const badgeController = require("../controllers/BadgeController");
+const personalBestController = require("../controllers/PersonalBestController");
+const userBadgeController = require("../controllers/UserBadgeController");
+const userMealProductController = require("../controllers/UserMealProductController");
+const userMealController = require("../controllers/UserMealController");
+const userPersonalBestController = require("../controllers/UserPersonalBestController");
+const unitController = require("../controllers/UnitController");
+const nutrientController = require("../controllers/NutrientController");
+const productController = require("../controllers/ProductController");
+const productNutrientController = require("../controllers/ProductNutrientController");
+const recipeController = require("../controllers/RecipeController");
+const recipeProductController = require("../controllers/RecipeProductController");
+const dietController = require("../controllers/DietController");
+const dietMealController = require("../controllers/DietMealController");
+const dietMealRecipeController = require("../controllers/DietMealRecipeController");
+const dietMealProductController = require("../controllers/DietMealProductController");
+const userActiveDietController = require("../controllers/UserActiveDietController");
+const userMealRecipeController = require("../controllers/UserMealRecipeController");
 
 
 

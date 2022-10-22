@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import {createUser, authUser } from '../services/userService';
+import {createUser, authUser } from '../services/UserService';
 import {createOne, findOne, findMany, updateOne, deleteOne } from '../services/StandardService';
 import { PrismaClient} from '@prisma/client';
 
