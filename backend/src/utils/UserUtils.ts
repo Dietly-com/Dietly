@@ -4,13 +4,10 @@ dotenv.config();
 
 export const generateAccessToken = (id: Number) => {
     const tokenSecret: Secret = process.env.TOKEN_SECRET as Secret;
-    console.log(id);
-    console.log(tokenSecret);
-    console.log(jwt.sign(id, tokenSecret, { expiresIn: '7d' }));
-    return jwt.sign(id, tokenSecret, { expiresIn: '7d' });
+    return jwt.sign({id: id}, tokenSecret,{expiresIn: '7d'});
 }
 
 export const verifyAccessToken = (token: string) => {
-    const tokenSecret: string = process.env.TOKEN_SECRET as string;
+    const tokenSecret: Secret = process.env.TOKEN_SECRET as Secret;
     return jwt.verify(token, tokenSecret);
 }
