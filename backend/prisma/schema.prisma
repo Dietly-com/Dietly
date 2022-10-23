@@ -20,15 +20,15 @@ model User {
   email String  @unique
   phone String?
 
-  height Float
-  weight Float
-  bmi Float
-  activeLevel Int
-  file File @relation(fields: [fileId], references: [id])
-  fileId Int
+  height Float?
+  weight Float?
+  bmi Float?
+  activeLevel Int?
+  file File? @relation(fields: [fileId], references: [id])
+  fileId Int?
 
-  displayTheme String
-  displayLanguage String
+  displayTheme String?
+  displayLanguage String?
 
   userBadges UserBadge[]
   userPersonalBests UserPersonalBest[]
@@ -43,9 +43,9 @@ model Badge {
   id    Int     @id @default(autoincrement())
   createdAt DateTime @default(now())
   name String
-  description String
-  file File @relation(fields: [fileId], references: [id])
-  fileId Int
+  description String?
+  file File? @relation(fields: [fileId], references: [id])
+  fileId Int?
 
   userBadges UserBadge[]
 }
@@ -57,16 +57,16 @@ model UserBadge {
   userId Int
   badge Badge @relation(fields: [badgeId], references: [id])
   badgeId Int
-  time DateTime
+  time DateTime @default(now())
 }
 
 model PersonalBest {
   id    Int     @id @default(autoincrement())
   createdAt DateTime @default(now())
   name String
-  description String
-  file File @relation(fields: [fileId], references: [id])
-  fileId Int
+  description String?
+  file File? @relation(fields: [fileId], references: [id])
+  fileId Int?
 
   userPersonalBests UserPersonalBest[]
 }
@@ -99,8 +99,8 @@ model UserMeal {
   name String
   time DateTime
 
-  userMealProduct UserMealProduct[]
-  userMealRecipe UserMealRecipe[]
+  userMealProducts UserMealProduct[]
+  userMealRecipes UserMealRecipe[]
 }
 
 model UserMealProduct {
@@ -132,41 +132,42 @@ model Unit {
   quantity Float
   shortcut String
 
-  product Product[]
+  products Product[]
   recipes Recipe[]
-  userMealProduct UserMealProduct[]
-  userMealRecipe UserMealRecipe[]
-  recipeProduct RecipeProduct[]
-  dietMealRecipe DietMealRecipe[]
-  dietMealProduct DietMealProduct[]
+  userMealProducts UserMealProduct[]
+  userMealRecipes UserMealRecipe[]
+  recipeProducts RecipeProduct[]
+  dietMealRecipes DietMealRecipe[]
+  dietMealProducts DietMealProduct[]
 }
 
 model Nutrient {
   id    Int     @id @default(autoincrement())
   createdAt DateTime @default(now())
   name String
-  min Int
-  max Int
+  min Int?
+  max Int?
 
-  productNutrient ProductNutrient[]
+  productNutrients ProductNutrient[]
 }
 
 model Product {
   id    Int     @id @default(autoincrement())
   createdAt DateTime @default(now())
   name String
-  description String
-  owner User @relation(fields: [ownerId], references: [id])
-  ownerId Int
-  file File @relation(fields: [fileId], references: [id])
-  fileId Int
+  description String?
+  owner User? @relation(fields: [ownerId], references: [id])
+  ownerId Int?
+  file File? @relation(fields: [fileId], references: [id])
+  fileId Int?
   unit Unit @relation(fields: [unitId], references: [id])
   unitId Int
+  quantity Int
 
-  userMealProduct UserMealProduct[]
-  productNutrient ProductNutrient[]
-  recipeProduct RecipeProduct[]
-  dietMealProduct DietMealProduct[]
+  userMealProducts UserMealProduct[]
+  productNutrients ProductNutrient[]
+  recipeProducts RecipeProduct[]
+  dietMealProducts DietMealProduct[]
 }
 
 model ProductNutrient {
@@ -183,19 +184,19 @@ model Recipe {
   id    Int     @id @default(autoincrement())
   createdAt DateTime @default(now())
   name String
-  description String
-  preparation String
-  owner User @relation(fields: [ownerId], references: [id])
-  ownerId Int
-  file File @relation(fields: [fileId], references: [id])
-  fileId Int
+  description String?
+  preparation String?
+  owner User? @relation(fields: [ownerId], references: [id])
+  ownerId Int?
+  file File? @relation(fields: [fileId], references: [id])
+  fileId Int?
   unit Unit @relation(fields: [unitId], references: [id])
   unitId Int
   quantity Float
 
-  userMealRecipe UserMealRecipe[]
-  recipeProduct RecipeProduct[]
-  dietMealRecipe DietMealRecipe[]
+  userMealRecipes UserMealRecipe[]
+  recipeProducts RecipeProduct[]
+  dietMealRecipes DietMealRecipe[]
 }
 
 model RecipeProduct {
@@ -214,27 +215,28 @@ model Diet {
   id    Int     @id @default(autoincrement())
   createdAt DateTime @default(now())
   name String
-  description String
-  owner User @relation(fields: [ownerId], references: [id])
-  ownerId Int
-  file File @relation(fields: [fileId], references: [id])
-  fileId Int
+  description String?
+  owner User? @relation(fields: [ownerId], references: [id])
+  ownerId Int?
+  file File? @relation(fields: [fileId], references: [id])
+  fileId Int?
 
   userActiveDiets UserActiveDiet[]
-  dietMeal DietMeal[]
+  dietMeals DietMeal[]
 }
 
 model DietMeal {
   id    Int     @id @default(autoincrement())
   createdAt DateTime @default(now())
   name String
-  hour DateTime
+  hour Int
+  minute Int
   day Int
   diet Diet @relation(fields: [dietId], references: [id])
   dietId Int
 
-  dietMealRecipe DietMealRecipe[]
-  dietMealProduct DietMealProduct[]
+  dietMealRecipes DietMealRecipe[]
+  dietMealProducts DietMealProduct[]
 }
 
 model DietMealRecipe {
@@ -261,21 +263,10 @@ model DietMealProduct {
   quantity Float
 }
 
-model Message {
-  id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  // fromUser User @relation(fields: [fromUserId], references: [id])
-  // fromUserId Int
-  // toUser User @relation(fields: [toUserId], references: [id])
-  // toUserId Int
-  time DateTime
-  content String
-}
-
 model File {
   id    Int     @id @default(autoincrement())
   createdAt DateTime @default(now())
-  type String
+  type String?
   path String
 
   users User[]

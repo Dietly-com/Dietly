@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-const userUtils = require("../utils/UserUtils")
+import { verifyAccessToken } from '../utils/UserUtils';
 
 export const verifyUser = async (req: Request, res: Response, next: NextFunction) => {
   const auth = req.headers.authorization;
@@ -8,7 +8,7 @@ export const verifyUser = async (req: Request, res: Response, next: NextFunction
     const token = auth.slice(7);
 
     try {
-      const tokenData = userUtils.verifyAccessToken(token);
+      const tokenData = verifyAccessToken(token);
       req.body.tokenData = tokenData;
       next();
     } catch (error) {
