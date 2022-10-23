@@ -15,6 +15,10 @@ router.post("/", async (req, res) => {
     createUser(req, res);
 })
 
+router.post("/auth", async (req, res) => {
+    authUser(req, res);
+})
+
 router.get("/:id",  async (req, res) => {
     findOne(req, res, object, include);
 })
@@ -23,8 +27,8 @@ router.get("/",  async (req, res) => {
     findMany(req, res, object, include);
 })
 
-router.post("/auth", async (req, res) => {
-    authUser(req, res);
+router.patch("/:id",  async (req, res) => {
+    updateOne(req, res, object);
 })
 
 router.delete("/:id", async (req, res) => {
