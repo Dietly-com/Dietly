@@ -55,3 +55,4 @@
 7. npm install react-markdown
 
 ### Uruchamianie
+1. npm start
