@@ -23,6 +23,7 @@ const dietMealRecipeController = require("../controllers/DietMealRecipeControlle
 const dietMealProductController = require("../controllers/DietMealProductController");
 const userActiveDietController = require("../controllers/UserActiveDietController");
 const userMealRecipeController = require("../controllers/UserMealRecipeController");
+const searchController = require("../controllers/SearchController");
 
 
 
@@ -56,7 +57,8 @@ const discoverRouter = Router()
   .use("/product", productController)
   .use("/productNutrient", productNutrientController)
   .use("/recipe", recipeController)
-  .use("/recipeProduct", recipeProductController);
+  .use("/recipeProduct", recipeProductController)
+  .use("/search", searchController);
 
 const standardRouter = Router()
   .use(bodyParser.json())
