@@ -10,17 +10,17 @@ export const createUser = async (req: Request, res: Response) => {
     try {
         const user = await prisma.user.findUnique({
             where: {
-              email: req.body.email,
+              login: req.body.data.login,
             },
           });
         if (user) {
             res.status(409)
-                .send({ success: false, message: "Użytkownik o takim emailu istnieje!"});
+                .send({ success: false, message: "Użytkownik o takim loginie istnieje!"});
         }
         const salt:string = await bcrypt.genSalt(Number(process.env.SALT));
-        const hashPassword = await bcrypt.hash(req.body.password, salt);
+        const hashPassword = await bcrypt.hash(req.body.data.password, salt);
         await prisma.user.create({
-            data: { ...req.body, password: hashPassword },
+            data: { ...req.body.data, password: hashPassword },
           });
         res.status(201).send({ success: true, message: "Utworzono użytkownika"});
     } catch (error) {
@@ -31,10 +31,10 @@ export const createUser = async (req: Request, res: Response) => {
 export const authUser = async (req:Request, res:Response) => {
     try {
         const schema = Joi.object({
-            email: Joi.string().email().required().label("Email"),
+            login: Joi.string().required().label("Login"),
             password: Joi.string().required().label("Password"),
         })
-        const { error } = schema.validate(req.body);
+        const { error } = schema.validate(req.body.data);
         if (error){
             console.log(error);
            return res.status(400).send({ success: false, message: error.details[0].message}) 
@@ -42,19 +42,19 @@ export const authUser = async (req:Request, res:Response) => {
         
         const user = await prisma.user.findUnique({
             where: {
-              email: req.body.email,
+              login: req.body.data.login,
             },
           });
         if (!user){
-           return res.status(401).send({ success: false, message: "Błędny email lub hasło!"}) 
+           return res.status(401).send({ success: false, message: "Błędny login lub hasło!"}) 
         }
             
         const validPassword = await bcrypt.compare(
-            req.body.password,
+            req.body.data.password,
             user.password
         )
         if (!validPassword){
-            return res.status(401).send({ success: false, message: "Błędny email lub hasło!"})
+            return res.status(401).send({ success: false, message: "Błędny login lub hasło!"})
         }
             
         const token = generateAccessToken(user.id);

@@ -162,6 +162,7 @@ model Product {
   fileId Int?
   unit Unit @relation(fields: [unitId], references: [id])
   unitId Int
+  quantity Int
 
   userMealProducts UserMealProduct[]
   productNutrients ProductNutrient[]
@@ -228,7 +229,8 @@ model DietMeal {
   id    Int     @id @default(autoincrement())
   createdAt DateTime @default(now())
   name String
-  hour DateTime
+  hour Int
+  minute Int
   day Int
   diet Diet @relation(fields: [dietId], references: [id])
   dietId Int
