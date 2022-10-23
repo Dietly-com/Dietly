@@ -2,7 +2,9 @@ import express, { Request, Response, NextFunction, Router } from 'express';
 
 export const createOne = async (req: Request, res: Response, object:any) => {
     try {
-        const record = await object.create({data: req.body});
+        const recordBody=req.body;
+        recordBody.tokenData=undefined;
+        const record = await object.create({data: recordBody});
         res.status(201).send({data: record, success: true, message: "Utworzono rekord"});
     } catch (error) {
         res.status(500).send({ success: false, message: "Wewnętrzny błąd serwera"});
@@ -12,11 +14,13 @@ export const createOne = async (req: Request, res: Response, object:any) => {
 export const updateOne = async (req: Request, res: Response, object:any) => {
     try {
         const { id } = req.params;
+        const recordBody=req.body;
+        recordBody.tokenData=undefined;
         const record = await object.update({
             where: {
                 id: Number(id),
             },
-            data: req.body
+            data: recordBody
           })
         res.status(201).send({data: record, success: true, message: "Znaleziono rekord"});
     } catch (error) {

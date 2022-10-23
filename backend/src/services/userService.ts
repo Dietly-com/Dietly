@@ -58,7 +58,10 @@ export const authUser = async (req:Request, res:Response) => {
         }
             
         const token = generateAccessToken(user.id);
-        res.status(200).send({ success: true, message: "Zalogowano!", data: token, user: {_id: user.id}})
+        res.status(200).send({ success: true, message: "Zalogowano!", data: {
+            token: token,
+            user: user
+        }})
     } catch (error) {
         res.status(500).send({ success: false, message: "Wewnętrzny błąd serwera"})
     }

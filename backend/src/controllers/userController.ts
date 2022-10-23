@@ -2,6 +2,7 @@ import express, { Router } from 'express';
 import {createUser, authUser } from '../services/UserService';
 import {createOne, findOne, findMany, updateOne, deleteOne } from '../services/StandardService';
 import { PrismaClient} from '@prisma/client';
+import { verifyUser } from '../middlewares/UserMiddleware';
 
 const object = new PrismaClient().user;
 const include = {
@@ -15,19 +16,23 @@ router.post("/", async (req, res) => {
     createUser(req, res);
 })
 
-router.get("/:id",  async (req, res) => {
-    findOne(req, res, object, include);
-})
-
-router.get("/",  async (req, res) => {
-    findMany(req, res, object, include);
-})
-
 router.post("/auth", async (req, res) => {
     authUser(req, res);
 })
 
-router.delete("/:id", async (req, res) => {
+router.get("/:id", verifyUser, async (req, res) => {
+    findOne(req, res, object, include);
+})
+
+router.get("/", verifyUser, async (req, res) => {
+    findMany(req, res, object, include);
+})
+
+router.patch("/:id", verifyUser, async (req, res) => {
+    updateOne(req, res, object);
+})
+
+router.delete("/:id", verifyUser, async (req, res) => {
     deleteOne(req, res, object);
 })
 

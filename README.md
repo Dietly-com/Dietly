@@ -20,12 +20,16 @@
 5. npm install joi
 6. npm install bcrypt 
 7. npm install jsonwebtoken
+8. npm install body-parser
 
 ### Migracja bazy danych
 1. npx prisma migrate dev --name "init" --preview-feature
 
 ### Uruchamianie
 1. npx ts-node backend.ts
+
+### Uruchamianie Prisma Studio
+1. npx prisma studio
 
 
 ## Fontend
