@@ -25,7 +25,7 @@ router.get("/",  async (req, res) => {
     findMany(req, res, object, include);
 })
 
-router.patch("/",  async (req, res) => {
+router.put("/:id",  async (req, res) => {
     updateOne(req, res, object);
 })
 
