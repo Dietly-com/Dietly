@@ -1,11 +1,34 @@
 import express, { Request, Response, NextFunction, Router } from 'express';
+import {
+    ResponseBuilder,
+    STATUS_CREATED,
+    STATUS_INTERNAL_SERVER_ERROR,
+    STATUS_NOT_FOUND,
+    STATUS_OK,
+    MESSAGE_CREATED_RECORD,
+    MESSAGE_UPDATED_RECORD,
+    MESSAGE_FIND_RECORD,
+    MESSAGE_FIND_RECORDS,
+    MESSAGE_DELETED_RECORD,
+    MESSAGE_INTERNAL_SERVER_ERROR,
+    MESSAGE_NOT_FOUND_RECORD
+} from '../utils/ResponseUtils';
 
 export const createOne = async (req: Request, res: Response, object:any) => {
     try {
         const record = await object.create({data: req.body.data});
-        res.status(201).send({data: record, success: true, message: "Utworzono rekord"});
+        res = new ResponseBuilder(res)
+        .withStatus(STATUS_CREATED)
+        .withResponseBodyData(record)
+        .withResponseBodySuccess(true)
+        .withResponseBodyMessage(MESSAGE_CREATED_RECORD)
+        .send();
     } catch (error) {
-        res.status(500).send({ success: false, message: "Wewnętrzny błąd serwera"});
+        res = new ResponseBuilder(res)
+        .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+        .withResponseBodySuccess(false)
+        .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+        .send();
     }
 }
 
@@ -18,9 +41,18 @@ export const updateOne = async (req: Request, res: Response, object:any) => {
             },
             data: req.body.data
           })
-        res.status(201).send({data: record, success: true, message: "Znaleziono rekord"});
+          res = new ResponseBuilder(res)
+          .withStatus(STATUS_OK)
+          .withResponseBodyData(record)
+          .withResponseBodySuccess(true)
+          .withResponseBodyMessage(MESSAGE_UPDATED_RECORD)
+          .send();
     } catch (error) {
-        res.status(500).send({ success: false, message: "Wewnętrzny błąd serwera"});
+        res = new ResponseBuilder(res)
+        .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+        .withResponseBodySuccess(false)
+        .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+        .send();
     }
 }
 
@@ -42,9 +74,25 @@ export const findOne = async (req: Request, res: Response, object:any, include:a
                 },
             })
         }
-        res.status(201).send({data: record, success: true, message: "Znaleziono rekord"});
+        if (record == null){
+            return res = new ResponseBuilder(res)
+            .withStatus(STATUS_NOT_FOUND)
+            .withResponseBodySuccess(false)
+            .withResponseBodyMessage(MESSAGE_NOT_FOUND_RECORD)
+            .send();
+        }
+        res = new ResponseBuilder(res)
+        .withStatus(STATUS_OK)
+        .withResponseBodyData(record)
+        .withResponseBodySuccess(true)
+        .withResponseBodyMessage(MESSAGE_FIND_RECORD)
+        .send();
     } catch (error) {
-        res.status(500).send({ success: false, message: "Wewnętrzny błąd serwera"});
+        res = new ResponseBuilder(res)
+        .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+        .withResponseBodySuccess(false)
+        .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+        .send();
     }
 }
 
@@ -58,9 +106,18 @@ export const findMany = async (req: Request, res: Response, object:any, include:
         } else {
             records = await object.findMany();
         }
-        res.status(201).send({data: records, success: true, message: "Znaleziono rekordy"});
+        res = new ResponseBuilder(res)
+        .withStatus(STATUS_OK)
+        .withResponseBodyData(records)
+        .withResponseBodySuccess(true)
+        .withResponseBodyMessage(MESSAGE_FIND_RECORDS)
+        .send();
     } catch (error) {
-        res.status(500).send({ success: false, message: "Wewnętrzny błąd serwera"});
+        res = new ResponseBuilder(res)
+        .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+        .withResponseBodySuccess(false)
+        .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+        .send();
     }
 }
 
@@ -72,8 +129,17 @@ export const deleteOne = async (req: Request, res: Response, object:any) => {
                 id: Number(id),
             },
         })
-        res.status(201).send({data: record, success: true, message: "Usunięto rekord"});
+        res = new ResponseBuilder(res)
+        .withStatus(STATUS_OK)
+        .withResponseBodyData(record)
+        .withResponseBodySuccess(true)
+        .withResponseBodyMessage(MESSAGE_DELETED_RECORD)
+        .send();
     } catch (error) {
-        res.status(500).send({ success: false, message: "Wewnętrzny błąd serwera"});
+        res = new ResponseBuilder(res)
+        .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+        .withResponseBodySuccess(false)
+        .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+        .send();
     }
 }

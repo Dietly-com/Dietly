@@ -1,5 +1,20 @@
+//DIETLY-17
 import express, { Request, Response, NextFunction, Router } from 'express';
 import { PrismaClient } from '@prisma/client';
+import {
+    ResponseBuilder,
+    STATUS_CREATED,
+    STATUS_INTERNAL_SERVER_ERROR,
+    STATUS_NOT_FOUND,
+    STATUS_OK,
+    MESSAGE_CREATED_RECORD,
+    MESSAGE_UPDATED_RECORD,
+    MESSAGE_FIND_RECORD,
+    MESSAGE_FIND_RECORDS,
+    MESSAGE_DELETED_RECORD,
+    MESSAGE_INTERNAL_SERVER_ERROR,
+    MESSAGE_NOT_FOUND_RECORD
+} from '../utils/ResponseUtils';
 
 export const search = async (req: Request, res: Response) => {
     try {
@@ -60,8 +75,17 @@ export const search = async (req: Request, res: Response) => {
             include: dietInclude
         });
 
-        res.status(201).send({data: records, success: true, message: "Znaleziono rekordy"});
+        res = new ResponseBuilder(res)
+        .withStatus(STATUS_OK)
+        .withResponseBodyData(records)
+        .withResponseBodySuccess(true)
+        .withResponseBodyMessage(MESSAGE_FIND_RECORD)
+        .send();
     } catch (error) {
-        res.status(500).send({ success: false, message: "Wewnętrzny błąd serwera"});
+        res = new ResponseBuilder(res)
+        .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+        .withResponseBodySuccess(false)
+        .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+        .send();
     }
 }

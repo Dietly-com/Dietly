@@ -1,8 +1,10 @@
 import { Router } from 'express';
 const bodyParser = require("body-parser");
+const cors = require('cors');
 
 import { showStatus } from '../middlewares/DeveloperMiddleware';
 
+const authController = require("../controllers/AuthController");
 const userController = require("../controllers/UserController");
 const fileController = require("../controllers/FileController");
 const badgeController = require("../controllers/BadgeController");
@@ -35,6 +37,7 @@ const adminRouter = Router()
   .use("/nutrient", nutrientController);
 
 const userRouter = Router()
+  .use("/auth", authController)
   .use("/user", userController);
 
 const userProfileRouter = Router()
@@ -63,6 +66,7 @@ const discoverRouter = Router()
 const standardRouter = Router()
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
+  .use(cors())
   .use(showStatus)
   .use(adminRouter)
   .use(userRouter)
