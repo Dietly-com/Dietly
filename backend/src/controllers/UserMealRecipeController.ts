@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 import {createOne, findOne, findMany, updateOne, deleteOne } from '../services/StandardService';
 import { PrismaClient} from '@prisma/client';
-import { verifyUser } from '../middlewares/UserMiddleware';
+import { verifyUser } from '../middlewares/AuthMiddleware';
 
 const object = new PrismaClient().userMealRecipe;
 const include = {

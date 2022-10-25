@@ -1,6 +1,7 @@
+//DIETLY-17
 import express, { Router } from 'express';
 import { search } from '../services/SearchService';
-import { verifyUser } from '../middlewares/UserMiddleware';
+import { verifyUser } from '../middlewares/AuthMiddleware';
 
 const router: Router = express.Router();
 router.use(verifyUser);

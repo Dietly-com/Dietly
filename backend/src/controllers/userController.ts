@@ -1,8 +1,8 @@
 import express, { Router } from 'express';
-import {createUser, authUser } from '../services/UserService';
+import { createUser } from '../services/UserService';
 import {createOne, findOne, findMany, updateOne, deleteOne } from '../services/StandardService';
 import { PrismaClient} from '@prisma/client';
-import { verifyUser } from '../middlewares/UserMiddleware';
+import { verifyUser } from '../middlewares/AuthMiddleware';
 
 const object = new PrismaClient().user;
 const include = {
@@ -14,10 +14,6 @@ const include = {
 const router: Router = express.Router();
 router.post("/", async (req, res) => {
     createUser(req, res);
-})
-
-router.post("/auth", async (req, res) => {
-    authUser(req, res);
 })
 
 router.get("/:id", verifyUser, async (req, res) => {
