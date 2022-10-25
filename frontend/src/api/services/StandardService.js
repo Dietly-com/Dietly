@@ -1,101 +1,147 @@
 import axios from 'axios';
-
-const METHOD_POST = 'post';
-const METHOD_GET = 'get';
-const METHOD_PATCH = 'patch';
-const METHOD_DELETE = 'delete';
-const URL = 'http://localhost:8080/api/v1/';
-const RESPONSE_TYPE = 'stream';
-const HEADERS = {
-    Authorization : `Bearer ${localStorage.getItem("access_token")}`
-};
+import {
+    METHOD_POST,
+    METHOD_GET,
+    METHOD_PATCH,
+    METHOD_DELETE,
+    URL,
+    RESPONSE_TYPE,
+    HEADERS
+} from '../utils/RequestUtils';
+import { processResult, RESULT_SOMETHING_WRONG } from '../utils/ResponseUtils';
 
 export const postOne = async (path, data) => {
-    try {
-        axios({
-            method: METHOD_POST,
-            url: URL + path,
-            responseType: RESPONSE_TYPE,
-            headers: HEADERS,
-            params: {},
-            data: data
-          })
-        .then(response => {
-            return response.data
-        });
-    } catch (err) {
-        console.log(err);
-    }
+    return new Promise( (resolve, reject) => {
+        try {
+            axios({
+                method: METHOD_POST,
+                url: URL + path,
+                responseType: RESPONSE_TYPE,
+                headers: HEADERS,
+                params: {},
+                data: {
+                    data: data
+                }
+            })
+            .then(response => {
+                processResult(response.data.result);
+                resolve(response.data);
+            })
+            .catch(error => {
+                processResult(RESULT_SOMETHING_WRONG);
+                reject(error.response.data);
+            });
+        } catch (error) {
+            processResult(RESULT_SOMETHING_WRONG);
+            reject(error);
+        }
+    })
 };
 
 export const getOne = async (path, id) => {
-    try {
-        axios({
-            method: METHOD_GET,
-            url: URL + path + '/' + id,
-            responseType: RESPONSE_TYPE,
-            headers: HEADERS,
-            params: {},
-            data: {}
-          })
-        .then(response => {
-            return response.data
-        });
-    } catch (err) {
-        console.log(err);
-    }
+    return new Promise( (resolve, reject) => {
+        try {
+            axios({
+                method: METHOD_GET,
+                url: URL + path + '/' + id,
+                responseType: RESPONSE_TYPE,
+                headers: HEADERS,
+                params: {},
+                data: {}
+            })
+            .then(response => {
+                processResult(response.data.result);
+                resolve(response.data);
+            })
+            .catch(error => {
+                processResult(RESULT_SOMETHING_WRONG);
+                reject(error.response.data);
+            });
+        } catch (error) {
+            processResult(RESULT_SOMETHING_WRONG);
+            reject(error);
+        }
+    })
 };
 
 export const getMany = async (path) => {
-    try {
-        axios({
-            method: METHOD_GET,
-            url: URL + path,
-            responseType: RESPONSE_TYPE,
-            headers: HEADERS,
-            params: {},
-            data: {}
-          })
-        .then(response => {
-            return response.data
-        });
-    } catch (err) {
-        console.log(err);
-    }
+    return new Promise( (resolve, reject) => {
+        try {
+            axios({
+                method: METHOD_GET,
+                url: URL + path,
+                responseType: RESPONSE_TYPE,
+                headers: HEADERS,
+                params: {},
+                data: {}
+              })
+            .then(response => {
+                processResult(response.data.result);
+                resolve(response.data);
+            })
+            .catch(error => {
+                processResult(error.response.data);
+                reject(error.response.data);
+            });
+        } catch (error) {
+            processResult(RESULT_SOMETHING_WRONG);
+            reject(error)
+        }
+    })
 };
 
+
 export const patchOne = async (path, id, data) => {
-    try {
-        axios({
-            method: METHOD_PATCH,
-            url: URL + path + '/' + id,
-            responseType: RESPONSE_TYPE,
-            headers: HEADERS,
-            params: {},
-            data: data
-          })
-        .then(response => {
-            return response.data
-        });
-    } catch (err) {
-        console.log(err);
-    }
+    return new Promise( (resolve, reject) => {
+        try {
+            axios({
+                method: METHOD_PATCH,
+                url: URL + path + '/' + id,
+                responseType: RESPONSE_TYPE,
+                headers: HEADERS,
+                params: {},
+                data: {
+                    data: data
+                }
+            })
+            .then(response => {
+                processResult(response.data.result);
+                resolve(response.data);
+            })
+            .catch(error => {
+                processResult(RESULT_SOMETHING_WRONG);
+                reject(error.response.data);
+            });
+        } catch (error) {
+            processResult(RESULT_SOMETHING_WRONG);
+            reject(error);
+        }
+    })
 };
 
 export const deleteOne = async (path, id) => {
-    try {
-        axios({
-            method: METHOD_DELETE,
-            url: URL + path + '/' + id,
-            responseType: RESPONSE_TYPE,
-            headers: HEADERS,
-            params: {},
-            data: {}
-          })
-        .then(response => {
-            return response.data
-        });
-    } catch (err) {
-        console.log(err);
-    }
+    return new Promise( (resolve, reject) => {
+        try {
+            axios({
+                method: METHOD_DELETE,
+                url: URL + path + '/' + id,
+                responseType: RESPONSE_TYPE,
+                headers: HEADERS,
+                params: {},
+                data: {}
+            })
+            .then(response => {
+                processResult(response.data.result);
+                resolve(response.data);
+            })
+            .catch(error => {
+                processResult(RESULT_SOMETHING_WRONG);
+                reject(error.response.data);
+            });
+        } catch (error) {
+            processResult(RESULT_SOMETHING_WRONG);
+            reject(error);
+        }
+    })
 };
+
