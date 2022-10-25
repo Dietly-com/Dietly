@@ -21,6 +21,7 @@
 6. npm install bcrypt 
 7. npm install jsonwebtoken
 8. npm install body-parser
+9. npm install cors
 
 ### Migracja bazy danych
 1. npx prisma migrate dev --name "init" --preview-feature
