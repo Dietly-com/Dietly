@@ -16,7 +16,9 @@ import {
 
 export const createOne = async (req: Request, res: Response, object:any) => {
     try {
-        const record = await object.create({data: req.body.data});
+        req.body.data.createdById = req.body.authorization.id;
+        let query = {data: req.body.data};
+        const record = await object.create(query);
         res = new ResponseBuilder(res)
         .withStatus(STATUS_CREATED)
         .withResponseBodyData(record)
@@ -34,13 +36,17 @@ export const createOne = async (req: Request, res: Response, object:any) => {
 
 export const updateOne = async (req: Request, res: Response, object:any) => {
     try {
+        req.body.data.modifiedById = req.body.authorization.id;
+        req.body.data.modifiedAt = new Date();
+        console.log(req.body.data);
         const { id } = req.params;
-        const record = await object.update({
+        let query = {
             where: {
                 id: Number(id),
             },
             data: req.body.data
-          })
+          };
+        const record = await object.update(query)
           res = new ResponseBuilder(res)
           .withStatus(STATUS_OK)
           .withResponseBodyData(record)
@@ -56,24 +62,35 @@ export const updateOne = async (req: Request, res: Response, object:any) => {
     }
 }
 
-export const findOne = async (req: Request, res: Response, object:any, include:any = undefined) => {
+export const findOne = async (req: Request, res: Response, object:any) => {
     try {
         const { id } = req.params;
+        await object.update({
+            where: {
+                id: Number(id),
+            },
+            data: {
+                views: {increment: 1}
+            }
+          })
+
         let record = null;
-        if(include != undefined) {
-            record = await object.findUnique({
+        var query = {};
+        if(req.body.include != undefined) {
+            query = {
                 where: {
                     id: Number(id),
                 },
-                include: include,
-            })
+                include: req.body.include,
+            }
         } else {
-            record = await object.findUnique({
+            query = {
                 where: {
                     id: Number(id),
                 },
-            })
+            }
         }
+        record = await object.findUnique(query);
         if (record == null){
             return res = new ResponseBuilder(res)
             .withStatus(STATUS_NOT_FOUND)
@@ -96,16 +113,16 @@ export const findOne = async (req: Request, res: Response, object:any, include:a
     }
 }
 
-export const findMany = async (req: Request, res: Response, object:any, include:any = undefined) => {
+export const findMany = async (req: Request, res: Response, object:any) => {
     try {
         let records = null;
-        if(include != undefined) {
-            records = await object.findMany({
-                include: include
-            });
-        } else {
-            records = await object.findMany();
+        var query = {};
+        if(req.body.include != undefined) {
+            query = {
+                include: req.body.include
+            }
         }
+        records = await object.findMany(query);
         res = new ResponseBuilder(res)
         .withStatus(STATUS_OK)
         .withResponseBodyData(records)
@@ -124,11 +141,12 @@ export const findMany = async (req: Request, res: Response, object:any, include:
 export const deleteOne = async (req: Request, res: Response, object:any) => {
     try {
         const { id } = req.params
-        const record = await object.delete({
+        var query = {
             where: {
                 id: Number(id),
             },
-        })
+        };
+        const record = await object.delete(query)
         res = new ResponseBuilder(res)
         .withStatus(STATUS_OK)
         .withResponseBodyData(record)

@@ -16,7 +16,9 @@ import {
 
 export const updateMe = async (req: Request, res: Response, object:any) => {
     try {
-        const id = req.body.tokenData.id;
+        req.body.data.modifiedById = req.body.authorization.id;
+        req.body.data.modifiedAt = new Date();
+        const id = req.body.authorization.id;
         const record = await object.update({
             where: {
                 id: Number(id),
@@ -38,17 +40,24 @@ export const updateMe = async (req: Request, res: Response, object:any) => {
     }
 }
 
-export const findMe = async (req: Request, res: Response, object:any, include:any = undefined) => {
+export const findMe = async (req: Request, res: Response, object:any) => {
     try {
-        console.log(req.body.tokenData.id);
-        const id = req.body.tokenData.id;
+        const id = req.body.authorization.id;
+        await object.update({
+            where: {
+                id: Number(id),
+            },
+            data: {
+                views: {increment: 1}
+            }
+          })
         let record = null;
-        if(include != undefined) {
+        if(req.body.include != undefined) {
             record = await object.findUnique({
                 where: {
                     id: Number(id),
                 },
-                include: include,
+                include: req.body.include,
             })
         } else {
             record = await object.findUnique({
@@ -81,7 +90,7 @@ export const findMe = async (req: Request, res: Response, object:any, include:an
 
 export const deleteMe = async (req: Request, res: Response, object:any) => {
     try {
-        const id = req.body.tokenData.id;
+        const id = req.body.authorization.id;
         const record = await object.delete({
             where: {
                 id: Number(id),
