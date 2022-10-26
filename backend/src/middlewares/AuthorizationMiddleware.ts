@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { verifyAccessToken } from '../utils/TokenUtils';
+import { RequestBuilder } from '../utils/RequestUtils';
 import {
   ResponseBuilder,
   STATUS_UNAUTHORIZED,
@@ -13,7 +14,9 @@ export const verifyUser = async (req: Request, res: Response, next: NextFunction
 
     try {
       const tokenData = verifyAccessToken(token);
-      req.body.tokenData = tokenData;
+      req = new RequestBuilder(req)
+      .withAuthorization(tokenData)
+      .get()
       next();
     } catch (error) {
       res = new ResponseBuilder(res)
