@@ -6,6 +6,7 @@ import { showStatus } from '../middlewares/DeveloperMiddleware';
 
 const authController = require("../controllers/AuthController");
 const userController = require("../controllers/UserController");
+const meController = require("../controllers/MeController");
 const fileController = require("../controllers/FileController");
 const badgeController = require("../controllers/BadgeController");
 const personalBestController = require("../controllers/PersonalBestController");
@@ -38,7 +39,8 @@ const adminRouter = Router()
 
 const userRouter = Router()
   .use("/auth", authController)
-  .use("/user", userController);
+  .use("/user", userController)
+  .use("/me", meController);
 
 const userProfileRouter = Router()
   .use("/userBadge", userBadgeController)

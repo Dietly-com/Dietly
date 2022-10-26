@@ -1,6 +1,7 @@
 import express, { Router } from 'express';
 import { createUser } from '../services/UserService';
 import {createOne, findOne, findMany, updateOne, deleteOne } from '../services/StandardService';
+import { findMe, updateMe, deleteMe } from '../services/MeService';
 import { PrismaClient} from '@prisma/client';
 import { verifyUser } from '../middlewares/AuthMiddleware';
 
@@ -30,6 +31,18 @@ router.patch("/:id", verifyUser, async (req, res) => {
 
 router.delete("/:id", verifyUser, async (req, res) => {
     deleteOne(req, res, object);
+})
+
+router.get("/me", verifyUser, async (req, res) => {
+    findMe(req, res, object, include);
+})
+
+router.patch("/me", verifyUser, async (req, res) => {
+    updateMe(req, res, object);
+})
+
+router.delete("/me", verifyUser, async (req, res) => {
+    deleteMe(req, res, object);
 })
 
 module.exports = router
