@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { getDiets } from '../../api/controllers/DietApi';
 import { postAuth } from '../../api/controllers/AuthApi';
+import { getMe } from '../../api/controllers/MeApi';
 
 postAuth({
   password: 'trudnehaslo',
@@ -14,6 +15,16 @@ postAuth({
 .then(response => {
   console.log(response.data);
 })
+
+getMe()
+.then(response => {
+  console.log(response.data);
+})
+
+getDiets()
+    .then(response => {
+      console.log(response.data)
+    });
 
 function StartPage() {
   return (

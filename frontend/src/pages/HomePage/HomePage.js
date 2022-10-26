@@ -3,12 +3,6 @@ import logo from '../../icons/logo.svg';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getDiets } from '../../api/controllers/DietApi';
-
-getDiets()
-    .then(response => {
-      console.log(response.data)
-    });
 
 function HomePage() {
   return (
