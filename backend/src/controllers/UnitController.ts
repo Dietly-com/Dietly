@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 import {createOne, findOne, findMany, updateOne, deleteOne } from '../services/StandardService';
 import { PrismaClient} from '@prisma/client';
-import { verifyUser } from '../middlewares/AuthMiddleware';
+import { verifyUser } from '../middlewares/AuthorizationMiddleware';
 
 const object = new PrismaClient().unit;
 

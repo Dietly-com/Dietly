@@ -1,9 +1,9 @@
 import express, { Router } from 'express';
 import { createUser } from '../services/UserService';
 import {createOne, findOne, findMany, updateOne, deleteOne } from '../services/StandardService';
-import { findMe, updateMe, deleteMe } from '../services/MeService';
 import { PrismaClient} from '@prisma/client';
-import { verifyUser } from '../middlewares/AuthMiddleware';
+import { verifyUser } from '../middlewares/AuthorizationMiddleware';
+import { RequestBuilder } from '../utils/RequestUtils';
 
 const object = new PrismaClient().user;
 const include = {
@@ -13,16 +13,22 @@ const include = {
 };
 
 const router: Router = express.Router();
+router.use(async (req, res, next) => {
+    req = new RequestBuilder(req)
+    .withInclude(include)
+    .get();
+    next();
+})
 router.post("/", async (req, res) => {
     createUser(req, res);
 })
 
 router.get("/:id", verifyUser, async (req, res) => {
-    findOne(req, res, object, include);
+    findOne(req, res, object);
 })
 
 router.get("/", verifyUser, async (req, res) => {
-    findMany(req, res, object, include);
+    findMany(req, res, object);
 })
 
 router.patch("/:id", verifyUser, async (req, res) => {
@@ -31,18 +37,6 @@ router.patch("/:id", verifyUser, async (req, res) => {
 
 router.delete("/:id", verifyUser, async (req, res) => {
     deleteOne(req, res, object);
-})
-
-router.get("/me", verifyUser, async (req, res) => {
-    findMe(req, res, object, include);
-})
-
-router.patch("/me", verifyUser, async (req, res) => {
-    updateMe(req, res, object);
-})
-
-router.delete("/me", verifyUser, async (req, res) => {
-    deleteMe(req, res, object);
 })
 
 module.exports = router
