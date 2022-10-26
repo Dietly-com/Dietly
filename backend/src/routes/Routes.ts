@@ -4,7 +4,7 @@ const cors = require('cors');
 
 import { showStatus } from '../middlewares/DeveloperMiddleware';
 
-const authController = require("../controllers/AuthController");
+const authController = require("../controllers/AuthorizationController");
 const userController = require("../controllers/UserController");
 const meController = require("../controllers/MeController");
 const fileController = require("../controllers/FileController");
