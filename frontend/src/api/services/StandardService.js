@@ -9,10 +9,12 @@ import {
     HEADERS
 } from '../utils/RequestUtils';
 import { processResult, RESULT_SOMETHING_WRONG } from '../utils/ResponseUtils';
+import { validate } from '../utils/ValidationUtils';
 
-export const postOne = async (path, data) => {
+export const postOne = async (path, data, schema) => {
     return new Promise( (resolve, reject) => {
-        try {
+        if(validate(schema, data)) {
+            try {
             axios({
                 method: METHOD_POST,
                 url: URL + path,
@@ -31,9 +33,10 @@ export const postOne = async (path, data) => {
                 processResult(RESULT_SOMETHING_WRONG);
                 reject(error.response.data);
             });
-        } catch (error) {
-            processResult(RESULT_SOMETHING_WRONG);
-            reject(error);
+            } catch (error) {
+                processResult(RESULT_SOMETHING_WRONG);
+                reject(error);
+            }
         }
     })
 };

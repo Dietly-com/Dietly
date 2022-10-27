@@ -54,6 +54,7 @@
 5. npm install --save react-toastify
 6. npm install axios
 7. npm install react-markdown
+8. npm install joi
 
 ### Uruchamianie
 1. npm start

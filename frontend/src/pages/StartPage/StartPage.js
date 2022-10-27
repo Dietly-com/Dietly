@@ -7,10 +7,19 @@ import 'react-toastify/dist/ReactToastify.css';
 import { getDiets } from '../../api/controllers/DietApi';
 import { postAuth } from '../../api/controllers/AuthApi';
 import { getMe } from '../../api/controllers/MeApi';
+import { postBadge } from '../../api/controllers/BadgeApi';
 
 postAuth({
   password: 'trudnehaslo',
   login: 'login123'
+})
+.then(response => {
+  console.log(response.data);
+})
+
+postBadge({
+  name: 'Nowy badge',
+  description: ""
 })
 .then(response => {
   console.log(response.data);

@@ -1,10 +1,18 @@
 import { postOne, getOne, getMany, patchOne, deleteOne } from '../services/StandardService';
+export const Joi = require("joi");
 
+const schema = {
+    dietMealId: Joi.number().required().label("Diet Meal"),
+    productId: Joi.number().required().label("Product"),
+    unitId: Joi.number().required().label("Unit"),
+    name: Joi.string().required().label("Name"),
+    quantity: Joi.number().required().label("Quantity")    
+};
 const path = 'dietMealProduct';
 
 export const postDietMealProduct = async (data) => {
     return new Promise( (resolve, reject) => {
-        postOne(path, data)
+        postOne(path, data, schema)
         .then(responseBody => {
             resolve(responseBody)
         })
