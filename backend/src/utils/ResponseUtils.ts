@@ -12,68 +12,68 @@ export const STATUS_INTERNAL_SERVER_ERROR = 500;
 
 //MESSAGE_SUCCESS
 export const MESSAGE_CREATED_RECORD = {
-    text: 'Utworzono rekord',
+    text: 'Record created',
     type: 'success',
     code: 'S1'
 }
 
 export const MESSAGE_UPDATED_RECORD = {
-    text: 'Zaktualizowano rekord',
+    text: 'Record updated',
     type: 'success',
     code: 'S2'
 }
 
 export const MESSAGE_FIND_RECORD = {
-    text: 'Znaleziono rekord',
+    text: 'Record found',
     type: 'success',
     code: 'S3'
 }
 
 export const MESSAGE_FIND_RECORDS = {
-    text: 'Znaleziono rekordy',
+    text: 'Records found',
     type: 'success',
     code: 'S4'
 }
 
 export const MESSAGE_DELETED_RECORD = {
-    text: 'Ununięto rekord',
+    text: 'Record deleted',
     type: 'success',
     code: 'S5'
 }
 
 export const MESSAGE_LOGGED_USER = {
-    text: 'Zalogowano użytkownika',
+    text: 'Logged in user',
     type: 'success',
     code: 'S6'
 }
 
 //MESSAGE_ERROR
 export const MESSAGE_INTERNAL_SERVER_ERROR = {
-    text: 'Wewnętrzny błąd serwera',
+    text: 'Internal server error',
     type: 'error',
     code: 'E1'
 }
 
 export const MESSAGE_WRONG_LOGIN = {
-    text: 'Użytkownik o takim loginie istnieje!',
+    text: 'User with such a login does not exist',
     type: 'error',
     code: 'E2'
 }
 
 export const MESSAGE_WRONG_LOGIN_DATA = {
-    text: 'Błędny login lub hasło!',
+    text: 'Wrong login or password',
     type: 'error',
     code: 'E3'
 }
 
 export const MESSAGE_WRONG_TOKEN = {
-    text: 'Zły token',
+    text: 'Sign in',
     type: 'error',
     code: 'E4'
 }
 
 export const MESSAGE_NOT_FOUND_RECORD = {
-    text: 'Nie znaleziono rekordu',
+    text: 'Record not found',
     type: 'error',
     code: 'E5'
 }
