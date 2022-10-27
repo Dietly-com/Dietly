@@ -12,13 +12,23 @@ export class RequestBuilder {
         return this;
     }
 
+    withInclude(include: any) {
+        this.request.body.include = include;
+        return this;
+    }
+
     withWhere(where: any) {
         this.request.body.where = where;
         return this;
     }
 
-    withInclude(include: any) {
-        this.request.body.include = include;
+    withSkip(skip: number) {
+        this.request.body.skip = skip;
+        return this;
+    }
+
+    withTake(take: number) {
+        this.request.body.take = take;
         return this;
     }
 
