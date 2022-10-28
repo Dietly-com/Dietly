@@ -5,7 +5,7 @@ const schema = {
     name: Joi.string().required().label("Name"),
     description: Joi.string().empty().label("Description"),
     onwerId: Joi.number().empty().label("Owner"),
-    fileId: Joi.number().empty().label("File"),
+    fileId: Joi.number().empty().label("File")
 };
 const path = 'diet';
 

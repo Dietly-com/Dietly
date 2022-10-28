@@ -19,7 +19,7 @@ postAuth({
 
 postBadge({
   name: 'Nowy badge',
-  description: ""
+  description: 1
 })
 .then(response => {
   console.log(response.data);
@@ -31,9 +31,9 @@ getMe()
 })
 
 getDiets()
-    .then(response => {
-      console.log(response.data)
-    });
+.then(response => {
+  console.log(response.data)
+});
 
 function StartPage() {
   return (

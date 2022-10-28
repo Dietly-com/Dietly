@@ -3,7 +3,7 @@ export const Joi = require("joi");
 
 const schema = {
     login: Joi.string().required().label("Login"),
-    password: Joi.string().required().label("Password"),
+    password: Joi.string().required().label("Password")
 };
 const path = 'auth';
 

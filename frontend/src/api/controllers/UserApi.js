@@ -15,7 +15,7 @@ const schema = {
     activeLevel: Joi.number().empty().min(1).max(5).label("Active Level"),
     fileId: Joi.number().empty().label("File"),
     displayTheme: Joi.string().empty().label("Theme"),
-    displayLanguage: Joi.string().empty().label("Language"),
+    displayLanguage: Joi.string().empty().label("Language")
 };
 const path = 'user';
 
