@@ -1,13 +1,10 @@
 import './StartPage.css';
-import logo from '../../icons/logo.svg';
-
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import { getDiets } from '../../api/controllers/DietApi';
 import { postAuth } from '../../api/controllers/AuthApi';
 import { getMe } from '../../api/controllers/MeApi';
 import { postBadge } from '../../api/controllers/BadgeApi';
+import Page from '../../components/platform/Page/Page';
 
 postAuth({
   password: 'trudnehaslo',
@@ -38,33 +35,16 @@ getDiets()
 function StartPage() {
   return (
     <div className="StartPage">
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"/>
-
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        
-      </header>
+      <Page
+        pageHeader={
+          <div></div>
+        }
+        pageBody={
+          <div></div>
+        }
+        pageFooter={
+          <div></div>
+        }/>
     </div>
   );
 }
