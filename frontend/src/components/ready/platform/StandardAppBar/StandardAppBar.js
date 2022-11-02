@@ -7,6 +7,8 @@ import ExploreIcon from '@mui/icons-material/Explore';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
+import SearchIcon from '@mui/icons-material/Search';
+import AddIcon from '@mui/icons-material/Add';
 
 import '../../../utils/AppBar/AppBar.css';
 import MeIcon from "../MeIcon/MeIcon";
@@ -45,6 +47,12 @@ function StandardAppBar() {
             </IconButton>
             <IconButton variant="contained" style={{backgroundColor: "#6464BB", width: 48, height: 48, borderRadius: 8}} href='/discover/diet'>
                 <MenuBookIcon style={{color: "white"}}/>
+            </IconButton>
+            <IconButton variant="contained" style={{backgroundColor: "#bf555a", width: 48, height: 48, borderRadius: 8}} href='/discover/search'>
+                <SearchIcon style={{color: "white"}}/>
+            </IconButton>
+            <IconButton style={{width: 48, height: 48, borderRadius: 8}}>
+                <AddIcon style={{color: "black"}}/>
             </IconButton>
         </AppBar>
     );

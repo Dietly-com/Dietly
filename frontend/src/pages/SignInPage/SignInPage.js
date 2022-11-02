@@ -14,7 +14,7 @@ function SignInPage() {
         <Column>
           <Title title='Dietly' subtitle='Health life'/>
         </Column>
-        <Column width = {500}>
+        <Column widthPoints = {1}>
           <FormBox
             header='Sign in'
             footer={
