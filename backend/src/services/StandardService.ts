@@ -14,27 +14,27 @@ import {
     MESSAGE_NOT_FOUND_RECORD
 } from '../utils/ResponseUtils';
 
-export const createOne = async (req: Request, res: Response, object:any) => {
+export const createOne = async (req: Request, res: Response, object: any) => {
     try {
         req.body.data.createdById = req.body.authorization.id;
-        let query = {data: req.body.data};
+        let query = { data: req.body.data };
         const record = await object.create(query);
         res = new ResponseBuilder(res)
-        .withStatus(STATUS_CREATED)
-        .withResponseBodyData(record)
-        .withResponseBodySuccess(true)
-        .withResponseBodyMessage(MESSAGE_CREATED_RECORD)
-        .send();
+            .withStatus(STATUS_CREATED)
+            .withResponseBodyData(record)
+            .withResponseBodySuccess(true)
+            .withResponseBodyMessage(MESSAGE_CREATED_RECORD)
+            .send();
     } catch (error) {
         res = new ResponseBuilder(res)
-        .withStatus(STATUS_INTERNAL_SERVER_ERROR)
-        .withResponseBodySuccess(false)
-        .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
-        .send();
+            .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+            .withResponseBodySuccess(false)
+            .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+            .send();
     }
 }
 
-export const updateOne = async (req: Request, res: Response, object:any) => {
+export const updateOne = async (req: Request, res: Response, object: any) => {
     try {
         req.body.data.modifiedById = req.body.authorization.id;
         req.body.data.modifiedAt = new Date();
@@ -45,24 +45,24 @@ export const updateOne = async (req: Request, res: Response, object:any) => {
                 id: Number(id),
             },
             data: req.body.data
-          };
+        };
         const record = await object.update(query)
-          res = new ResponseBuilder(res)
-          .withStatus(STATUS_OK)
-          .withResponseBodyData(record)
-          .withResponseBodySuccess(true)
-          .withResponseBodyMessage(MESSAGE_UPDATED_RECORD)
-          .send();
+        res = new ResponseBuilder(res)
+            .withStatus(STATUS_OK)
+            .withResponseBodyData(record)
+            .withResponseBodySuccess(true)
+            .withResponseBodyMessage(MESSAGE_UPDATED_RECORD)
+            .send();
     } catch (error) {
         res = new ResponseBuilder(res)
-        .withStatus(STATUS_INTERNAL_SERVER_ERROR)
-        .withResponseBodySuccess(false)
-        .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
-        .send();
+            .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+            .withResponseBodySuccess(false)
+            .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+            .send();
     }
 }
 
-export const findOne = async (req: Request, res: Response, object:any) => {
+export const findOne = async (req: Request, res: Response, object: any) => {
     try {
         const { id } = req.params;
         await object.update({
@@ -70,13 +70,13 @@ export const findOne = async (req: Request, res: Response, object:any) => {
                 id: Number(id),
             },
             data: {
-                views: {increment: 1}
+                views: { increment: 1 }
             }
-          })
+        })
 
         let record = null;
         var query = {};
-        if(req.body.include != undefined) {
+        if (req.body.include != undefined) {
             query = {
                 where: {
                     id: Number(id),
@@ -91,54 +91,54 @@ export const findOne = async (req: Request, res: Response, object:any) => {
             }
         }
         record = await object.findUnique(query);
-        if (record == null){
+        if (record == null) {
             return res = new ResponseBuilder(res)
-            .withStatus(STATUS_NOT_FOUND)
-            .withResponseBodySuccess(false)
-            .withResponseBodyMessage(MESSAGE_NOT_FOUND_RECORD)
-            .send();
+                .withStatus(STATUS_NOT_FOUND)
+                .withResponseBodySuccess(false)
+                .withResponseBodyMessage(MESSAGE_NOT_FOUND_RECORD)
+                .send();
         }
         res = new ResponseBuilder(res)
-        .withStatus(STATUS_OK)
-        .withResponseBodyData(record)
-        .withResponseBodySuccess(true)
-        .withResponseBodyMessage(MESSAGE_FIND_RECORD)
-        .send();
+            .withStatus(STATUS_OK)
+            .withResponseBodyData(record)
+            .withResponseBodySuccess(true)
+            .withResponseBodyMessage(MESSAGE_FIND_RECORD)
+            .send();
     } catch (error) {
         res = new ResponseBuilder(res)
-        .withStatus(STATUS_INTERNAL_SERVER_ERROR)
-        .withResponseBodySuccess(false)
-        .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
-        .send();
+            .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+            .withResponseBodySuccess(false)
+            .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+            .send();
     }
 }
 
-export const findMany = async (req: Request, res: Response, object:any) => {
+export const findMany = async (req: Request, res: Response, object: any) => {
     try {
         let records = null;
         var query = {};
-        if(req.body.include != undefined) {
+        if (req.body.include != undefined) {
             query = {
                 include: req.body.include
             }
         }
         records = await object.findMany(query);
         res = new ResponseBuilder(res)
-        .withStatus(STATUS_OK)
-        .withResponseBodyData(records)
-        .withResponseBodySuccess(true)
-        .withResponseBodyMessage(MESSAGE_FIND_RECORDS)
-        .send();
+            .withStatus(STATUS_OK)
+            .withResponseBodyData(records)
+            .withResponseBodySuccess(true)
+            .withResponseBodyMessage(MESSAGE_FIND_RECORDS)
+            .send();
     } catch (error) {
         res = new ResponseBuilder(res)
-        .withStatus(STATUS_INTERNAL_SERVER_ERROR)
-        .withResponseBodySuccess(false)
-        .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
-        .send();
+            .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+            .withResponseBodySuccess(false)
+            .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+            .send();
     }
 }
 
-export const deleteOne = async (req: Request, res: Response, object:any) => {
+export const deleteOne = async (req: Request, res: Response, object: any) => {
     try {
         const { id } = req.params
         var query = {
@@ -148,16 +148,64 @@ export const deleteOne = async (req: Request, res: Response, object:any) => {
         };
         const record = await object.delete(query)
         res = new ResponseBuilder(res)
-        .withStatus(STATUS_OK)
-        .withResponseBodyData(record)
-        .withResponseBodySuccess(true)
-        .withResponseBodyMessage(MESSAGE_DELETED_RECORD)
-        .send();
+            .withStatus(STATUS_OK)
+            .withResponseBodyData(record)
+            .withResponseBodySuccess(true)
+            .withResponseBodyMessage(MESSAGE_DELETED_RECORD)
+            .send();
     } catch (error) {
         res = new ResponseBuilder(res)
-        .withStatus(STATUS_INTERNAL_SERVER_ERROR)
-        .withResponseBodySuccess(false)
-        .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
-        .send();
+            .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+            .withResponseBodySuccess(false)
+            .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+            .send();
+    }
+}
+
+export const findPopular = async (req: Request, res: Response, object: any) => {
+    try {
+        const { amount, page } = req.params;
+        let amountINT = parseInt(amount);
+        let skipINT = (parseInt(page) - 1) * amountINT;
+        let records = null;
+        let query = {};
+        if (req.body.include != undefined) {
+            query = {
+                take: amountINT,
+                skip: skipINT,
+                orderBy: [{
+                    views: 'desc',
+                },
+                {
+                    name: 'desc',
+                }],
+                include: req.body.include,
+            };
+        } else {
+            query = {
+                take: amountINT,
+                skip: skipINT,
+                orderBy: [{
+                    views: 'desc',
+                },
+                {
+                    name: 'desc',
+                }],
+            };
+
+        }
+        records = await object.findMany(query);
+        res = new ResponseBuilder(res)
+            .withStatus(STATUS_OK)
+            .withResponseBodyData(records)
+            .withResponseBodySuccess(true)
+            .withResponseBodyMessage(MESSAGE_FIND_RECORDS)
+            .send();
+    } catch (error) {
+        res = new ResponseBuilder(res)
+            .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+            .withResponseBodySuccess(false)
+            .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+            .send();
     }
 }

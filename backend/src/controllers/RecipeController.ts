@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import {createOne, findOne, findMany, updateOne, deleteOne } from '../services/StandardService';
+import {createOne, findOne, findMany, updateOne, deleteOne, findPopular } from '../services/StandardService';
 import { PrismaClient} from '@prisma/client';
 import { verifyUser } from '../middlewares/AuthorizationMiddleware';
 import { RequestBuilder } from '../utils/RequestUtils';
@@ -9,7 +9,7 @@ const include = {
     owner: true,
     file: true,
     unit: true,
-    recipeProduct: {include: {product: {include: {file: true}}}}
+    recipeProducts: {include: {product: {include: {file: true}}}}
 };
 
 const router: Router = express.Router();
@@ -30,6 +30,10 @@ router.get("/:id",  async (req, res) => {
 
 router.get("/",  async (req, res) => {
     findMany(req, res, object);
+})
+
+router.get("/popular/:amount/:page",  async (req, res) => {
+    findPopular(req, res, object);
 })
 
 router.patch("/:id",  async (req, res) => {
