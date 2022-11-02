@@ -21,7 +21,6 @@ export const getOneMe = async (path) => {
                 data: {}
               })
             .then(response => {
-                processResult(response.data.result);
                 resolve(response.data);
             })
             .catch(error => {

@@ -13,5 +13,5 @@ export const removeToken = () => {
 }
 
 export const checkToken = () => {
-    return (localStorage.removeItem(ACCESS_TOKEN_KEY) !== null && localStorage.removeItem(ACCESS_TOKEN_KEY) !== undefined);
+    return (localStorage.getItem(ACCESS_TOKEN_KEY) !== null && localStorage.getItem(ACCESS_TOKEN_KEY) !== undefined);
 }

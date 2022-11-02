@@ -50,7 +50,7 @@
 1. npm install react
 2. npm install react-router-dom
 3. npm install react-dom
-4. npm install @mui/material @emotion/react @emotion/styled
+4. npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
 5. npm install --save react-toastify
 6. npm install axios
 7. npm install react-markdown
