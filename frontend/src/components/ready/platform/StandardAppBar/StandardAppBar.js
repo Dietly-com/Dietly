@@ -31,7 +31,7 @@ function StandardAppBar() {
                     <IconButton style={{width: 48, height: 48, borderRadius: 8}} href='/me/settings'>
                         <SettingsIcon style={{color: "black"}}/>
                     </IconButton>
-                    <IconButton variant="contained" style={{backgroundColor: "#CCCCCC", width: 48, height: 48, borderRadius: 8}} href='/me'>
+                    <IconButton variant="contained" style={{width: 48, height: 48, borderRadius: 8}} href='/me'>
                         <MeIcon/>
                     </IconButton>
                 </div>
