@@ -18,10 +18,35 @@
     align-items: center;
     gap: 32px;
 }
+.page_top {
+    position: fixed;
+    top: 0px;
+    left: 100px;
+    right: 0px;
+    z-index: 10;
+}
+.page_top__inner {
+    padding: 64px 64px 8px 64px;
+    width: calc(100% - 128px - 20px);
+    background-color: #F5F6FF;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 .page_header {
     width: 100%;
 }
 .page_header__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+}
+.page_tools_bar {
+    width: 100%;
+}
+.page_tools_bar__inner {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
