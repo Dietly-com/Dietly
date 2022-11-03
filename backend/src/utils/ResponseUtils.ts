@@ -47,6 +47,31 @@ export const MESSAGE_LOGGED_USER = {
     code: 'S6'
 }
 
+
+export const MESSAGE_CREATED_USER = {
+    text: 'User created',
+    type: 'success',
+    code: 'S7'
+}
+
+export const MESSAGE_UPDATED_USER = {
+    text: 'User updated',
+    type: 'success',
+    code: 'S8'
+}
+
+export const MESSAGE_FIND_USER = {
+    text: 'User found',
+    type: 'success',
+    code: 'S9'
+}
+
+export const MESSAGE_DELETED_USER = {
+    text: 'User deleted',
+    type: 'success',
+    code: 'S10'
+}
+
 //MESSAGE_ERROR
 export const MESSAGE_INTERNAL_SERVER_ERROR = {
     text: 'Internal server error',

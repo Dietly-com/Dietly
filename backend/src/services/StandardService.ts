@@ -1,4 +1,5 @@
 import express, { Request, Response, NextFunction, Router } from 'express';
+const bcrypt = require("bcrypt");
 import {
     ResponseBuilder,
     STATUS_CREATED,
@@ -40,6 +41,11 @@ export const updateOne = async (req: Request, res: Response, object:any) => {
         req.body.data.modifiedAt = new Date();
         console.log(req.body.data);
         const { id } = req.params;
+        if(req.body.data.password !== undefined) {
+            const salt:string = await bcrypt.genSalt(Number(process.env.SALT));
+            const hashPassword = await bcrypt.hash(req.body.data.password, salt);
+            req.body.data.password = hashPassword;
+        };
         let query = {
             where: {
                 id: Number(id),

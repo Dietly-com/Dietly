@@ -1,15 +1,15 @@
 import express, { Request, Response, NextFunction, Router } from 'express';
+const bcrypt = require("bcrypt");
 import {
     ResponseBuilder,
     STATUS_CREATED,
     STATUS_INTERNAL_SERVER_ERROR,
     STATUS_NOT_FOUND,
     STATUS_OK,
-    MESSAGE_CREATED_RECORD,
-    MESSAGE_UPDATED_RECORD,
-    MESSAGE_FIND_RECORD,
-    MESSAGE_FIND_RECORDS,
-    MESSAGE_DELETED_RECORD,
+    MESSAGE_CREATED_USER,
+    MESSAGE_UPDATED_USER,
+    MESSAGE_FIND_USER,
+    MESSAGE_DELETED_USER,
     MESSAGE_INTERNAL_SERVER_ERROR,
     MESSAGE_NOT_FOUND_RECORD
 } from '../utils/ResponseUtils';
@@ -19,6 +19,11 @@ export const updateMe = async (req: Request, res: Response, object:any) => {
         req.body.data.modifiedById = req.body.authorization.id;
         req.body.data.modifiedAt = new Date();
         const id = req.body.authorization.id;
+        if(req.body.data.password !== undefined) {
+            const salt:string = await bcrypt.genSalt(Number(process.env.SALT));
+            const hashPassword = await bcrypt.hash(req.body.data.password, salt);
+            req.body.data.password = hashPassword;
+        };
         const record = await object.update({
             where: {
                 id: Number(id),
@@ -29,7 +34,7 @@ export const updateMe = async (req: Request, res: Response, object:any) => {
           .withStatus(STATUS_OK)
           .withResponseBodyData(record)
           .withResponseBodySuccess(true)
-          .withResponseBodyMessage(MESSAGE_UPDATED_RECORD)
+          .withResponseBodyMessage(MESSAGE_UPDATED_USER)
           .send();
     } catch (error) {
         res = new ResponseBuilder(res)
@@ -77,7 +82,7 @@ export const findMe = async (req: Request, res: Response, object:any) => {
         .withStatus(STATUS_OK)
         .withResponseBodyData(record)
         .withResponseBodySuccess(true)
-        .withResponseBodyMessage(MESSAGE_FIND_RECORD)
+        .withResponseBodyMessage(MESSAGE_FIND_USER)
         .send();
     } catch (error) {
         res = new ResponseBuilder(res)
@@ -100,7 +105,7 @@ export const deleteMe = async (req: Request, res: Response, object:any) => {
         .withStatus(STATUS_OK)
         .withResponseBodyData(record)
         .withResponseBodySuccess(true)
-        .withResponseBodyMessage(MESSAGE_DELETED_RECORD)
+        .withResponseBodyMessage(MESSAGE_DELETED_USER)
         .send();
     } catch (error) {
         res = new ResponseBuilder(res)
