@@ -22,6 +22,8 @@ export const getOneMe = async (path) => {
               })
             .then(response => {
                 resolve(response.data);
+                localStorage.setItem("displayTheme", response.data.data.displayTheme);
+                localStorage.setItem("displayLanguage", response.data.data.displayLanguage);
             })
             .catch(error => {
                 processResult(error.response.data);
