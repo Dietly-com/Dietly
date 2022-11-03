@@ -3,7 +3,7 @@ import Page from '../../components/utils/Page/Page';
 import Column from '../../components/utils/Column/Column';
 import Title from '../../components/ready/startPage/Title/Title';
 import FormBox from '../../components/ready/startPage/FormBox/FormBox';
-import { Button, Step, StepLabel, Stepper, TextField } from '@mui/material';
+import { Button, MenuItem, Step, StepLabel, Stepper, TextField } from '@mui/material';
 import DragonFruit from '../../components/ready/startPage/DragonFruit/DragonFruit';
 import { useSignOn } from '../../hooks/useSignOn';
 
@@ -15,15 +15,10 @@ function SignOnPage() {
     height, setHeight, weight, setWeight, activeLevel, setActiveLevel,
     filePath, setFilePath,
     displayTheme, setDisplayTheme, displayLanguage, setDisplayLanguage,
-    signOn
+    signOn,
+    themes, languages, activeLevels, steps
   ] = useSignOn();
-  const steps = [
-    'Personal',
-    'Login',
-    'Body',
-    'Profile picture',
-    'Display'
-  ];
+  
   return (
     <div className="SignOnPage" style={{width: '100%'}}>
       <Page>
@@ -88,7 +83,13 @@ function SignOnPage() {
                 <div>
                   <TextField id="standard-basic" label="Height" defaultValue={height} variant="standard" type="number" fullWidth onChange={(event)=>{setHeight(event.target.value)}}/>
                   <TextField id="standard-basic" label="Weight" defaultValue={weight} variant="standard" type="number" fullWidth onChange={(event)=>{setWeight(event.target.value)}}/>
-                  <TextField id="standard-basic" label="Active level" defaultValue={activeLevel} variant="standard" type="number" fullWidth onChange={(event)=>{setActiveLevel(event.target.value)}}/>
+                  <TextField id="standard-basic" label="Active level" defaultValue={activeLevel} variant="standard" select type="number" fullWidth onChange={(event)=>{setActiveLevel(event.target.value)}}>
+                    {activeLevels.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
                 </div>
               }
               {stage===3 &&
@@ -101,8 +102,20 @@ function SignOnPage() {
               }
               {stage===4 &&
                 <div>
-                  <TextField id="standard-basic" label="Theme" defaultValue={displayTheme} variant="standard" type="text" fullWidth onChange={(event)=>{setDisplayTheme(event.target.value)}}/>
-                  <TextField id="standard-basic" label="Language" defaultValue={displayLanguage} variant="standard" type="text" fullWidth onChange={(event)=>{setDisplayLanguage(event.target.value)}}/>
+                  <TextField id="standard-basic" label="Theme" defaultValue={displayTheme} variant="standard" select type="text" fullWidth onChange={(event)=>{setDisplayTheme(event.target.value)}}>
+                    {themes.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                  <TextField id="standard-basic" label="Language" defaultValue={displayLanguage} variant="standard" select type="text" fullWidth onChange={(event)=>{setDisplayLanguage(event.target.value)}}>
+                    {languages.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
                 </div>
               }
           </FormBox>

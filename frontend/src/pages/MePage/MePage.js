@@ -4,6 +4,9 @@ import MeDetails from '../../components/ready/mePage/MeDetails/MeDetails';
 import Section from '../../components/utils/Section/Section';
 import Group from '../../components/utils/Group/Group';
 import SearchBar from '../../components/ready/platform/SearchBar/SearchBar';
+import MeActiveLevel from '../../components/ready/mePage/MeActiveLevel/MeActiveLevel';
+import MeBadges from '../../components/ready/mePage/MeBadges/MeBadges';
+import MePersonalBests from '../../components/ready/mePage/MePersonalBests/MePersonalBests';
 
 function MePage() {
   return (
@@ -16,18 +19,20 @@ function MePage() {
           </Section>
           <Section
             header={<div>Activity level</div>}>
-              abc
+              <MeActiveLevel/>
           </Section>
         </Column>
         <Column widthPoints = {1}>
           <Group>
             <Section
               header={<div>Badges</div>}>
+              <MeBadges/>
             </Section>
           </Group>
           <Group>
             <Section
               header={<div>Personal Bests</div>}>
+                <MePersonalBests/>
             </Section>
           </Group>
         </Column>
