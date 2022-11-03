@@ -50,11 +50,12 @@
 1. npm install react
 2. npm install react-router-dom
 3. npm install react-dom
-4. npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
+4. npm install @mui/icons-material @mui/material @emotion/styled @emotion/react @mui/lab @mui/x-date-pickers
 5. npm install --save react-toastify
 6. npm install axios
 7. npm install react-markdown
 8. npm install joi
+9. npm install dayjs
 
 ### Uruchamianie
 1. npm start
