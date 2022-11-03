@@ -37,7 +37,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 8px;
+    gap: 32px;
 }
 .page_footer {
     width: 100%;

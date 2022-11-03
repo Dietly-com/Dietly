@@ -26,7 +26,7 @@ function Platform(props) {
                 <div className="page_container" style={{
                     marginTop: props.platformBar? 64 : 0,
                     marginLeft: props.appBar? 100 : 0,
-                    width: props.appBar? 'calc(100vw - 100px)': '100%'
+                    width: props.appBar? 'calc(100vw - 100px - 20px)': '100%'
                 }}>
                     <div className="page_container__inner">
                         {props.page}
