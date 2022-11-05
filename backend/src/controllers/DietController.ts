@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import {createOne, findOne, findMany, updateOne, deleteOne } from '../services/StandardService';
+import {createOne, findOne, findMany, updateOne, deleteOne, search } from '../services/StandardService';
 import { PrismaClient} from '@prisma/client';
 import { verifyUser } from '../middlewares/AuthorizationMiddleware';
 import { RequestBuilder } from '../utils/RequestUtils';
@@ -44,6 +44,10 @@ router.patch("/:id",  async (req, res) => {
 
 router.delete("/:id",  async (req, res) => {
     deleteOne(req, res, object);
+})
+
+router.get("/search/:term",  async (req, res) => {
+    search(req, res, object);
 })
 
 module.exports = router

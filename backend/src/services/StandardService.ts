@@ -161,3 +161,35 @@ export const deleteOne = async (req: Request, res: Response, object:any) => {
         .send();
     }
 }
+
+export const search = async (req: Request, res: Response, object:any) => {
+    try {
+        const term=req.params.term;
+
+        let records = null;
+        var query = {};
+        if(req.body.include != undefined) {
+            query = {
+                where: {
+                    name:{
+                        contains:term,
+                    }
+                },
+                include: req.body.include
+            }
+        }
+        records = await object.findMany(query);
+        res = new ResponseBuilder(res)
+        .withStatus(STATUS_OK)
+        .withResponseBodyData(records)
+        .withResponseBodySuccess(true)
+        .withResponseBodyMessage(MESSAGE_FIND_RECORDS)
+        .send();
+    } catch (error) {
+        res = new ResponseBuilder(res)
+        .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+        .withResponseBodySuccess(false)
+        .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+        .send();
+    }
+}

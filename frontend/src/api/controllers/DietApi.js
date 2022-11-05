@@ -1,4 +1,4 @@
-import { postOne, getOne, getMany, patchOne, deleteOne } from '../services/StandardService';
+import { postOne, getOne, getMany, patchOne, deleteOne, search } from '../services/StandardService';
 export const Joi = require("joi");
 
 const schema = {
@@ -60,6 +60,18 @@ export const patchDiet = async (id, data) => {
 export const deleteDiet = async (id) => {
     return new Promise( (resolve, reject) => {
         deleteOne(path, id)
+        .then(responseBody => {
+            resolve(responseBody)
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })
+};
+
+export const searchDiets = async (term) => {
+    return new Promise( (resolve, reject) => {
+        search(path, term)
         .then(responseBody => {
             resolve(responseBody)
         })
