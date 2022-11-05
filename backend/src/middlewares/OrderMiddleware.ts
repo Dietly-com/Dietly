@@ -8,14 +8,17 @@ import {
 } from '../utils/ResponseUtils';
 
 
-export const addWhere = async (req: Request, res: Response, next: NextFunction) => {
+export const addOrder = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        if (req.query.where != undefined) {
-            let where = "{" + req.query.where + "}";
-            console.log(where);
-            let jsonedString = JSON.parse(where);
+        if (req.query.orderBy != undefined || req.query.arrange != undefined) {
+            let order = "id";
+            let arrange = "desc";
+            if (req.query.orderBy != undefined) order = String(req.query.orderBy);
+            if (req.query.arrange != undefined) arrange = String(req.query.arrange);
+            let orderBy = JSON.parse('{"' + order + '":"' + arrange + '"}');
+            console.log(orderBy);
             req = new RequestBuilder(req)
-                .withWhere(jsonedString)
+                .withOrderBy(orderBy)
                 .get()
         }
         next();
