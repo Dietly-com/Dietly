@@ -148,3 +148,28 @@ export const deleteOne = async (path, id) => {
     })
 };
 
+export const search = async (path, term) => {
+    return new Promise( (resolve, reject) => {
+        try {
+            axios({
+                method: METHOD_GET,
+                url: URL + path + "/search/" + term,
+                responseType: RESPONSE_TYPE,
+                headers: HEADERS,
+                params: {},
+                data: {}
+              })
+            .then(response => {
+                processResult(response.data.result);
+                resolve(response.data);
+            })
+            .catch(error => {
+                processResult(error.response.data);
+                reject(error.response.data);
+            });
+        } catch (error) {
+            processResult(RESULT_SOMETHING_WRONG);
+            reject(error)
+        }
+    })
+};
