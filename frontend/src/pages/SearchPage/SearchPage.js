@@ -7,6 +7,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Section from '../../components/utils/Section/Section';
+import NoToDi from '../../components/ready/platform/NoToDi/NoToDi';
 
 function SearchPage() {
   const [value, setValue] = useState('1');
@@ -31,13 +32,13 @@ function SearchPage() {
           <Column width = {1000}>
           <Section>
             <TabPanel value="1">
-              Searched products
+              <NoToDi show={true}/>
             </TabPanel>
             <TabPanel value="2">
-              Searched recipes
+              <NoToDi show={true}/>
             </TabPanel>
             <TabPanel value="3">
-              Searched diets
+              <NoToDi show={true}/>
             </TabPanel>
           </Section>
           </Column>

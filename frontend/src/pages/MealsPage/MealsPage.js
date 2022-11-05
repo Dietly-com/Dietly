@@ -17,9 +17,11 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useState } from 'react';
 import dayjs from 'dayjs';
+import ProductCard from '../../components/ready/platform/cards/ProductCard/ProductCard';
 
 function MealsPage() {
   let [date, setDate] = useState(dayjs(new Date()));
+
   return (
     <div className="MealsPage">
       <Page
@@ -57,7 +59,6 @@ function MealsPage() {
                 <Group>
                 <Section
                   header={<div>Breakfast</div>}>
-                    Coś
                 </Section>
               </Group>
             </TimelineContent>
