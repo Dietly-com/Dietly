@@ -3,6 +3,9 @@ import {createOne, findOne, findMany, updateOne, deleteOne } from '../services/S
 import { PrismaClient} from '@prisma/client';
 import { verifyUser } from '../middlewares/AuthorizationMiddleware';
 import { RequestBuilder } from '../utils/RequestUtils';
+import { addWhere } from '../middlewares/WhereMiddleware';
+import { addPagination } from '../middlewares/PaginationMiddleware';
+import { addOrder } from '../middlewares/OrderMiddleware';
 
 const object = new PrismaClient().product;
 const include = {
@@ -14,6 +17,9 @@ const include = {
 
 const router: Router = express.Router();
 router.use(verifyUser);
+router.use(addWhere);
+router.use(addPagination);
+router.use(addOrder);
 router.use(async (req, res, next) => {
     req = new RequestBuilder(req)
     .withInclude(include)

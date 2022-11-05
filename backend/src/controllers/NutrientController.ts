@@ -2,11 +2,17 @@ import express, { Router } from 'express';
 import {createOne, findOne, findMany, updateOne, deleteOne } from '../services/StandardService';
 import { PrismaClient} from '@prisma/client';
 import { verifyUser } from '../middlewares/AuthorizationMiddleware';
+import { addWhere } from '../middlewares/WhereMiddleware';
+import { addPagination } from '../middlewares/PaginationMiddleware';
+import { addOrder } from '../middlewares/OrderMiddleware';
 
 const object = new PrismaClient().nutrient;
 
 const router: Router = express.Router();
 router.use(verifyUser);
+router.use(addWhere);
+router.use(addPagination);
+router.use(addOrder);
 router.post("/", async (req, res) => {
     createOne(req, res, object);
 })
