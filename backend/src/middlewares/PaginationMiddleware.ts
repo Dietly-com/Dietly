@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { verifyAccessToken } from '../utils/TokenUtils';
 import { RequestBuilder } from '../utils/RequestUtils';
 import {
     ResponseBuilder,
@@ -7,14 +8,16 @@ import {
 } from '../utils/ResponseUtils';
 
 
-export const addWhere = async (req: Request, res: Response, next: NextFunction) => {
+export const addPagination = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        if (req.query.where != undefined) {
-            let where = "{" + req.query.where + "}";
-            console.log(where);
-            let jsonedString = JSON.parse(where);
+        if (req.query.page != undefined || req.query.take != undefined) {
+            let skip = 0;
+            let take = 10;
+            if(req.query.take != undefined)     take = Number(req.query.take);
+            if(req.query.page != undefined)     skip = take * (Number(req.query.page) - 1);
             req = new RequestBuilder(req)
-                .withWhere(jsonedString)
+                .withSkip(skip)
+                .withTake(take)
                 .get()
         }
         next();

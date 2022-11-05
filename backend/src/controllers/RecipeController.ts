@@ -3,17 +3,23 @@ import {createOne, findOne, findMany, updateOne, deleteOne, search } from '../se
 import { PrismaClient} from '@prisma/client';
 import { verifyUser } from '../middlewares/AuthorizationMiddleware';
 import { RequestBuilder } from '../utils/RequestUtils';
+import { addWhere } from '../middlewares/WhereMiddleware';
+import { addPagination } from '../middlewares/PaginationMiddleware';
+import { addOrder } from '../middlewares/OrderMiddleware';
 
 const object = new PrismaClient().recipe;
 const include = {
     owner: true,
     file: true,
     unit: true,
-    recipeProduct: {include: {product: {include: {file: true}}}}
+    recipeProducts: {include: {product: {include: {file: true}}}}
 };
 
 const router: Router = express.Router();
 router.use(verifyUser);
+router.use(addWhere);
+router.use(addPagination);
+router.use(addOrder);
 router.use(async (req, res, next) => {
     req = new RequestBuilder(req)
     .withInclude(include)
@@ -31,6 +37,7 @@ router.get("/:id",  async (req, res) => {
 router.get("/",  async (req, res) => {
     findMany(req, res, object);
 })
+
 
 router.patch("/:id",  async (req, res) => {
     updateOne(req, res, object);
