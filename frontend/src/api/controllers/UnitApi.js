@@ -32,9 +32,9 @@ export const getUnit = async (id) => {
     })
 };
 
-export const getUnits = async () => {
+export const getUnits = async (params) => {
     return new Promise( (resolve, reject) => {
-        getMany(path)
+        getMany(path, params)
         .then(responseBody => {
             resolve(responseBody)
         })

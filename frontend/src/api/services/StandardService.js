@@ -67,7 +67,7 @@ export const getOne = async (path, id) => {
     })
 };
 
-export const getMany = async (path) => {
+export const getMany = async (path, params) => {
     return new Promise( (resolve, reject) => {
         try {
             axios({
@@ -75,7 +75,7 @@ export const getMany = async (path) => {
                 url: URL + path,
                 responseType: RESPONSE_TYPE,
                 headers: HEADERS,
-                params: {},
+                params: params,
                 data: {}
               })
             .then(response => {

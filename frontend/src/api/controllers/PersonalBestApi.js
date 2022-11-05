@@ -32,9 +32,9 @@ export const getPersonalBest = async (id) => {
     })
 };
 
-export const getPersonalBests = async () => {
+export const getPersonalBests = async (params) => {
     return new Promise( (resolve, reject) => {
-        getMany(path)
+        getMany(path, params)
         .then(responseBody => {
             resolve(responseBody)
         })

@@ -35,9 +35,9 @@ export const getProduct = async (id) => {
     })
 };
 
-export const getProducts = async () => {
+export const getProducts = async (params) => {
     return new Promise( (resolve, reject) => {
-        getMany(path)
+        getMany(path, params)
         .then(responseBody => {
             resolve(responseBody)
         })

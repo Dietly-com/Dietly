@@ -32,9 +32,9 @@ export const getBadge = async (id) => {
     })
 };
 
-export const getBadges = async () => {
+export const getBadges = async (params) => {
     return new Promise( (resolve, reject) => {
-        getMany(path)
+        getMany(path, params)
         .then(responseBody => {
             resolve(responseBody)
         })

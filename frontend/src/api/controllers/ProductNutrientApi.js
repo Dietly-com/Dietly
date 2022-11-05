@@ -32,9 +32,9 @@ export const getProductNutrient = async (id) => {
     })
 };
 
-export const getProductNutrients = async () => {
+export const getProductNutrients = async (params) => {
     return new Promise( (resolve, reject) => {
-        getMany(path)
+        getMany(path, params)
         .then(responseBody => {
             resolve(responseBody)
         })

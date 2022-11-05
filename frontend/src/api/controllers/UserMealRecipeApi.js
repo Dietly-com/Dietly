@@ -32,9 +32,9 @@ export const getUserMealRecipe = async (id) => {
     })
 };
 
-export const getUserMealRecipes = async () => {
+export const getUserMealRecipes = async (params) => {
     return new Promise( (resolve, reject) => {
-        getMany(path)
+        getMany(path, params)
         .then(responseBody => {
             resolve(responseBody)
         })

@@ -34,9 +34,9 @@ export const getDietMealProduct = async (id) => {
     })
 };
 
-export const getDietMealProducts = async () => {
+export const getDietMealProducts = async (params) => {
     return new Promise( (resolve, reject) => {
-        getMany(path)
+        getMany(path, params)
         .then(responseBody => {
             resolve(responseBody)
         })
