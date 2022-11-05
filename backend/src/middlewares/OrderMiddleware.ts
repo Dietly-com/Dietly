@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import { verifyAccessToken } from '../utils/TokenUtils';
 import { RequestBuilder } from '../utils/RequestUtils';
 import {
     ResponseBuilder,
@@ -16,7 +15,6 @@ export const addOrder = async (req: Request, res: Response, next: NextFunction) 
             if (req.query.orderBy != undefined) order = String(req.query.orderBy);
             if (req.query.arrange != undefined) arrange = String(req.query.arrange);
             let orderBy = JSON.parse('{"' + order + '":"' + arrange + '"}');
-            console.log(orderBy);
             req = new RequestBuilder(req)
                 .withOrderBy(orderBy)
                 .get()

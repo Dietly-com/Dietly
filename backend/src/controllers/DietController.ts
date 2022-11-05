@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import {createOne, findOne, findMany, updateOne, deleteOne, findPopular } from '../services/StandardService';
+import {createOne, findOne, findMany, updateOne, deleteOne} from '../services/StandardService';
 import { PrismaClient} from '@prisma/client';
 import { verifyUser } from '../middlewares/AuthorizationMiddleware';
 import { RequestBuilder } from '../utils/RequestUtils';
@@ -52,8 +52,5 @@ router.delete("/:id",  async (req, res) => {
     deleteOne(req, res, object);
 })
 
-router.get("/popular/:amount/:page",  async (req, res) => {
-    findPopular(req, res, object);
-})
 
 module.exports = router

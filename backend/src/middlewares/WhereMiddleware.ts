@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import { verifyAccessToken } from '../utils/TokenUtils';
 import { RequestBuilder } from '../utils/RequestUtils';
 import {
     ResponseBuilder,
