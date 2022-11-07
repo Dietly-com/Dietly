@@ -12,7 +12,9 @@ const include = {
     owner: true,
     file: true,
     unit:true,
-    productNutrients: {include: {nutrient: true}}
+    productNutrients: {include: {
+        nutrient: { include: {unit: true}}
+    }}
 };
 
 const router: Router = express.Router();

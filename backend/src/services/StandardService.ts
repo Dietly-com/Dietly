@@ -204,9 +204,18 @@ export const search = async (req: Request, res: Response, object:any) => {
         if(req.body.include != undefined) {
             query = {
                 where: {
-                    name:{
-                        contains:term,
-                    }
+                    OR: [
+                        {
+                            name:{
+                                contains: term,
+                            }
+                        },
+                        {
+                            description:{
+                                contains: term,
+                            }
+                        }
+                    ]
                 },
                 include: req.body.include
             }

@@ -187,7 +187,11 @@ model UserMeal {
   user User @relation(fields: [userId], references: [id])
   userId Int
   name String
-  time DateTime
+  year Int
+  month Int
+  day Int
+  hour Int
+  minute Int
 
   userMealProducts UserMealProduct[]
   userMealRecipes UserMealRecipe[]
@@ -240,8 +244,9 @@ model Unit {
   views Int @default(0)
 
   name String
-  quantity Float
-  shortcut String
+  viewName String
+  code String
+  quantity Float @default(1)
 
   products Product[]
   recipes Recipe[]
@@ -250,6 +255,7 @@ model Unit {
   recipeProducts RecipeProduct[]
   dietMealRecipes DietMealRecipe[]
   dietMealProducts DietMealProduct[]
+  nutrients Nutrient[]
 }
 
 model Nutrient {
@@ -263,8 +269,12 @@ model Nutrient {
   views Int @default(0)
 
   name String
+  viewName String
+  code String
   min Int?
   max Int?
+  unit Unit @relation(fields: [unitId], references: [id])
+  unitId Int @default(1)
 
   productNutrients ProductNutrient[]
 }
@@ -280,6 +290,12 @@ model Product {
   views Int @default(0)
 
   name String
+  category String?
+  producer String?
+  code String?
+  nutriScore String?
+  vegan Boolean? @default(false)
+  vegetarian Boolean? @default(false)
   description String?
   owner User? @relation(fields: [ownerId], references: [id])
   ownerId Int?
@@ -287,7 +303,7 @@ model Product {
   fileId Int?
   unit Unit @relation(fields: [unitId], references: [id])
   unitId Int
-  quantity Int
+  quantity Int @default(100)
 
   userMealProducts UserMealProduct[]
   productNutrients ProductNutrient[]
@@ -323,15 +339,18 @@ model Recipe {
   views Int @default(0)
 
   name String
+  category String?
+  vegan Boolean? @default(false)
+  vegetarian Boolean? @default(false)
   description String?
-  preparation String?
+  preparation String? @db.LongText
   owner User? @relation(fields: [ownerId], references: [id])
   ownerId Int?
   file File? @relation(fields: [fileId], references: [id])
   fileId Int?
   unit Unit @relation(fields: [unitId], references: [id])
   unitId Int
-  quantity Float
+  quantity Float @default(100)
 
   userMealRecipes UserMealRecipe[]
   recipeProducts RecipeProduct[]
@@ -389,9 +408,9 @@ model DietMeal {
   views Int @default(0)
 
   name String
+  day Int
   hour Int
   minute Int
-  day Int
   diet Diet @relation(fields: [dietId], references: [id])
   dietId Int
 
@@ -447,6 +466,8 @@ model File {
   modifiedById Int?
   views Int @default(0)
 
+  name String?
+  category String?
   type String?
   path String
 

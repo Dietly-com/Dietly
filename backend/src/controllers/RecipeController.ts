@@ -12,7 +12,16 @@ const include = {
     owner: true,
     file: true,
     unit: true,
-    recipeProducts: {include: {product: {include: {file: true}}}}
+    recipeProducts: {include: {
+        product: {include: {
+            file: true,
+            unit: true,
+            productNutrients: {include: {
+                nutrient: { include: {unit: true}}
+            }}
+        }},
+        unit: true
+    }}
 };
 
 const router: Router = express.Router();
@@ -37,7 +46,6 @@ router.get("/:id",  async (req, res) => {
 router.get("/",  async (req, res) => {
     findMany(req, res, object);
 })
-
 
 router.patch("/:id",  async (req, res) => {
     updateOne(req, res, object);

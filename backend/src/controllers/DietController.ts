@@ -9,14 +9,21 @@ import { addOrder } from '../middlewares/OrderMiddleware';
 
 const object = new PrismaClient().diet;
 const include = {
-    owner: true,
     file: true,
     dietMeals: {include: {
         dietMealRecipes: {include: {
             recipe: {include: {file: true}},
             unit: true
     }}, dietMealProducts: {include: {
-        product: {include: {file: true}},
+        product: {include: {
+            file: true,
+            unit: true,
+            productNutrients: {include: {
+                nutrient: {include: {
+                    unit: true
+                }}}
+            }
+        }},
         unit: true
 }}}}
 };
