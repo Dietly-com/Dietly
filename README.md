@@ -56,6 +56,9 @@
 7. npm install react-markdown
 8. npm install joi
 9. npm install dayjs
+10. npm install react-i18next
+11. npm install rehype-raw 
+12. npm install react-barcode
 
 ### Uruchamianie
 1. npm start
