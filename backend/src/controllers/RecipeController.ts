@@ -6,6 +6,7 @@ import { RequestBuilder } from '../utils/RequestUtils';
 import { addWhere } from '../middlewares/WhereMiddleware';
 import { addPagination } from '../middlewares/PaginationMiddleware';
 import { addOrder } from '../middlewares/OrderMiddleware';
+import { getRecipeWithNutrients } from '../utils/NutrientsUtils';
 
 const object = new PrismaClient().recipe;
 const include = {
@@ -39,8 +40,12 @@ router.post("/", async (req, res) => {
     createOne(req, res, object);
 })
 
+let findOneResponseBodyDataProcessor = (responseBodyData: any) => {
+    responseBodyData.data = getRecipeWithNutrients(responseBodyData.data);
+    return responseBodyData;
+}
 router.get("/:id",  async (req, res) => {
-    findOne(req, res, object);
+    findOne(req, res, object, findOneResponseBodyDataProcessor);
 })
 
 router.get("/",  async (req, res) => {

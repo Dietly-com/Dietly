@@ -69,7 +69,7 @@ export const updateOne = async (req: Request, res: Response, object:  any) => {
     }
 }
 
-export const findOne = async (req: Request, res: Response, object:  any) => {
+export const findOne = async (req: Request, res: Response, object:  any, responseBodyDataProcessor: any = undefined) => {
     try {
         const { id } = req.params;
         await object.update({
@@ -108,6 +108,7 @@ export const findOne = async (req: Request, res: Response, object:  any) => {
         res = new ResponseBuilder(res)
                 .withStatus(STATUS_OK)
                 .withResponseBodyData(record)
+                .withResponseBodyDataProcessor(responseBodyDataProcessor)
                 .withResponseBodySuccess(true)
                 .withResponseBodyMessage(MESSAGE_FIND_RECORD)
                 .send();
@@ -120,7 +121,7 @@ export const findOne = async (req: Request, res: Response, object:  any) => {
     }
 }
 
-export const findMany = async (req: Request, res: Response, object:  any) => {
+export const findMany = async (req: Request, res: Response, object:  any, responseBodyDataProcessor: any = undefined) => {
     try {
         let records = null;
         let query = {
@@ -158,6 +159,7 @@ export const findMany = async (req: Request, res: Response, object:  any) => {
         res = new ResponseBuilder(res)
                 .withStatus(STATUS_OK)
                 .withResponseBodyData(records)
+                .withResponseBodyDataProcessor(responseBodyDataProcessor)
                 .withResponseBodySuccess(true)
                 .withResponseBodyMessage(MESSAGE_FIND_RECORDS)
                 .send();
