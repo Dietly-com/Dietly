@@ -65,30 +65,107 @@ export const getRecipeWithNutrients = (recipe: any) => {
 
 
 
-export const getUserMealProductWithNutrients = (userMealProduct: any) => {
 
+
+
+export const getUserMealProductWithNutrients = (userMealProduct: any) => {
+    let userMealProductNutrients:any = [];
+    for (let productNutrient of userMealProduct.product.productNutrients) {
+        let userMealProductNutrient = {
+            "nutrientId": 0,
+            "quantity": 0,
+            "nutrient": {}
+        };
+        userMealProductNutrient.quantity = productNutrient.quantity*(999/100); //change 999 to userMealProduct.quantity
+        userMealProductNutrient.nutrient = productNutrient.nutrient;
+        userMealProductNutrient.nutrientId = productNutrient.nutrientId;
+        userMealProductNutrients.push(userMealProductNutrient)
+    }
+
+    userMealProduct.userMealProductNutrients = userMealProductNutrients;
+    return userMealProduct;
 }
 
 export const getUserMealProductsWithNutrients = (userMealProducts: any) => {
-
+    let userMealProductsWithNutrients = [];
+    for (let userMealProduct of userMealProducts) {
+        userMealProductsWithNutrients.push(getUserMealProductWithNutrients(userMealProduct));
+    }
+    return userMealProductsWithNutrients;
 }
 
 export const getUserMealRecipeWithNutrients = (userMealRecipe: any) => {
+    userMealRecipe.recipe = getRecipeWithNutrients(userMealRecipe.recipe);
+    let userMealRecipeNutrients:any = [];
+    for (let recipeNutrient of userMealRecipe.recipe.recipeNutrients) {
+        let userMealRecipeNutrient = {
+            "nutrientId": 0,
+            "quantity": 0,
+            "nutrient": {}
+        };
+        userMealRecipeNutrient.quantity = recipeNutrient.quantity*(999/100); //change 999 to userMealRecipe.quantity
+        userMealRecipeNutrient.nutrient = recipeNutrient.nutrient;
+        userMealRecipeNutrient.nutrientId = recipeNutrient.nutrientId;
+        userMealRecipeNutrients.push(userMealRecipeNutrient)
+    }
 
+    userMealRecipe.userMealRecipeNutrients = userMealRecipeNutrients;
+    return userMealRecipe;
 }
 
 export const getUserMealRecipesWithNutrients = (userMealRecipes: any) => {
-
+    let userMealRecipesWithNutrients:any = [];
+    for (let userMealRecipe of userMealRecipes) {
+        userMealRecipesWithNutrients.push(getUserMealRecipeWithNutrients(userMealRecipe));
+    }
+    return userMealRecipesWithNutrients;
 }
 
 const getUserMealNutrientsMap = (userMealProducts: any, userMealRecipes: any) => {
-
+    let userMealNutrientsMap:any = [];
+    for (let userMealProduct of userMealProducts) {
+        for (const userMealProductNutrient of userMealProduct.userMealProductNutrients) {
+            if(userMealNutrientsMap[userMealProductNutrient.nutrientId]) {
+                userMealNutrientsMap[userMealProductNutrient.nutrientId].push(userMealProductNutrient);
+            } else {
+                userMealNutrientsMap[userMealProductNutrient.nutrientId] = [userMealProductNutrient];
+            }
+        }
+    }
+    for (let userMealRecipe of userMealRecipes) {
+        for (const userMealRecipeNutrient of userMealRecipe.userMealRecipeNutrients) {
+            if(userMealNutrientsMap[userMealRecipeNutrient.nutrientId]) {
+                userMealNutrientsMap[userMealRecipeNutrient.nutrientId].push(userMealRecipeNutrient);
+            } else {
+                userMealNutrientsMap[userMealRecipeNutrient.nutrientId] = [userMealRecipeNutrient];
+            }
+        }
+    }
+    userMealNutrientsMap = userMealNutrientsMap.filter(function (el:any) {
+        return el != null;
+      });
+    return userMealNutrientsMap;
 }
 
 export const getUserMealWithNutrients = (userMeal: any) => {
+    userMeal.userMealProducts = getUserMealProductsWithNutrients(userMeal.userMealProducts);
+    userMeal.userMealRecipes = getUserMealRecipesWithNutrients(userMeal.userMealRecipes);
+    let userMealNutrientsMap = getUserMealNutrientsMap(userMeal.userMealProducts, userMeal.userMealRecipes);
 
-}
-
-export const getUserMealsWithNutrients = (userMeal: any) => {
-
+    let userMealNutrients:any = [];
+    for (let userMealNutrientsMapElement of userMealNutrientsMap) {
+        let userMealNutrient:any = undefined;
+        if(userMealNutrientsMapElement!==null) {
+            for (const userMealNutrientsMapElementNutrient of userMealNutrientsMapElement) {
+                if(userMealNutrient!==undefined) {
+                    userMealNutrient.quantity = userMealNutrient.quantity + userMealNutrientsMapElementNutrient.quantity;
+                } else {
+                    userMealNutrient = userMealNutrientsMapElementNutrient;
+                }
+            }
+        }
+        userMealNutrients.push(userMealNutrient);
+    }
+    userMeal.userMealNutrients = userMealNutrients;
+    return userMeal;
 }

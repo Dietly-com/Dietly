@@ -13,7 +13,14 @@ const include = {
     owner: true,
     file: true,
     unit: true,
-    recipeProducts: {include: {product: {include: {file: true}}}}
+    recipeProducts: {include: {
+        product: {include: {
+            file: true,
+            productNutrients: {include: {
+                nutrient: true
+            }}
+        }}
+    }}
 };
 
 const router: Router = express.Router();
