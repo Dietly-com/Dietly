@@ -16,9 +16,12 @@ import SearchPage from './pages/SearchPage/SearchPage';
 import MealsPage from './pages/MealsPage/MealsPage';
 import HomePage from './pages/HomePage/HomePage';
 import DiscoverPage from './pages/DiscoverPage/DiscoverPage';
-import DietPage from './pages/DietPage/DietPage';
+import DietsPage from './pages/DietsPage/DietsPage';
 
 import { checkToken } from "./api/utils/TokenUtils";
+import ProductPage from './pages/ProductPage/ProductPage';
+import RecipePage from './pages/RecipePage/RecipePage';
+import DietPage from './pages/DietPage/DietPage';
 
 function App() {
   if(!checkToken()) {
@@ -43,11 +46,14 @@ function App() {
             <Routes>
               <Route path="/home" element={<HomePage />}/>
               <Route path="/discover" element={<DiscoverPage />}/>
-              <Route path="/discover/diet" element={<DietPage />} />
-              <Route path="/discover/search" element={<SearchPage />} />
+              <Route path="/diets" element={<DietsPage />} />
+              <Route path="/search" element={<SearchPage />} />
+              <Route path="/product/:id" element={<ProductPage />} />
+              <Route path="/recipe/:id" element={<RecipePage />} />
+              <Route path="/diet/:id" element={<DietPage />} />
               <Route path="/me" element={<MePage />}/>
-              <Route path="/me/meals" element={<MealsPage />} />
-              <Route path="/me/settings" element={<SettingsPage />} />
+              <Route path="/meals" element={<MealsPage />} />
+              <Route path="/settings" element={<SettingsPage />} />
             </Routes>
           </BrowserRouter>
         }/>

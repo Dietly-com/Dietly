@@ -16,3 +16,9 @@ export const processResult = (result) => {
         showNotification(message);
     }
 }
+
+export const processGetResult = (result) => {
+    for (const message of result.messages) {
+        if(message.type!=='success') showNotification(message);
+    }
+}

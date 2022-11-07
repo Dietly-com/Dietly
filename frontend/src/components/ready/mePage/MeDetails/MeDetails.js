@@ -3,8 +3,10 @@ import { getMe } from "../../../../api/controllers/MeApi";
 import HeightIcon from '@mui/icons-material/Height';
 import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
 import CalculateIcon from '@mui/icons-material/Calculate';
+import { useTranslation } from "react-i18next";
 
 function MeDetails() {
+    const { t } = useTranslation();
     var [path, setPath] = useState();
     var [name, setName] = useState();
     var [surname, setSurname] = useState();
@@ -31,17 +33,17 @@ function MeDetails() {
                 <div style={{fontSize: 24}}>{name + ' ' + surname}</div>
                 <div style={{display: "flex", flexDirection: "row", alignItems: "center", gap: 8}}>
                     <div><HeightIcon/></div>
-                    <b>Height: </b>
+                    <b>{t('Height')}: </b>
                     <div>{height + " cm"}</div>
                 </div>
                 <div style={{display: "flex", flexDirection: "row", alignItems: "center", gap: 8}}>
                     <div><MonitorWeightIcon/></div>
-                    <b>Weight: </b>
+                    <b>{t('Weight')}: </b>
                     <div>{weight + " kg"}</div>
                 </div>
                 <div style={{display: "flex", flexDirection: "row", alignItems: "center", gap: 8}}>
                     <div><CalculateIcon/></div>
-                    <b>BMI: </b>
+                    <b>{t('BMI')}: </b>
                     <div>{Math.round((weight/(height*height/10000))*100)/100}</div>
                 </div>
             </div>

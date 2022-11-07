@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { postUser } from '../api/controllers/UserApi';
+import { useTranslation } from "react-i18next";
 
 export var useSignOn = () => {
+    const { t } = useTranslation();
     var [stage, setStage] = useState(0);
 
     var [name, setName] = useState();
@@ -31,22 +33,22 @@ export var useSignOn = () => {
     const themes = [
         {
           value: 'light:LIGHT',
-          label: 'Light',
+          label: t('Light'),
         },
         {
           value: 'dark:DARK',
-          label: 'Dark',
+          label: t('Dark'),
         }
       ];
     
       const languages = [
         {
           value: 'pl:PL',
-          label: 'Polish',
+          label: t('Polish'),
         },
         {
           value: 'en:EN',
-          label: 'English',
+          label: t('English'),
         }
       ];
 
@@ -74,11 +76,11 @@ export var useSignOn = () => {
       ];
 
       const steps = [
-        'Personal',
-        'Login',
-        'Body',
-        'Profile picture',
-        'Display'
+        t('Personal'),
+        t('Login'),
+        t('Body'),
+        t('Avatar'),
+        t('Display')
       ];
 
     return [

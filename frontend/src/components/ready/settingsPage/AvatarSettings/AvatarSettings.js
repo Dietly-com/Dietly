@@ -5,8 +5,10 @@ import { useSettings } from "../../../../hooks/useSettings";
 import Section from "../../../utils/Section/Section";
 import PhotoIcon from '@mui/icons-material/Photo';
 import { patchFile } from "../../../../api/controllers/FileApi";
+import { useTranslation } from "react-i18next";
 
 function AvatarSettings() {
+    const { t } = useTranslation();
     var [
         filePath, setFilePath, fileId, setFileId, updateFilePath
     ] = useSettings();
@@ -25,14 +27,14 @@ function AvatarSettings() {
     return (
         <Section
             header={
-                <div style={{display: "flex",flexDirection: "row", alignItems:"center", gap:8}}><PhotoIcon/><div>Avatar</div></div>
+                <div style={{display: "flex",flexDirection: "row", alignItems:"center", gap:8}}><PhotoIcon/><div>{t('Avatar')}</div></div>
             }
             footer={
                 <div style={{display: "flex", flexDirection: "row-reverse"}}>
-                    <Button variant="contained" style={{backgroundColor: '#6D9EE6', width: 200}} onClick={()=>{updateFilePath(fileId, filePath)}}>Save</Button>
+                    <Button variant="contained" style={{backgroundColor: '#6D9EE6', width: 200}} onClick={()=>{updateFilePath(fileId, filePath)}}>{t('Save')}</Button>
                 </div>
             }>
-            <TextField id="standard-basic" label="Profile picture path" defaultValue="Profile picture path" value={filePath} variant="standard" type="url" fullWidth onChange={(event)=>{setFilePath(event.target.value)}}/>
+            <TextField id="standard-basic" label={t('Avatar path')} defaultValue="Profile picture path" value={filePath} variant="standard" type="url" fullWidth onChange={(event)=>{setFilePath(event.target.value)}}/>
             <center>
                 <img src={filePath} style={{width: "30%", margin: "64px 0px"}}/>
             </center>

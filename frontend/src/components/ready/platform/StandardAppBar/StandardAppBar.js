@@ -28,7 +28,7 @@ function StandardAppBar() {
                     }}>
                         <LogoutIcon style={{color: "black"}}/>
                     </IconButton>
-                    <IconButton style={{width: 48, height: 48, borderRadius: 8}} href='/me/settings'>
+                    <IconButton style={{width: 48, height: 48, borderRadius: 8}} href='/settings'>
                         <SettingsIcon style={{color: "black"}}/>
                     </IconButton>
                     <IconButton variant="contained" style={{width: 48, height: 48, borderRadius: 8}} href='/me'>
@@ -39,16 +39,16 @@ function StandardAppBar() {
             <IconButton variant="contained" style={{backgroundColor: "#212121", width: 48, height: 48, borderRadius: 8}} href='/home'>
                 <HomeIcon style={{color: "white"}}/>
             </IconButton>
-            <IconButton variant="contained" style={{backgroundColor: "#7C99DB", width: 48, height: 48, borderRadius: 8}} href='/me/meals'>
+            <IconButton variant="contained" style={{backgroundColor: "#7C99DB", width: 48, height: 48, borderRadius: 8}} href='/meals'>
                 <RestaurantIcon style={{color: "white"}}/>
             </IconButton>
             <IconButton variant="contained" style={{backgroundColor: "#6D9EE6", width: 48, height: 48, borderRadius: 8}} href='/discover'>
                 <ExploreIcon style={{color: "white"}}/>
             </IconButton>
-            <IconButton variant="contained" style={{backgroundColor: "#6464BB", width: 48, height: 48, borderRadius: 8}} href='/discover/diet'>
+            <IconButton variant="contained" style={{backgroundColor: "#6464BB", width: 48, height: 48, borderRadius: 8}} href='/diets'>
                 <MenuBookIcon style={{color: "white"}}/>
             </IconButton>
-            <IconButton variant="contained" style={{backgroundColor: "#bf555a", width: 48, height: 48, borderRadius: 8}} href='/discover/search'>
+            <IconButton variant="contained" style={{backgroundColor: "#bf555a", width: 48, height: 48, borderRadius: 8}} href='/search'>
                 <SearchIcon style={{color: "white"}}/>
             </IconButton>
             <IconButton style={{width: 48, height: 48, borderRadius: 8}}>

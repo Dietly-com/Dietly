@@ -4,29 +4,84 @@ import Column from '../../components/utils/Column/Column';
 import Page from '../../components/utils/Page/Page';
 import Section from '../../components/utils/Section/Section';
 import NoToDi from '../../components/ready/platform/NoToDi/NoToDi'
+import ProductCard from '../../components/ready/platform/cards/ProductCard/ProductCard';
+import RecipeCard from '../../components/ready/platform/cards/RecipeCard/RecipeCard';
+import DietCard from '../../components/ready/platform/cards/DietCard/DietCard';
+import { getProducts } from '../../api/controllers/ProductApi';
+import { getRecipes } from '../../api/controllers/RecipeApi';
+import { getDiets } from '../../api/controllers/DietApi';
+import { useEffect, useState } from 'react';
+import CardsGrid from '../../components/utils/CardsGrid/CardsGrid';
+import { useTranslation } from "react-i18next";
+import { getMe } from '../../api/controllers/MeApi';
 
 function HomePage() {
+  const { t } = useTranslation();
+  const [popularProducts, setPopularProducts] = useState();
+  const [popularRecipes, setPopularRecipes] = useState();
+  const [popularDiets, setPopularDiets] = useState();
+  const [meName, setMeName] = useState();
+
+  useEffect(()=>{
+    getMe()
+    .then(response => {
+        setMeName(response.data.name);
+    });
+
+    getProducts({take:8, orderBy:"views"})
+    .then(response => {
+      setPopularProducts(response.data);
+    });
+
+    getRecipes({take:8, orderBy:"views"})
+    .then(response => {
+      setPopularRecipes(response.data);
+    });
+
+    getDiets({take:8, orderBy:"views"})
+    .then(response => {
+      setPopularDiets(response.data);
+    });
+  }, []);
   return (
     <div className="HomePage">
       <Page
-      header={<SearchBar/>}>
+      bar_header={<SearchBar/>}
+      header={
+        <b style={{fontSize: 22}}>Hi {meName}!<br></br> See what we have prepared for you!</b>
+      }>
         <Column width = {1000}>
           <Section
-            header={<div>Recipes for you</div>}>
+            header={<div>{t('Recipes for you')}</div>}>
               {/* <NoToDi show={true}/> */}
+              {popularRecipes !== undefined &&
+                <CardsGrid>
+                  {popularRecipes.map((recipe, i) => <RecipeCard data={recipe} key={i}/>)}
+                </CardsGrid>
+              }
           </Section>
           <Section
-            header={<div>Recommended products</div>}>
+            header={<div>{t('Recommended products')}</div>}>
               {/* <NoToDi show={true}/> */}
+              {popularProducts !== undefined &&
+                <CardsGrid>
+                  {popularProducts.map((product, i) => <ProductCard data={product} key={i}/>)}
+                </CardsGrid>
+              }
           </Section>
           <Section
-            header={<div>Popular diets</div>}>
+            header={<div>{t('Popular diets')}</div>}>
               {/* <NoToDi show={true}/> */}
+              {popularDiets !== undefined &&
+                <CardsGrid>
+                  {popularDiets.map((diet, i) => <DietCard data={diet} key={i}/>)}
+                </CardsGrid>
+              }
           </Section>
         </Column>
         <Column>
           <Section
-            header={<div>Today summary</div>}>
+            header={<div>{t('Today summary')}</div>}>
               {/* <NoToDi show={true}/> */}
           </Section>
         </Column>

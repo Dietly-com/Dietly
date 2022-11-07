@@ -7,7 +7,7 @@ import {
     RESPONSE_TYPE,
     HEADERS
 } from '../utils/RequestUtils';
-import { processResult, RESULT_SOMETHING_WRONG } from '../utils/ResponseUtils';
+import { processGetResult, processResult, RESULT_SOMETHING_WRONG } from '../utils/ResponseUtils';
 
 export const getOneMe = async (path) => {
     return new Promise( (resolve, reject) => {
@@ -21,9 +21,11 @@ export const getOneMe = async (path) => {
                 data: {}
               })
             .then(response => {
-                resolve(response.data);
+                processGetResult(response.data.result);
                 localStorage.setItem("displayTheme", response.data.data.displayTheme);
                 localStorage.setItem("displayLanguage", response.data.data.displayLanguage);
+                resolve(response.data);
+                
             })
             .catch(error => {
                 processResult(error.response.data);

@@ -8,7 +8,7 @@ import {
     RESPONSE_TYPE,
     HEADERS
 } from '../utils/RequestUtils';
-import { processResult, RESULT_SOMETHING_WRONG } from '../utils/ResponseUtils';
+import { processGetResult, processResult, RESULT_SOMETHING_WRONG } from '../utils/ResponseUtils';
 import { validate } from '../utils/ValidationUtils';
 
 export const postOne = async (path, data, schema) => {
@@ -53,7 +53,7 @@ export const getOne = async (path, id) => {
                 data: {}
             })
             .then(response => {
-                processResult(response.data.result);
+                processGetResult(response.data.result);
                 resolve(response.data);
             })
             .catch(error => {
@@ -79,7 +79,7 @@ export const getMany = async (path, params) => {
                 data: {}
               })
             .then(response => {
-                processResult(response.data.result);
+                processGetResult(response.data.result);
                 resolve(response.data);
             })
             .catch(error => {
@@ -160,7 +160,6 @@ export const search = async (path, term) => {
                 data: {}
               })
             .then(response => {
-                processResult(response.data.result);
                 resolve(response.data);
             })
             .catch(error => {

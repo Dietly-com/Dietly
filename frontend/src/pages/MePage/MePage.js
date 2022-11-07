@@ -7,31 +7,33 @@ import SearchBar from '../../components/ready/platform/SearchBar/SearchBar';
 import MeActiveLevel from '../../components/ready/mePage/MeActiveLevel/MeActiveLevel';
 import MeBadges from '../../components/ready/mePage/MeBadges/MeBadges';
 import MePersonalBests from '../../components/ready/mePage/MePersonalBests/MePersonalBests';
+import { useTranslation } from "react-i18next";
 
 function MePage() {
+  const { t } = useTranslation();
   return (
     <div className="MePage">
       <Page
-      header={<SearchBar/>}>
+        bar_header={<SearchBar/>}>
         <Column widthPoints = {2}>
           <Section>
             <MeDetails/>
           </Section>
           <Section
-            header={<div>Activity level</div>}>
+            header={<div>{t('Activity level')}</div>}>
               <MeActiveLevel/>
           </Section>
         </Column>
         <Column widthPoints = {1}>
           <Group>
             <Section
-              header={<div>Badges</div>}>
+              header={<div>{t('Badges')}</div>}>
               <MeBadges/>
             </Section>
           </Group>
           <Group>
             <Section
-              header={<div>Personal Bests</div>}>
+              header={<div>{t('Personal Bests')}</div>}>
                 <MePersonalBests/>
             </Section>
           </Group>

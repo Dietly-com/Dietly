@@ -8,6 +8,10 @@
     background-color: white;
     border-radius: 20px;
 }
+.card:hover {
+    background-color: #0000000a;
+    cursor: pointer;
+}
 .card__inner {
     height: calc(100% - 32px);
     width: calc(100% - 32px);

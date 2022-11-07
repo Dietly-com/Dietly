@@ -4,7 +4,8 @@ import Tag from "../../../../utils/Tag/Tag";
 function DietCard(props) {
   return (
     <Card
-    image={props.data.file.path}
+    location={"diet/" + props.data.id}
+    image={props.data.file!==null?props.data.file.path: undefined}
     header={props.data.name}>
         {props.data.description}
     </Card>

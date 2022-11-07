@@ -13,7 +13,7 @@ function SettingsPage() {
   return (
     <div className="SettingsPage">
       <Page
-        header={<SearchBar/>}>
+        bar_header={<SearchBar/>}>
         <Column widthPoints = {2}>
           <Group>
             <PersonalSettings/>

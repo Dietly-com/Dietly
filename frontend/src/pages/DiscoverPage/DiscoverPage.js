@@ -10,9 +10,17 @@ import TabPanel from '@mui/lab/TabPanel';
 import ProductCard from '../../components/ready/platform/cards/ProductCard/ProductCard';
 import { getProducts } from '../../api/controllers/ProductApi';
 import NoToDi from '../../components/ready/platform/NoToDi/NoToDi'
+import { getRecipes } from '../../api/controllers/RecipeApi';
+import RecipeCard from '../../components/ready/platform/cards/RecipeCard/RecipeCard';
+import CardsGrid from '../../components/utils/CardsGrid/CardsGrid';
+import { useTranslation } from "react-i18next";
 
 function DiscoverPage() {
+  const { t } = useTranslation();
   const [products, setProducts] = useState();
+  const [popularProducts, setPopularProducts] = useState();
+  const [recipes, setRecipes] = useState();
+  const [popularRecipes, setPopularRecipes] = useState();
   const [value, setValue] = useState('1');
 
   const handleChange = (event, newValue) => {
@@ -23,8 +31,23 @@ function DiscoverPage() {
     getProducts()
     .then(response => {
       setProducts(response.data);
-      console.log(response.data);
-    })
+    });
+
+    getProducts({take:8, orderBy:"views"})
+    .then(response => {
+      setPopularProducts(response.data);
+    });
+
+    getRecipes()
+    .then(response => {
+      setRecipes(response.data);
+    });
+
+    getRecipes({take:8, orderBy:"views"})
+    .then(response => {
+      setPopularRecipes(response.data);
+    });
+
   }, []);
 
 
@@ -32,42 +55,57 @@ function DiscoverPage() {
     <div className="DiscoverPage">
       <TabContext value={value}>
         <Page
-        header={
+        bar_header={
           <SearchBar/>
         }
-        toolsBar={
+        bar_body={
           <TabList onChange={handleChange}>
-            <Tab label="Products" value="1" />
-            <Tab label="Recipes" value="2" />
+            <Tab label={t('Products')} value="1" />
+            <Tab label={t('Recipes')} value="2" />
           </TabList>
         }>
           <Column width = {1000}>
             <TabPanel value="1">
               <Section
-                header={<div>Products</div>}>
+                header={<div>{t('Products')}</div>}>
                   {products !== undefined &&
-                    <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 32}}>
+                    <CardsGrid>
                       {products.map((product, i) => <ProductCard data={product} key={i}/>)}
-                    </div>
+                    </CardsGrid>
                   }
                   <NoToDi show={products === undefined}/>
               </Section>
             </TabPanel>
             <TabPanel value="2">
               <Section
-                header={<div>Recipes</div>}>
+                header={<div>{t('Recipes')}</div>}>
+                  {recipes !== undefined &&
+                    <CardsGrid>
+                      {recipes.map((recipe, i) => <RecipeCard data={recipe} key={i}/>)}
+                    </CardsGrid>
+                  }
               </Section>
             </TabPanel>
           </Column>
           <Column>
             <TabPanel value="1">
               <Section
-                header={<div>Popular products</div>}>
+                header={<div>{t('Popular products')}</div>}>
+                  {popularProducts !== undefined &&
+                    <CardsGrid>
+                      {popularProducts.map((product, i) => <ProductCard data={product} key={i}/>)}
+                    </CardsGrid>
+                  }
               </Section>
             </TabPanel>
             <TabPanel value="2">
               <Section
-                header={<div>Recipes for you</div>}>
+                header={<div>{t('Recipes for you')}</div>}>
+                  {popularRecipes !== undefined &&
+                    <CardsGrid>
+                      {popularRecipes.map((recipe, i) => <RecipeCard data={recipe} key={i}/>)}
+                    </CardsGrid>
+                  }
               </Section>
             </TabPanel>
           </Column>

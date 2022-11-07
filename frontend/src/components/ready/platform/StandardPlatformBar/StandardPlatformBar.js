@@ -2,8 +2,10 @@ import PlatformBar from "../../../utils/PlatformBar/PlatformBar";
 import Button from '@mui/material/Button'
 import '../../../utils/PlatformBar/PlatformBar';
 import Logo from "../Logo/Logo";
+import { useTranslation } from "react-i18next";
 
 function StandardPlatformBar() {
+    const { t } = useTranslation();
     return (
         <PlatformBar
             header={
@@ -17,10 +19,10 @@ function StandardPlatformBar() {
             footer={
                 <div className="platform_bar_footer__inner">
                     <Button variant="contained" style={{backgroundColor: '#CF113F'}} href='/sign-on'>
-                        Sign on
+                        {t('Sign on')}
                     </Button>
                     <Button variant="contained" style={{backgroundColor: '#349951'}} href='/sign-in'>
-                        Sign in
+                        {t('Sign in')}
                     </Button>
                 </div>
             }/>
