@@ -112,6 +112,7 @@ export class ResponseBuilder {
             messages: any
         }
     }
+    responseBodyDataProcessor: any = undefined;
 
     constructor(response: Response) {
         this.response = response;
@@ -134,6 +135,11 @@ export class ResponseBuilder {
         return this;
     }
 
+    withResponseBodyDataProcessor(responseBodyDataProcessor: any) {
+        this.responseBodyDataProcessor = responseBodyDataProcessor;
+        return this;
+    }
+
     withResponseBodySuccess(success: any) {
         this.responseBody.result.success = success;
         return this;
@@ -145,6 +151,7 @@ export class ResponseBuilder {
     }
 
     send() {
+        if(this.responseBodyDataProcessor!==undefined) this.responseBody = this.responseBodyDataProcessor(this.responseBody);
         this.response.send(this.responseBody);
         return this.response;
     }
