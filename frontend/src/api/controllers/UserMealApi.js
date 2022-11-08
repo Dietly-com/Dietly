@@ -67,3 +67,15 @@ export const deleteUserMeal = async (id) => {
         })
     })
 };
+
+export const getUserMealsNutrients = async (params) => {
+    return new Promise( (resolve, reject) => {
+        getMany(path + '/nutrients', params)
+        .then(responseBody => {
+            resolve(responseBody)
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })
+};
