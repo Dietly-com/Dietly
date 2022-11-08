@@ -213,6 +213,7 @@ model UserMealProduct {
   productId Int
   unit Unit @relation(fields: [unitId], references: [id])
   unitId Int
+  quantity Int @default(100)
 }
 
 model UserMealRecipe {
@@ -231,6 +232,7 @@ model UserMealRecipe {
   recipeId Int
   unit Unit @relation(fields: [unitId], references: [id])
   unitId Int
+  quantity Int @default(100)
 }
 
 model Unit {
