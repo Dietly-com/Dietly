@@ -2,30 +2,29 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-function ProductNutrients(props) {
+function MealsNutrients(props) {
     const { t } = useTranslation();
     let [rows, setRows] = useState([])
 
-    function createRow(nutrientViewName, quantity, totalQuantity, unitViewName) {
-        return { nutrientViewName, quantity, totalQuantity, unitViewName };
+    function createRow(nutrientViewName, quantity, unitViewName) {
+        return { nutrientViewName, quantity, unitViewName };
     }
 
     useEffect(()=>{
         let effectRows = [];
-        for (const productNutrient of props.data.productNutrients) {
-            effectRows.push(createRow(t(productNutrient.nutrient.viewName), productNutrient.quantity, productNutrient.quantity*(props.data.quantity/100), productNutrient.nutrient.unit.viewName));
+        for (const homeNutrient of props.userMealsNutrients) {
+            effectRows.push(createRow(t(homeNutrient.nutrient.viewName), homeNutrient.quantity, homeNutrient.nutrient.unit.viewName));
         }
         setRows(effectRows);
     }, [])
 
     return (
         <TableContainer>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table sx={{ minWidth: 450 }} aria-label="simple table">
                 <TableHead>
                 <TableRow>
                     <TableCell>{t('Nutrients')}</TableCell>
-                    <TableCell align="right">100 {props.data.unit.viewName}</TableCell>
-                    <TableCell align="right">{props.data.quantity}{props.data.unit.viewName}</TableCell>
+                    <TableCell align="right">{props.date.toString()}</TableCell>
                 </TableRow>
                 </TableHead>
                 <TableBody>
@@ -38,7 +37,6 @@ function ProductNutrients(props) {
                         {row.nutrientViewName}
                     </TableCell>
                     <TableCell align="right">{row.quantity} {row.unitViewName}</TableCell>
-                    <TableCell align="right">{row.totalQuantity} {row.unitViewName}</TableCell>
                     </TableRow>
                 ))}
                 </TableBody>
@@ -47,4 +45,4 @@ function ProductNutrients(props) {
     )
 }
   
-export default ProductNutrients;
+export default MealsNutrients;

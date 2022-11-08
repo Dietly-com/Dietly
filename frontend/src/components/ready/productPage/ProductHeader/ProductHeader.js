@@ -41,19 +41,19 @@ function ProductHeader(props) {
                     </div>
                     <div style={{display: "flex", flexDirection: "row", gap: 8}}>
                       {meId === props.data.ownerId &&
-                        <Tag>Your</Tag>
+                        <Tag>{t('Your')}</Tag>
                       }
                       {100 <= props.data.views &&
-                        <Tag backgroundColor={"#ffc107"}>Popular</Tag>
+                        <Tag backgroundColor={"#ffc107"}>{t('Popular')}</Tag>
                       }
                       {true === props.data.vegan &&
-                        <Tag backgroundColor={"#2e7d32"} color={"white"}>Vegan</Tag>
+                        <Tag backgroundColor={"#2e7d32"} color={"white"}>{t('Vegan')}</Tag>
                       }
                       {true === props.data.vegetarian &&
-                        <Tag backgroundColor={"#2e7d32"} color={"white"}>Vegetarian</Tag>
+                        <Tag backgroundColor={"#2e7d32"} color={"white"}>{t('Vegetarian')}</Tag>
                       }
                       {props.data.category !== undefined && props.data.category !== null &&
-                        <Tag>{props.data.category}</Tag>
+                        <Tag>{t(props.data.category)}</Tag>
                       }
                     </div>
                   </div>

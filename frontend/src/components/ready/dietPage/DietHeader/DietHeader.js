@@ -36,10 +36,10 @@ function DietHeader(props) {
                   </div>
                   <div style={{display: "flex", flexDirection: "row", gap: 8}}>
                     {meId === props.data.ownerId &&
-                      <Tag>Your</Tag>
+                      <Tag>{t('Your')}</Tag>
                     }
                     {100 <= props.data.views &&
-                      <Tag backgroundColor={"#ffc107"}>Popular</Tag>
+                      <Tag backgroundColor={"#ffc107"}>{t('Popular')}</Tag>
                     }
                   </div>
                 </div>

@@ -1,12 +1,14 @@
 import Card from "../../../../utils/Card/Card";
 import Tag from "../../../../utils/Tag/Tag";
+import { useTranslation } from "react-i18next";
 
 function ProductCard(props) {
+  const { t } = useTranslation();
   let getEnergy = (data)=> {
     if(data.productNutrients !== undefined) {
       for (let productNutrient of data.productNutrients) {
         if(productNutrient.nutrient.code === "ENERGY") {
-          return <Tag>{productNutrient.quantity * (data.quantity/100)} {productNutrient.nutrient.viewName}</Tag>;
+          return <Tag>{productNutrient.quantity * (data.quantity/100)} {productNutrient.nutrient.unit.viewName}</Tag>;
         }
       }
     }
@@ -30,10 +32,10 @@ function ProductCard(props) {
       <div style={{display: "flex", flexDirection: "row", gap: 8}}>
         {getEnergy(props.data)}
         {true === props.data.vegan &&
-          <Tag backgroundColor={"#2e7d32"} color={"white"}>Vegan</Tag>
+          <Tag backgroundColor={"#2e7d32"} color={"white"}>{t('Vegan')}</Tag>
         }
         {true === props.data.vegetarian &&
-          <Tag backgroundColor={"#2e7d32"} color={"white"}>Vegetarian</Tag>
+          <Tag backgroundColor={"#2e7d32"} color={"white"}>{t('Vegetarian')}</Tag>
         }
       </div>
       }>
