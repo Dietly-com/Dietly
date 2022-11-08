@@ -14,6 +14,8 @@ import { useEffect, useState } from 'react';
 import CardsGrid from '../../components/utils/CardsGrid/CardsGrid';
 import { useTranslation } from "react-i18next";
 import { getMe } from '../../api/controllers/MeApi';
+import HomeNutrients from '../../components/ready/homePage/HomeNutrients/HomeNutrients';
+import Group from '../../components/utils/Group/Group';
 
 function HomePage() {
   const { t } = useTranslation();
@@ -48,7 +50,7 @@ function HomePage() {
       <Page
       bar_header={<SearchBar/>}
       header={
-        <b style={{fontSize: 22}}>Hi {meName}!<br></br> See what we have prepared for you!</b>
+        <b style={{fontSize: 22}}>{t('Hi')} {meName}!<br></br> {t('See what we have prepared for you!')}</b>
       }>
         <Column width = {1000}>
           <Section
@@ -80,10 +82,13 @@ function HomePage() {
           </Section>
         </Column>
         <Column>
+        <Group>
           <Section
             header={<div>{t('Today summary')}</div>}>
               {/* <NoToDi show={true}/> */}
+              <HomeNutrients/>
           </Section>
+        </Group>
         </Column>
       </Page>
     </div>

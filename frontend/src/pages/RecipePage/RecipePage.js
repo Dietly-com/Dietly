@@ -21,6 +21,7 @@ function RecipePage() {
         getRecipe(id)
         .then(response => {
           setRecipe(response.data);
+          console.log(response.data);
         });
       }, []);
 
