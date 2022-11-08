@@ -6,14 +6,18 @@ import { RequestBuilder } from '../utils/RequestUtils';
 import { addWhere } from '../middlewares/WhereMiddleware';
 import { addPagination } from '../middlewares/PaginationMiddleware';
 import { addOrder } from '../middlewares/OrderMiddleware';
-import { getUserMealWithNutrients } from '../utils/NutrientsUtils';
+import { getUserMealsNutrients, getUserMealWithNutrients } from '../utils/NutrientsUtils';
 
 const object = new PrismaClient().userMeal;
 const include = {
     userMealProducts: {include: {
         product: {include: {
             file: true,
-            productNutrients: {include: {nutrient: true}}
+            productNutrients: {include: {
+                nutrient: {include: {
+                    unit: true
+                }}
+            }}
         }},
         unit:true
     }},
@@ -24,7 +28,9 @@ const include = {
                 product: {include: {
                     file: true,
                     productNutrients: {include: {
-                        nutrient: true
+                        nutrient: {include: {
+                            unit: true
+                        }}
                     }}
                 }}
             }}
@@ -45,6 +51,15 @@ router.use(async (req, res, next) => {
     .get();
     next();
 })
+
+let findNutrientsResponseBodyDataProcessor = (responseBodyData: any) => {
+    responseBodyData.data = getUserMealsNutrients(responseBodyData.data);
+    return responseBodyData;
+}
+router.get("/nutrients/",  async (req, res) => {
+    findMany(req, res, object, findNutrientsResponseBodyDataProcessor);
+})
+
 router.post("/", async (req, res) => {
     createOne(req, res, object);
 })
