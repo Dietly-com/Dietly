@@ -10,8 +10,33 @@ import { addOrder } from '../middlewares/OrderMiddleware';
 const object = new PrismaClient().dietMeal;
 const include = {
     diet: {include: {file: true}},
-    dietMealRecipes: true,
-    dietMealProducts: true
+    dietMealRecipes: {include:{
+        recipe: {include: {
+            file: true,
+            recipeProducts: {include: {
+                product: {include: {
+                    file: true,
+                    productNutrients: {include: {
+                        nutrient: {include: {
+                            unit: true
+                        }}
+                    }}
+                }}
+            }}
+        }}, 
+        unit:true
+    }},
+    dietMealProducts: {include:{
+        product: {include: {
+            file: true,
+            productNutrients: {include: {
+                nutrient: {include: {
+                    unit: true
+                }}
+            }}
+        }},
+        unit:true
+    }}
 };
 
 const router: Router = express.Router();

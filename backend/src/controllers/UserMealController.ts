@@ -61,6 +61,7 @@ router.get("/nutrients/",  async (req, res) => {
 })
 
 router.post("/", async (req, res) => {
+    req.body.data.userId = req.body.authorization.id;
     createOne(req, res, object);
 })
 

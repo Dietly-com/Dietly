@@ -12,12 +12,6 @@ datasource db {
 
 model User {
   id Int @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdUsers", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedUsers", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   name  String
@@ -44,57 +38,10 @@ model User {
   ownedRecipes Recipe[]
   userActiveDiets UserActiveDiet[]
   userMeals UserMeal[]
-
-  createdUsers User[] @relation("createdUsers")
-  modifiedUsers User[] @relation("modifiedUsers")
-  createdBadges Badge[] @relation("createdBadges")
-  modifiedBadges Badge[] @relation("modifiedBadges")
-  createdUserBadges UserBadge[] @relation("createdUserBadges")
-  modifiedUserdBadges UserBadge[] @relation("modifiedUserBadges")
-  createdPersonalBests PersonalBest[] @relation("createdPersonalBests")
-  modifiedPersonalBests PersonalBest[] @relation("modifiedPersonalBests")
-  createdUserPersonalBests UserPersonalBest[] @relation("createdUserPersonalBests")
-  modifiedUserPersonalBests UserPersonalBest[] @relation("modifiedUserPersonalBests")
-  createdUserActiveDiets UserActiveDiet[] @relation("createdUserActiveDiets")
-  modifiedUserActiveDiets UserActiveDiet[] @relation("modifiedUserActiveDiets")
-  createdUserMeals UserMeal[] @relation("createdUserMeals")
-  modifiedUserMeals UserMeal[] @relation("modifiedUserMeals")
-  createdUserMealProducts UserMealProduct[] @relation("createdUserMealProducts")
-  modifiedUserMealProducts UserMealProduct[] @relation("modifiedUserMealProducts")
-  createdUserMealRecipes UserMealRecipe[] @relation("createdUserMealRecipes")
-  modifiedUserMealRecipes UserMealRecipe[] @relation("modifiedUserMealRecipes")
-  createdUnits Unit[] @relation("createdUnits")
-  modifiedUnits Unit[] @relation("modifiedUnits")
-  createdNutrients Nutrient[] @relation("createdNutrients")
-  modifiedNutrients Nutrient[] @relation("modifiedNutrients")
-  createdProducts Product[] @relation("createdProducts")
-  modifiedProducts Product[] @relation("modifiedProducts")
-  createdProductNutrients ProductNutrient[] @relation("createdProductNutrients")
-  modifiedProductNutrients ProductNutrient[] @relation("modifiedProductNutrients")
-  createdRecipes Recipe[] @relation("createdRecipes")
-  modifiedRecipes Recipe[] @relation("modifiedRecipes")
-  createdRecipeProducts RecipeProduct[] @relation("createdRecipeProducts")
-  modifiedRecipeProducts RecipeProduct[] @relation("modifiedRecipeProducts")
-  createdDiets Diet[] @relation("createdDiets")
-  modifiedDiets Diet[] @relation("modifiedDiets")
-  createdDietMeals DietMeal[] @relation("createdDietMeals")
-  modifiedDietMeals DietMeal[] @relation("modifiedDietMeals")
-  createdDietMealRecipes DietMealRecipe[] @relation("createdDietMealRecipes")
-  modifiedDietMealRecipes DietMealRecipe[] @relation("modifiedDietMealRecipes")
-  createdDietMealProducts DietMealProduct[] @relation("createdDietMealProducts")
-  modifiedDietMealProducts DietMealProduct[] @relation("modifiedDietMealProducts")
-  createdFiles File[] @relation("createdFiles")
-  modifiedFiles File[] @relation("modifiedFiles")
 }
 
 model Badge {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdBadges", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedBadges", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   name String
@@ -107,12 +54,6 @@ model Badge {
 
 model UserBadge {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdUserBadges", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedUserBadges", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   user User @relation(fields: [userId], references: [id])
@@ -124,12 +65,6 @@ model UserBadge {
 
 model PersonalBest {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdPersonalBests", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedPersonalBests", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   name String
@@ -142,12 +77,6 @@ model PersonalBest {
 
 model UserPersonalBest {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdUserPersonalBests", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedUserPersonalBests", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   user User @relation(fields: [userId], references: [id])
@@ -158,12 +87,6 @@ model UserPersonalBest {
 
 model UserActiveDiet {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdUserActiveDiets", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedUserActiveDiets", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   user User @relation(fields: [userId], references: [id])
@@ -172,16 +95,11 @@ model UserActiveDiet {
   dietId Int
   startTime DateTime
   endTime DateTime
+  active Boolean @default(true)
 }
 
 model UserMeal {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdUserMeals", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedUserMeals", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   user User @relation(fields: [userId], references: [id])
@@ -199,12 +117,6 @@ model UserMeal {
 
 model UserMealProduct {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdUserMealProducts", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedUserMealProducts", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   userMeal UserMeal @relation(fields: [userMealId], references: [id])
@@ -218,12 +130,6 @@ model UserMealProduct {
 
 model UserMealRecipe {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdUserMealRecipes", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedUserMealRecipes", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   userMeal UserMeal @relation(fields: [userMealId], references: [id])
@@ -237,12 +143,6 @@ model UserMealRecipe {
 
 model Unit {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdUnits", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedUnits", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   name String
@@ -262,12 +162,6 @@ model Unit {
 
 model Nutrient {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdNutrients", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedNutrients", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   name String
@@ -283,12 +177,6 @@ model Nutrient {
 
 model Product {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdProducts", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedProducts", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   name String
@@ -315,12 +203,6 @@ model Product {
 
 model ProductNutrient {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdProductNutrients", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedProductNutrients", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   product Product @relation(fields: [productId], references: [id])
@@ -332,12 +214,6 @@ model ProductNutrient {
 
 model Recipe {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdRecipes", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedRecipes", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   name String
@@ -361,12 +237,6 @@ model Recipe {
 
 model RecipeProduct {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdRecipeProducts", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedRecipeProducts", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   recipe Recipe @relation(fields: [recipeId], references: [id])
@@ -380,12 +250,6 @@ model RecipeProduct {
 
 model Diet {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdDiets", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedDiets", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   name String
@@ -401,12 +265,6 @@ model Diet {
 
 model DietMeal {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdDietMeals", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedDietMeals", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   name String
@@ -422,12 +280,6 @@ model DietMeal {
 
 model DietMealRecipe {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdDietMealRecipes", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedDietMealRecipes", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   dietMeal DietMeal @relation(fields: [dietMealId], references: [id])
@@ -441,12 +293,6 @@ model DietMealRecipe {
 
 model DietMealProduct {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdDietMealProducts", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedDietMealProducts", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   dietMeal DietMeal @relation(fields: [dietMealId], references: [id])
@@ -460,12 +306,6 @@ model DietMealProduct {
 
 model File {
   id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  createdBy User? @relation("createdFiles", fields: [createdById], references: [id])
-  createdById Int?
-  modifiedAt DateTime @default(now())
-  modifiedBy User? @relation("modifiedFiles", fields: [modifiedById], references: [id])
-  modifiedById Int?
   views Int @default(0)
 
   name String?

@@ -1,3 +1,4 @@
+import { PrismaClient } from '@prisma/client';
 import { ALL } from 'dns';
 import express, { Request, Response, NextFunction, Router } from 'express';
 const bcrypt = require("bcrypt");
@@ -18,9 +19,11 @@ import {
 
 export const createOne = async (req: Request, res: Response, object:  any) => {
     try {
-        req.body.data.createdById = req.body.authorization.id;
-        let query = {  data: req.body.data  };
-        const record = await object.create(query);
+        console.log(req.body.data);
+        
+        const record = await object.create({
+            data: { ...req.body.data},
+        });
         res = new ResponseBuilder(res)
                 .withStatus(STATUS_CREATED)
                 .withResponseBodyData(record)
@@ -38,9 +41,6 @@ export const createOne = async (req: Request, res: Response, object:  any) => {
 
 export const updateOne = async (req: Request, res: Response, object:  any) => {
     try {
-        req.body.data.modifiedById = req.body.authorization.id;
-        req.body.data.modifiedAt = new Date();
-        console.log(req.body.data);
         const { id } = req.params;
         if(req.body.data.password !== undefined) {
             const salt:string = await bcrypt.genSalt(Number(process.env.SALT));
@@ -154,7 +154,6 @@ export const findMany = async (req: Request, res: Response, object:  any, respon
         if (req.body.orderBy != undefined) {
             query.orderBy = req.body.orderBy;
         }
-        console.log(query);
         records = await object.findMany(query);
         res = new ResponseBuilder(res)
                 .withStatus(STATUS_OK)
@@ -164,7 +163,6 @@ export const findMany = async (req: Request, res: Response, object:  any, respon
                 .withResponseBodyMessage(MESSAGE_FIND_RECORDS)
                 .send();
     } catch (error) {
-        console.log(error);
         res = new ResponseBuilder(res)
                 .withStatus(STATUS_INTERNAL_SERVER_ERROR)
                 .withResponseBodySuccess(false)

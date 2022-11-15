@@ -29,6 +29,7 @@ router.use(async (req, res, next) => {
     next();
 })
 router.post("/", async (req, res) => {
+    req.body.data.ownerId = req.body.authorization.id;
     createOne(req, res, object);
 })
 
