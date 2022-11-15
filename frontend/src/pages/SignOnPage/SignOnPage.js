@@ -1,10 +1,10 @@
 import Page from '../../components/utils/Page/Page';
 
 import Column from '../../components/utils/Column/Column';
-import Title from '../../components/ready/startPage/Title/Title';
-import FormBox from '../../components/ready/startPage/FormBox/FormBox';
+import Title from '../../components/ready/pages/startPage/Title/Title';
+import FormBox from '../../components/ready/pages/startPage/FormBox/FormBox';
 import { Button, MenuItem, Step, StepLabel, Stepper, TextField } from '@mui/material';
-import DragonFruit from '../../components/ready/startPage/DragonFruit/DragonFruit';
+import DragonFruit from '../../components/ready/pages/startPage/DragonFruit/DragonFruit';
 import { useSignOn } from '../../hooks/useSignOn';
 import { useTranslation } from "react-i18next";
 

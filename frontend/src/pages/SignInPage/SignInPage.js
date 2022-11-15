@@ -1,9 +1,9 @@
 import Page from '../../components/utils/Page/Page';
 import Column from '../../components/utils/Column/Column';
 import { Button, TextField } from '@mui/material';
-import Title from '../../components/ready/startPage/Title/Title';
-import DragonFruit from '../../components/ready/startPage/DragonFruit/DragonFruit';
-import FormBox from '../../components/ready/startPage/FormBox/FormBox';
+import Title from '../../components/ready/pages/startPage/Title/Title';
+import DragonFruit from '../../components/ready/pages/startPage/DragonFruit/DragonFruit';
+import FormBox from '../../components/ready/pages/startPage/FormBox/FormBox';
 import { useSignIn} from '../../hooks/useSignIn';
 import { useTranslation } from "react-i18next";
 

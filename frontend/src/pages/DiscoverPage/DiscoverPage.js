@@ -14,6 +14,9 @@ import { getRecipes } from '../../api/controllers/RecipeApi';
 import RecipeCard from '../../components/ready/platform/cards/RecipeCard/RecipeCard';
 import CardsGrid from '../../components/utils/CardsGrid/CardsGrid';
 import { useTranslation } from "react-i18next";
+import { Button } from '@mui/material';
+import CreateProductButton from '../../components/ready/modals/buttons/CreateProductButton/CreateProductButton';
+import CreateRecipeButton from '../../components/ready/modals/buttons/CreateRecipeButton/CreateRecipeButton';
 
 function DiscoverPage() {
   const { t } = useTranslation();
@@ -56,7 +59,13 @@ function DiscoverPage() {
       <TabContext value={value}>
         <Page
         bar_header={
-          <SearchBar/>
+          <div style={{display: "flex", justifyContent: "space-between", width: "100%"}}>
+            <SearchBar/>
+            <div style={{display: "flex", gap: 8}}>
+              <CreateProductButton/>
+              <CreateRecipeButton/>
+            </div>
+          </div>
         }
         bar_body={
           <TabList onChange={handleChange}>

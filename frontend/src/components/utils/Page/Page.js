@@ -43,6 +43,13 @@ function Page(props) {
                     </div>
                 </div>
             }
+            {props.speedDial!== undefined &&
+                <div className="page_speed_dial_container">
+                    <div className="page_speed_dial_container__inner">
+                        {props.speedDial}
+                    </div>
+                </div>
+            }
         </div>
     </div>
   )

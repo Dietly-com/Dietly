@@ -2,9 +2,14 @@ import { postOne, getOne, getMany, patchOne, deleteOne } from '../services/Stand
 export const Joi = require("joi");
 
 const schema = {
-    userId: Joi.number().required().label("User"),
+    userId: Joi.number().empty().label("User"),
     name: Joi.string().required().label("Name"),
-    time: Joi.date().required().label("Time")
+    year: Joi.number().required().label("Year"),
+    month: Joi.number().required().label("Month"),
+    day: Joi.number().required().label("Day"),
+    hour: Joi.number().required().label("Hour"),
+    minute: Joi.number().required().label("Minute"),
+    
 };
 const path = 'userMeal';
 

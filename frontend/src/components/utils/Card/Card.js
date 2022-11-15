@@ -1,8 +1,9 @@
+import { Link } from '@mui/material';
 import './Card.css';
 
 function Card(props) {
   return (
-    <div className="card" onClick={()=>{window.location=props.location}}>
+    <div className="card" onClick={()=>{window.location="../../"+props.location}}>
         <div className="card__inner">
             {props.image !== undefined &&
                 <div className="card_image">

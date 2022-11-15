@@ -7,10 +7,10 @@ import Page from "../../components/utils/Page/Page";
 import { useTranslation } from "react-i18next";
 import Group from "../../components/utils/Group/Group";
 import Section from "../../components/utils/Section/Section";
-import Preparation from "../../components/ready/recipePage/RecipePreparation/RecipePreparation";
-import RecipeIngredients from "../../components/ready/recipePage/RecipeIngredients/RecipeIngredients";
-import RecipeHeader from "../../components/ready/recipePage/RecipeHeader/RecipeHeader";
-import RecipeNutrients from "../../components/ready/recipePage/RecipeNutrients/RecipeNutrients";
+import Preparation from "../../components/ready/pages/recipePage/RecipePreparation/RecipePreparation";
+import RecipeIngredients from "../../components/ready/pages/recipePage/RecipeIngredients/RecipeIngredients";
+import RecipeHeader from "../../components/ready/pages/recipePage/RecipeHeader/RecipeHeader";
+import RecipeNutrients from "../../components/ready/pages/recipePage/RecipeNutrients/RecipeNutrients";
 
 function RecipePage() {
     const { t } = useTranslation();

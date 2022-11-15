@@ -51,9 +51,6 @@ function StandardAppBar() {
             <IconButton variant="contained" style={{backgroundColor: "#bf555a", width: 48, height: 48, borderRadius: 8}} href='/search'>
                 <SearchIcon style={{color: "white"}}/>
             </IconButton>
-            <IconButton style={{width: 48, height: 48, borderRadius: 8}}>
-                <AddIcon style={{color: "black"}}/>
-            </IconButton>
         </AppBar>
     );
 }

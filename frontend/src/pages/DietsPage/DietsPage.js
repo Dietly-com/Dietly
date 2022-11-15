@@ -9,6 +9,8 @@ import DietCard from '../../components/ready/platform/cards/DietCard/DietCard';
 import { getMe } from "../../api/controllers/MeApi";
 import CardsGrid from '../../components/utils/CardsGrid/CardsGrid';
 import { useTranslation } from "react-i18next";
+import { Button } from '@mui/material';
+import CreateDietButton from '../../components/ready/modals/buttons/CreateDietButton/CreateDietButton';
 
 function DietsPage() {
   const { t } = useTranslation();
@@ -24,7 +26,7 @@ function DietsPage() {
         setMeDiets(response.data);
       });
 
-      getUserActiveDiets({where: '"userId":'+ response.data.id})
+      getUserActiveDiets({where: '"userId":'+ response.data.id +', "active":true'})
       .then(response=> {
         setMeUserActiveDiets(response.data);
       })
@@ -38,7 +40,14 @@ function DietsPage() {
   return (
     <div className="DietsPage">
       <Page
-      bar_header={<SearchBar/>}>
+      bar_header={
+        <div style={{display: "flex", justifyContent: "space-between", width: "100%"}}>
+          <SearchBar/>
+          <div style={{display: "flex", gap: 8}}>
+            <CreateDietButton/>
+          </div>
+        </div>
+      }>
         <Column width = {1000}>
           <Section
             header={<div>{t('Your diets')}</div>}>

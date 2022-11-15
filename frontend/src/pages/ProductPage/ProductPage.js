@@ -7,10 +7,10 @@ import Page from "../../components/utils/Page/Page";
 import { useTranslation } from "react-i18next";
 import Section from '../../components/utils/Section/Section';
 import Group from "../../components/utils/Group/Group";
-import ProductHeader from "../../components/ready/productPage/ProductHeader/ProductHeader";
-import ProductNutrients from "../../components/ready/productPage/ProductNutrients/ProductNutrents";
-import ProductNutriScore from "../../components/ready/productPage/ProductNutriScore/ProductNutriScore";
-import ProductCode from "../../components/ready/productPage/ProductCode/ProductCode";
+import ProductHeader from "../../components/ready/pages/productPage/ProductHeader/ProductHeader";
+import ProductNutrients from "../../components/ready/pages/productPage/ProductNutrients/ProductNutrents";
+import ProductNutriScore from "../../components/ready/pages/productPage/ProductNutriScore/ProductNutriScore";
+import ProductCode from "../../components/ready/pages/productPage/ProductCode/ProductCode";
 
 function ProductPage() {
     const { t } = useTranslation();

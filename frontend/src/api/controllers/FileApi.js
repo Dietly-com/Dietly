@@ -3,7 +3,10 @@ export const Joi = require("joi");
 
 const schema = {
     type: Joi.string().empty().label("Type"),
-    path: Joi.string().required().label("Path")  
+    path: Joi.string().required().label("Path"),
+    products: Joi.any().empty().label("Products"),
+    recipes: Joi.any().empty().label("Recipes"),
+    diets: Joi.any().empty().label("Diets")
 };
 const path = 'file';
 

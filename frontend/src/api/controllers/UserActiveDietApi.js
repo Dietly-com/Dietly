@@ -5,7 +5,8 @@ const schema = {
     userId: Joi.number().required().label("User"),
     dietId: Joi.number().required().label("Diet"),
     startTime: Joi.date().required().label("Start time"),
-    endTime: Joi.date().required().label("End time")
+    endTime: Joi.date().required().label("End time"),
+    active: Joi.boolean().empty().label("Active"),
 };
 const path = 'userActiveDiet';
 

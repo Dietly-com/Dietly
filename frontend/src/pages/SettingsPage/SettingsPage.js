@@ -2,12 +2,12 @@ import Page from '../../components/utils/Page/Page';
 import Column from '../../components/utils/Column/Column';
 import Group from '../../components/utils/Group/Group';
 import SearchBar from '../../components/ready/platform/SearchBar/SearchBar';
-import PersonalSettings from '../../components/ready/settingsPage/PersonalSettings/PersonalSettings';
-import LoginSettings from '../../components/ready/settingsPage/LoginSettings/LoginSettings';
-import DeleteAccountSettings from '../../components/ready/settingsPage/DeleteAccountSettings/DeleteAccountSettings';
-import DisplaySettings from '../../components/ready/settingsPage/DisplaySettings/DisplaySettings';
-import AvatarSettings from '../../components/ready/settingsPage/AvatarSettings/AvatarSettings';
-import BodyDataSettings from '../../components/ready/settingsPage/BodyDataSettings/BodyDataSettings';
+import PersonalSettings from '../../components/ready/pages/settingsPage/PersonalSettings/PersonalSettings';
+import LoginSettings from '../../components/ready/pages/settingsPage/LoginSettings/LoginSettings';
+import DeleteAccountSettings from '../../components/ready/pages/settingsPage/DeleteAccountSettings/DeleteAccountSettings';
+import DisplaySettings from '../../components/ready/pages/settingsPage/DisplaySettings/DisplaySettings';
+import AvatarSettings from '../../components/ready/pages/settingsPage/AvatarSettings/AvatarSettings';
+import BodyDataSettings from '../../components/ready/pages/settingsPage/BodyDataSettings/BodyDataSettings';
 
 function SettingsPage() {
   return (

@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 import CardsGrid from '../../components/utils/CardsGrid/CardsGrid';
 import { useTranslation } from "react-i18next";
 import { getMe } from '../../api/controllers/MeApi';
-import HomeNutrients from '../../components/ready/homePage/HomeNutrients/HomeNutrients';
+import HomeNutrients from '../../components/ready/pages/homePage/HomeNutrients/HomeNutrients';
 import Group from '../../components/utils/Group/Group';
 
 function HomePage() {

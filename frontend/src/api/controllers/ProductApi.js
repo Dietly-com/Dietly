@@ -6,8 +6,15 @@ const schema = {
     description: Joi.string().empty().label("Description"),
     ownerId: Joi.number().empty().label("Owner"),
     fileId: Joi.number().empty().label("File"),
+    file: Joi.any().empty().label("File"),
     unitId: Joi.number().required().label("Unit"),
-    quantity: Joi.number().required().label("Quantity")
+    quantity: Joi.number().required().label("Quantity"),
+    producer: Joi.string().empty().label("Producer"),
+    category: Joi.string().empty().label("Category"),
+    code: Joi.string().empty().label("Code"),
+    nutriScore: Joi.string().empty().label("Nutri-Score"),
+    vegan: Joi.boolean().empty().label("Vegan"),
+    vegetarian: Joi.boolean().empty().label("Vegetarian"),
 };
 const path = 'product';
 
