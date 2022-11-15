@@ -94,7 +94,7 @@ function ProductLayout(props) {
                         </TableRow>
                         </TableHead>
                         <TableBody>
-                        {viewLayoutNutrientsData.map((row, index) => (
+                        {viewLayoutNutrientsData && viewLayoutNutrientsData.map((row, index) => (
                             <TableRow
                             key={row.nutrient.viewName}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
