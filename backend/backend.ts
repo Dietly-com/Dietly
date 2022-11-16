@@ -1,5 +1,5 @@
 const express = require("express");
-const port = 8080;
+const port = process.env.SERVER_PORT || 8080;
 import routes from './src/routes/Routes';
 import dotenv from "dotenv";
 dotenv.config();
