@@ -1,6 +1,7 @@
 import { Checkbox, Input, InputAdornment, InputBase, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { getNutrients } from "../../../../api/controllers/NutrientApi";
 import Layout from "../../../utils/Layout/Layout";
 import LayoutGroup from "../../../utils/LayoutGroup/LayoutGroup";
 import LayoutSection from "../../../utils/LayoutSection/LayoutSection";
@@ -35,7 +36,7 @@ function ProductLayout(props) {
         props.onChangeLayoutFileData({path: value});
     }
 
-    const [viewLayoutNutrientsData, setViewLayoutNutrientsData] = useState(props.data.productNutrients);
+    const [viewLayoutNutrientsData, setViewLayoutNutrientsData] = useState([]);
     const [saveLayoutNutrientsData, setSaveLayoutNutrientsData] = useState([]);
     const handleChangeLayoutNutrientsData = (key, value) => {
         let tempViewLayoutNutrientsData = viewLayoutNutrientsData;
@@ -45,9 +46,29 @@ function ProductLayout(props) {
         let tempSaveLayoutNutrientsData = saveLayoutNutrientsData;
         tempSaveLayoutNutrientsData[key] = value;
         setSaveLayoutNutrientsData(tempSaveLayoutNutrientsData);
-        // props.onChangeLayoutNutrientsData(saveLayoutNutrientsData);
-        console.log(saveLayoutNutrientsData);
+        props.onChangeLayoutNutrientsData(saveLayoutNutrientsData);
     }
+
+    useEffect(()=>{
+        getNutrients()
+        .then((response)=>{
+            console.log(response.data);
+            let productNutrients = [];
+            for (const nutrient of response.data) {
+                var productNutrient = {
+                    id: undefined,
+                    quantity: 0,
+                    nutrient: nutrient,
+                    nutrientId: nutrient.id
+                }
+                for (const dataProductNutrient of props.data.productNutrients) {
+                    if(dataProductNutrient.nutrient.code === nutrient.code) productNutrient = dataProductNutrient;
+                }
+                productNutrients.push(productNutrient);
+            }
+            setViewLayoutNutrientsData(productNutrients);
+        })
+    }, [props.data]);
 
     return (
         <Layout>

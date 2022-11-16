@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { postFile } from "../../../../../api/controllers/FileApi";
 import { postProduct } from "../../../../../api/controllers/ProductApi";
+import { patchProductNutrient, postProductNutrient } from "../../../../../api/controllers/ProductNutrientApi";
 import Modal from "../../../../utils/Modal/Modal";
 import ProductLayout from "../../../layouts/ProductLayout/ProductLayout";
 
@@ -19,6 +20,7 @@ function CreateProductModal(props){
         "description": null,
         "unitId": null,
         "quantity": null,
+        "productNutrients": [],
         "file": {
             "path": null
         }
@@ -31,6 +33,10 @@ function CreateProductModal(props){
     const [layoutFileData, setLayoutFileData] = useState();
     const handleChangeLayoutFileData = (layoutFileData) => {
         setLayoutFileData(layoutFileData);
+    }
+    const [layoutNutrientsData, setLayoutNutrientsData] = useState();
+    const handleChangeLayoutNutrientsData = (layoutNutrientsData) => {
+        setLayoutNutrientsData(layoutNutrientsData);
     }
     
     const onSave = () => {
@@ -46,6 +52,19 @@ function CreateProductModal(props){
                         }
                     });
                 }
+
+                if(layoutNutrientsData) {
+                    for (const layoutNutrientData of layoutNutrientsData) {
+                        if(layoutNutrientData) {
+                            postProductNutrient({
+                                productId: response.data.id,
+                                nutrientId: layoutNutrientData.nutrientId,
+                                quantity: layoutNutrientData.quantity
+                            });
+                        }
+                    }
+                }
+
                 props.onClose();
                 window.location = '../../product/' + response.data.id;
             });
@@ -54,7 +73,7 @@ function CreateProductModal(props){
 
     return (
         <Modal open={props.open} onClose={props.onClose} title={t('Add Product')} onSave={onSave}>
-            <ProductLayout data={product} onChangeLayoutData={handleChangeLayoutData} onChangeLayoutFileData={handleChangeLayoutFileData}/>
+            <ProductLayout data={product} onChangeLayoutData={handleChangeLayoutData} onChangeLayoutFileData={handleChangeLayoutFileData} onChangeLayoutNutrientsData={handleChangeLayoutNutrientsData}/>
         </Modal>
     )
 };

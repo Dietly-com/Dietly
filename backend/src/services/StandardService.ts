@@ -125,7 +125,7 @@ export const findMany = async (req: Request, res: Response, object:  any, respon
     try {
         let records = null;
         let query = {
-            include: { createdBy: false },
+            include: undefined,
             where: {
                 NOT: [
                     {
@@ -139,19 +139,19 @@ export const findMany = async (req: Request, res: Response, object:  any, respon
                 id: 'desc',
             }],
         };
-        if (req.body.include != undefined) {
+        if (req.body.include !== undefined) {
             query.include = req.body.include;
         }
-        if (req.body.where != undefined) {
+        if (req.body.where !== undefined) {
             query.where = req.body.where;
         }
-        if (req.body.skip != undefined) {
+        if (req.body.skip !== undefined) {
             query.skip = req.body.skip;
         }
-        if (req.body.take != undefined) {
+        if (req.body.take !== undefined) {
             query.take = req.body.take;
         }
-        if (req.body.orderBy != undefined) {
+        if (req.body.orderBy !== undefined) {
             query.orderBy = req.body.orderBy;
         }
         records = await object.findMany(query);

@@ -5,14 +5,24 @@ import { verifyUser } from '../middlewares/AuthorizationMiddleware';
 import { addWhere } from '../middlewares/WhereMiddleware';
 import { addPagination } from '../middlewares/PaginationMiddleware';
 import { addOrder } from '../middlewares/OrderMiddleware';
+import { RequestBuilder } from '../utils/RequestUtils';
 
 const object = new PrismaClient().nutrient;
+const include = {
+    unit: true
+};
 
 const router: Router = express.Router();
 router.use(verifyUser);
 router.use(addWhere);
 router.use(addPagination);
 router.use(addOrder);
+router.use(async (req, res, next) => {
+    req = new RequestBuilder(req)
+    .withInclude(include)
+    .get();
+    next();
+})
 router.post("/", async (req, res) => {
     createOne(req, res, object);
 })
