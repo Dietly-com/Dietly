@@ -35,6 +35,7 @@ function EditDietModal(props){
         }
         if(layoutData!==undefined) patchDiet(props.data.id, layoutData);
         props.onClose();
+        window.location = '../../diet/' + props.data.id;
     }
 
     return (

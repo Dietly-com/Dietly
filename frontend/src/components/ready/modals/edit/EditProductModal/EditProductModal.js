@@ -58,6 +58,7 @@ function EditProductModal(props){
             }
         }
         props.onClose();
+        window.location = '../../product/' + props.data.id;
     }
 
     return (

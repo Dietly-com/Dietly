@@ -4,7 +4,8 @@ export const Joi = require("joi");
 const schema = {
     userMealId: Joi.number().required().label("User meal"),
     productId: Joi.number().required().label("Product"),
-    unitId: Joi.number().required().label("Unit")
+    unitId: Joi.number().required().label("Unit"),
+    quantity: Joi.number().required().label("Quantity")  
 };
 const path = 'userMealProduct';
 

@@ -8,7 +8,10 @@ const schema = {
     ownerId: Joi.number().empty().label("Owner"),
     fileId: Joi.number().empty().label("File"),
     unitId: Joi.number().required().label("Unit"),
-    quantity: Joi.number().required().label("Quantity")
+    quantity: Joi.number().required().label("Quantity"),
+    category: Joi.string().empty().label("Category"),
+    vegan: Joi.boolean().empty().label("Vegan"),
+    vegetarian: Joi.boolean().empty().label("Vegetarian"),
 };
 const path = 'recipe';
 

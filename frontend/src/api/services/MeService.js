@@ -28,7 +28,7 @@ export const getOneMe = async (path) => {
                 
             })
             .catch(error => {
-                processResult(error.response.data);
+                processResult(error.response.data.result);
                 reject(error.response.data);
             });
         } catch (error) {
@@ -57,7 +57,7 @@ export const patchOneMe = async (path, data) => {
                 resolve(response.data);
             })
             .catch(error => {
-                processResult(RESULT_SOMETHING_WRONG);
+                processResult(error.response.data.result);
                 reject(error.response.data);
             });
         } catch (error) {
@@ -83,7 +83,7 @@ export const deleteOneMe = async (path) => {
                 resolve(response.data);
             })
             .catch(error => {
-                processResult(RESULT_SOMETHING_WRONG);
+                processResult(error.response.data.result);
                 reject(error.response.data);
             });
         } catch (error) {

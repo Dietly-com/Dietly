@@ -30,7 +30,7 @@ export const postOne = async (path, data, schema) => {
                 resolve(response.data);
             })
             .catch(error => {
-                processResult(RESULT_SOMETHING_WRONG);
+                processResult(error.response.data.result);
                 reject(error.response.data);
             });
             } catch (error) {
@@ -57,7 +57,7 @@ export const getOne = async (path, id) => {
                 resolve(response.data);
             })
             .catch(error => {
-                processResult(RESULT_SOMETHING_WRONG);
+                processResult(error.response.data.result);
                 reject(error.response.data);
             });
         } catch (error) {
@@ -83,7 +83,7 @@ export const getMany = async (path, params) => {
                 resolve(response.data);
             })
             .catch(error => {
-                processResult(error.response.data);
+                processResult(error.response.data.result);
                 reject(error.response.data);
             });
         } catch (error) {
@@ -112,7 +112,7 @@ export const patchOne = async (path, id, data) => {
                 resolve(response.data);
             })
             .catch(error => {
-                processResult(RESULT_SOMETHING_WRONG);
+                processResult(error.response.data.result);
                 reject(error.response.data);
             });
         } catch (error) {
@@ -138,7 +138,7 @@ export const deleteOne = async (path, id) => {
                 resolve(response.data);
             })
             .catch(error => {
-                processResult(RESULT_SOMETHING_WRONG);
+                processResult(error.response.data.result);
                 reject(error.response.data);
             });
         } catch (error) {
@@ -160,10 +160,11 @@ export const search = async (path, term) => {
                 data: {}
               })
             .then(response => {
+                processGetResult(response.data.result);
                 resolve(response.data);
             })
             .catch(error => {
-                processResult(error.response.data);
+                processResult(error.response.data.result);
                 reject(error.response.data);
             });
         } catch (error) {

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { postFile } from "../../../../../api/controllers/FileApi";
 import { postRecipe } from "../../../../../api/controllers/RecipeApi";
+import { postRecipeProduct } from "../../../../../api/controllers/RecipeProductApi";
 import Modal from "../../../../utils/Modal/Modal";
 import RecipeLayout from "../../../layouts/RecipeLayout/RecipeLayout";
 
@@ -17,6 +18,7 @@ function CreateRecipeModal(props){
         "preparation": null,
         "unitId": null,
         "quantity": null,
+        "recipeProducts": [],
         "file": {
             "path": null
         }
@@ -29,6 +31,11 @@ function CreateRecipeModal(props){
     const [layoutFileData, setLayoutFileData] = useState();
     const handleChangeLayoutFileData = (layoutFileData) => {
         setLayoutFileData(layoutFileData);
+    }
+
+    const [layoutRecipeProductsData, setLayoutRecipeProductsData] = useState();
+    const handleChangeLayoutRecipeProductsData = (layoutRecipeProductsData) => {
+        setLayoutRecipeProductsData(layoutRecipeProductsData);
     }
     
     const onSave = () => {
@@ -44,6 +51,20 @@ function CreateRecipeModal(props){
                         }
                     });
                 }
+
+                if(layoutRecipeProductsData) {
+                    for (const layoutRecipeProductData of layoutRecipeProductsData) {
+                        if(layoutRecipeProductData) {
+                            postRecipeProduct({
+                                recipeId: response.data.id,
+                                productId: layoutRecipeProductData.productId,
+                                quantity: layoutRecipeProductData.quantity,
+                                unitId:  layoutRecipeProductData.unitId
+                            });
+                        }
+                    }
+                }
+
                 props.onClose();
                 window.location = '../../recipe/' + response.data.id;
             });
@@ -52,7 +73,11 @@ function CreateRecipeModal(props){
 
     return (
         <Modal open={props.open} onClose={props.onClose} title={t('Add Recipe')} onSave={onSave}>
-            <RecipeLayout data={recipe} onChangeLayoutData={handleChangeLayoutData} onChangeLayoutFileData={handleChangeLayoutFileData}/>
+            <RecipeLayout
+                data={recipe}
+                onChangeLayoutData={handleChangeLayoutData}
+                onChangeLayoutFileData={handleChangeLayoutFileData}
+                onChangeLayoutRecipeProductsData={handleChangeLayoutRecipeProductsData}/>
         </Modal>
     )
 };
