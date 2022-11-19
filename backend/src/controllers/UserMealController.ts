@@ -13,6 +13,7 @@ const include = {
     userMealProducts: {include: {
         product: {include: {
             file: true,
+            unit: true,
             productNutrients: {include: {
                 nutrient: {include: {
                     unit: true
@@ -24,6 +25,7 @@ const include = {
     userMealRecipes: {include: {
         recipe: {include: {
             file: true,
+            unit: true,
             recipeProducts: {include: {
                 product: {include: {
                     file: true,

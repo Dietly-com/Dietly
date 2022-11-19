@@ -16,8 +16,6 @@ import {
 
 export const updateMe = async (req: Request, res: Response, object:any) => {
     try {
-        req.body.data.modifiedById = req.body.authorization.id;
-        req.body.data.modifiedAt = new Date();
         const id = req.body.authorization.id;
         if(req.body.data.password !== undefined) {
             const salt:string = await bcrypt.genSalt(Number(process.env.SALT));
