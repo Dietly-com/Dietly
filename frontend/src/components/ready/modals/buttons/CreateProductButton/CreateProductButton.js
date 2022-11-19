@@ -8,7 +8,7 @@ function CreateProductButton(props){
     const [open, setOpen, handleOpen, handleClose] = useModal()
     return (
         <div>
-            <Button variant="contained" style={{height: 36}} onClick={handleOpen}>{t('Add product')}</Button>
+            <Button variant="contained" style={{height: 36}} onClick={handleOpen}>{t('Add Product')}</Button>
             <CreateProductModal open={open} onClose={handleClose}/>
         </div>
     )

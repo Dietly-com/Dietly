@@ -83,7 +83,11 @@ i18n
                 'Your': 'Your',
                 'Popular': 'Popular',
                 'Yogurt': 'Yogurt',
-                'Soup': 'Soup'
+                'Soup': 'Soup',
+                'Add Meal': 'Add Meal',
+                'Add Recipe': 'Add Recipe',
+                'Add Product': 'Add Product',
+                'Add Diet': 'Add Diet'
             }
         },
         pl: {
@@ -164,7 +168,11 @@ i18n
                 'Your': 'Twoje',
                 'Popular': 'Popularne',
                 'Yogurt': 'Jogurt',
-                'Soup': 'Zupa'
+                'Soup': 'Zupa',
+                'Add Meal': 'Dodaj posiłek',
+                'Add Recipe': 'Dodaj przepis',
+                'Add Product': 'Dodaj produkt',
+                'Add Diet': 'Dodaj dietę'
             }
         }
     },

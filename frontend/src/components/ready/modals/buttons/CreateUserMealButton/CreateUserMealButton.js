@@ -8,7 +8,7 @@ function CreateUserMealButton(props){
     const [open, setOpen, handleOpen, handleClose] = useModal()
     return (
         <div>
-            <Button variant="contained" style={{height: 36}} onClick={handleOpen}>{t('Add User Meal')}</Button>
+            <Button variant="contained" style={{height: 36}} onClick={handleOpen}>{t('Add Meal')}</Button>
             <CreateUserMealModal open={open} onClose={handleClose}/>
         </div>
     )
