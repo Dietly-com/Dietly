@@ -87,7 +87,13 @@ i18n
                 'Add Meal': 'Add Meal',
                 'Add Recipe': 'Add Recipe',
                 'Add Product': 'Add Product',
-                'Add Diet': 'Add Diet'
+                'Add Diet': 'Add Diet',
+                'Target':'Target',
+                'Year of birth': 'Year of birth',
+                'Sex': 'Sex',
+                'Target Weight':'Target Weight',
+                'Male':'Male',
+                'Female':'Female'
             }
         },
         pl: {
@@ -172,7 +178,13 @@ i18n
                 'Add Meal': 'Dodaj posiłek',
                 'Add Recipe': 'Dodaj przepis',
                 'Add Product': 'Dodaj produkt',
-                'Add Diet': 'Dodaj dietę'
+                'Add Diet': 'Dodaj dietę',
+                'Target':'Cel',
+                'Year of birth': 'Rok urodzenia',
+                'Sex': 'Płeć',
+                'Target Weight':'Waga docelowa',
+                'Male':'Mężczyzna',
+                'Female':'Kobieta'
             }
         }
     },

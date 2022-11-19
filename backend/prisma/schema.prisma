@@ -20,10 +20,11 @@ model User {
   password  String
   email String  @unique
   phone String?
-
+  sex String?
+  yearOfBirth Int?
   height Float?
   weight Float?
-  bmi Float?
+  targetWeight Float?
   activeLevel Int?
   file File? @relation(fields: [fileId], references: [id])
   fileId Int?

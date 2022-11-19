@@ -37,3 +37,15 @@ export const deleteMe = async () => {
         })
     })
 };
+
+export const getUserTargetNutrients = async (params) => {
+    return new Promise( (resolve, reject) => {
+        getOneMe(path + '/targetNutrients', params)
+        .then(responseBody => {
+            resolve(responseBody)
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })
+};
