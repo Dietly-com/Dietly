@@ -4,7 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "jest"
+        "test": "jest",
+        "start": "npx ts-node backend.ts"
     },
     "repository": {
         "type": "git",
@@ -35,6 +36,7 @@
         "@types/node": "^18.11.3",
         "babel-jest": "^29.3.1",
         "cross-env": "^7.0.3",
+        "jest-mock-extended": "^3.0.1",
         "prisma": "^4.5.0",
         "supertest": "^6.3.1",
         "ts-jest": "^29.0.3",
