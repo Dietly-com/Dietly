@@ -19,15 +19,15 @@ beforeAll(async () => {
 
 describe("CreateOne endpoint", () => {
     describe("Given no data", () => {
-        it("Should return 500", async () => {
+        it("Should return 400", async () => {
             const temp = await request
                 .post('/api/v1/diet')
                 .auth(auth, { type: "bearer" })
-            expect(temp.status).toBe(500)
+            expect(temp.status).toBe(400)
         })
     })
     describe("Given bad data", () => {
-        it("Should return 500", async () => {
+        it("Should return 400", async () => {
             const temp = await request
                 .post('/api/v1/diet')
                 .auth(auth, { type: "bearer" })
@@ -36,7 +36,7 @@ describe("CreateOne endpoint", () => {
                         name: 43
                     }
                 })
-            expect(temp.status).toBe(500)
+            expect(temp.status).toBe(400)
         })
     })
     describe("Given good data", () => {
@@ -57,11 +57,11 @@ describe("CreateOne endpoint", () => {
 
 describe("Get endpoint", () => {
     describe("Given bad data", () => {
-        it("Should return 500", async () => {
+        it("Should return 400", async () => {
             const temp = await request
                 .get('/api/v1/diet/ds')
                 .auth(auth, { type: "bearer" })
-            expect(temp.status).toBe(500)
+            expect(temp.status).toBe(400)
         })
     })
 
@@ -95,7 +95,7 @@ describe("Patch endpoint", () => {
     })
 
     describe("Given bad data", () => {
-        it("Should return 500", async () => {
+        it("Should return 400", async () => {
             const temp = await request
                 .patch('/api/v1/diet/ds')
                 .auth(auth, { type: "bearer" })
@@ -104,7 +104,7 @@ describe("Patch endpoint", () => {
                         name: 42
                     }
                 })
-            expect(temp.status).toBe(500)
+            expect(temp.status).toBe(400)
         })
     })
 
@@ -135,11 +135,11 @@ describe("DeleteOne endpoint", () => {
     })
 
     describe("Given bad data", () => {
-        it("Should return 500", async () => {
+        it("Should return 400", async () => {
             const temp = await request
                 .delete('/api/v1/diet/ds')
                 .auth(auth, { type: "bearer" })
-            expect(temp.status).toBe(500)
+            expect(temp.status).toBe(400)
         })
     })
 

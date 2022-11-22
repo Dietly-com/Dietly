@@ -19,7 +19,6 @@ import {
 
 export const createOne = async (req: Request, res: Response, object:  any) => {
     try {
-        console.log(req.body.data);
         
         const record = await object.create({
             data: { ...req.body.data},

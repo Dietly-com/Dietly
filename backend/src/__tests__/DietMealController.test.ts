@@ -1,4 +1,4 @@
-import { describe, it, beforeAll, afterAll, expect } from '@jest/globals';
+import { describe, it, beforeAll, expect } from '@jest/globals';
 import { app } from '../../backend_test';
 let request = require('supertest')(app);
 let auth: string;
@@ -17,12 +17,11 @@ beforeAll(async () => {
 });
 
 
-
 describe("CreateOne endpoint", () => {
     describe("Given no data", () => {
         it("Should return 400", async () => {
             const temp = await request
-                .post('/api/v1/badge')
+                .post('/api/v1/dietmeal')
                 .auth(auth, { type: "bearer" })
             expect(temp.status).toBe(400)
         })
@@ -30,11 +29,11 @@ describe("CreateOne endpoint", () => {
     describe("Given bad data", () => {
         it("Should return 400", async () => {
             const temp = await request
-                .post('/api/v1/badge')
+                .post('/api/v1/dietmeal')
                 .auth(auth, { type: "bearer" })
                 .send({
                     data: {
-                        name: 43
+                        test: "test"
                     }
                 })
             expect(temp.status).toBe(400)
@@ -43,11 +42,15 @@ describe("CreateOne endpoint", () => {
     describe("Given good data", () => {
         it("Should return 201", async () => {
             const temp = await request
-                .post('/api/v1/badge')
+                .post('/api/v1/dietmeal')
                 .auth(auth, { type: "bearer" })
                 .send({
                     data: {
-                        name: "test"
+                        name: "test",
+                        hour: 13,
+                        minute: 30,
+                        day: 2,
+                        dietId: 5
                     }
                 })
             expect(temp.status).toBe(201)
@@ -60,7 +63,7 @@ describe("Get endpoint", () => {
     describe("Given bad data", () => {
         it("Should return 400", async () => {
             const temp = await request
-                .get('/api/v1/badge/ds')
+                .get('/api/v1/dietmeal/ds')
                 .auth(auth, { type: "bearer" })
             expect(temp.status).toBe(400)
         })
@@ -69,7 +72,7 @@ describe("Get endpoint", () => {
     describe("Given good data - id", () => {
         it("Should return 200", async () => {
             const temp = await request
-                .get('/api/v1/badge/' + toDelete)
+                .get('/api/v1/dietmeal/' + toDelete)
                 .auth(auth, { type: "bearer" })
             expect(temp.status).toBe(200)
         })
@@ -78,19 +81,18 @@ describe("Get endpoint", () => {
     describe("Given good data - no id", () => {
         it("Should return 200", async () => {
             const temp = await request
-                .get('/api/v1/badge/')
+                .get('/api/v1/dietmeal/')
                 .auth(auth, { type: "bearer" })
             expect(temp.status).toBe(200)
         })
     })
-
 })
 
 describe("Patch endpoint", () => {
     describe("Given no data", () => {
         it("Should return 404", async () => {
             const temp = await request
-                .patch('/api/v1/badge/')
+                .patch('/api/v1/dietmeal')
                 .auth(auth, { type: "bearer" })
             expect(temp.status).toBe(404)
         })
@@ -99,7 +101,7 @@ describe("Patch endpoint", () => {
     describe("Given bad data", () => {
         it("Should return 400", async () => {
             const temp = await request
-                .patch('/api/v1/badge/ds')
+                .patch('/api/v1/dietmeal/ds')
                 .auth(auth, { type: "bearer" })
                 .send({
                     data: {
@@ -113,7 +115,7 @@ describe("Patch endpoint", () => {
     describe("Given good data", () => {
         it("Should return 200", async () => {
             const temp = await request
-                .patch('/api/v1/badge/' + toDelete)
+                .patch('/api/v1/dietmeal/' + toDelete)
                 .auth(auth, { type: "bearer" })
                 .send({
                     data: {
@@ -130,7 +132,7 @@ describe("DeleteOne endpoint", () => {
     describe("Given no data", () => {
         it("Should return 404", async () => {
             const temp = await request
-                .delete('/api/v1/badge/')
+                .delete('/api/v1/dietmeal/')
                 .auth(auth, { type: "bearer" })
             expect(temp.status).toBe(404)
         })
@@ -139,7 +141,7 @@ describe("DeleteOne endpoint", () => {
     describe("Given bad data", () => {
         it("Should return 400", async () => {
             const temp = await request
-                .delete('/api/v1/badge/ds')
+                .delete('/api/v1/dietmeal/ds')
                 .auth(auth, { type: "bearer" })
             expect(temp.status).toBe(400)
         })
@@ -148,7 +150,7 @@ describe("DeleteOne endpoint", () => {
     describe("Given good data", () => {
         it("Should return 200", async () => {
             const temp = await request
-                .delete('/api/v1/badge/' + toDelete)
+                .delete('/api/v1/dietmeal/' + toDelete)
                 .auth(auth, { type: "bearer" })
             expect(temp.status).toBe(200)
         })
