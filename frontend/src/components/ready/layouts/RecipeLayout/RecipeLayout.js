@@ -80,7 +80,7 @@ function RecipeLayout(props) {
             }
             <LayoutGroup>
                 <LayoutSection
-                    header={"Basic infromation"}>
+                    header={t('Basic information')}>
                     <TextField id="standard-basic" label={t('Name')} defaultValue={defaultValue(viewLayoutData.name)} variant="standard" type="text" style={standardFieldStyle} onChange={(event)=>{handleChangeLayoutData("name", event.target.value)}}/>
                     <TextField id="standard-basic" label={t('Category')} defaultValue={defaultValue(viewLayoutData.category)} variant="standard" type="text" style={standardFieldStyle} onChange={(event)=>{handleChangeLayoutData("category", event.target.value)}}/>
                     <UnitField defaultValue={defaultValue(viewLayoutData.unitId)} style={standardFieldStyle} onChange={(value)=>{handleChangeLayoutData("unitId", value)}}/>
@@ -89,7 +89,7 @@ function RecipeLayout(props) {
                     <TextField id="standard-basic" label={t('Description')} defaultValue={defaultValue(viewLayoutData.description)} multiline variant="standard" type="text" fullWidth onChange={(event)=>{handleChangeLayoutData("description", event.target.value)}}/>
                 </LayoutSection>
                 <LayoutSection
-                    header={"Additional information"}>
+                    header={t('Additional information')}>
                     <div style={{borderBottom: "1px solid black", width: standardFieldStyle.width}}>
                         {t('Vegan')}
                         <Checkbox id="standard-basic" label={t('Vegan')} defaultValue={defaultValue(viewLayoutData.vegan)} onChange={(event)=>{handleChangeLayoutData("vegan", event.target.checked)}}/>
@@ -100,14 +100,14 @@ function RecipeLayout(props) {
                     </div>
                 </LayoutSection>
                 <LayoutSection
-                    header={"Preparation infromation"}>
+                    header={t('Preparation infromation')}>
                     <TextField id="standard-basic" label={t('Preparation')} defaultValue={defaultValue(viewLayoutData.preparation)} multiline variant="standard" type="text" fullWidth onChange={(event)=>{handleChangeLayoutData("preparation", event.target.value)}}/>
                 </LayoutSection>
             </LayoutGroup>
             <LayoutSection
                 header={
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                        <div>Products</div>
+                        <div>{t('Products')}</div>
                         <TextField
                             id="standard-basic"
                             label={t('Search')}
@@ -123,7 +123,7 @@ function RecipeLayout(props) {
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead>
                             <TableRow>
-                                <TableCell>Image</TableCell>
+                                <TableCell>{t('Image')}</TableCell>
                                 <TableCell>{t('Name')}</TableCell>
                                 <TableCell align="right">{t('Quantity')}</TableCell>
                                 <TableCell align="right">{t('Add')}</TableCell>
@@ -159,7 +159,7 @@ function RecipeLayout(props) {
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
                         <TableRow>
-                            <TableCell>Image</TableCell>
+                            <TableCell>{t('Image')}</TableCell>
                             <TableCell>{t('Name')}</TableCell>
                             <TableCell align="right">{t('Quantity')}</TableCell>
                         </TableRow>

@@ -102,7 +102,7 @@ function UserMealLayout(props) {
         <Layout>
             <LayoutGroup>
                 <LayoutSection
-                    header={"Details"}>
+                    header={t('Details')}>
                     <TextField id="standard-basic" label={t('Name')} defaultValue={defaultValue(viewLayoutData.name)} variant="standard" type="text" fullWidth onChange={(event)=>{handleChangeLayoutData("name", event.target.value)}}/>
                     <TextField id="standard-basic" label={t('Date')} defaultValue={defaultValue(viewLayoutData.date)} variant="standard" type="date" style={standardFieldStyle} onChange={(event)=>{handleChangeLayoutData("date", event.target.valueAsDate)}}/>
                     <TextField id="standard-basic" label={t('Time')} defaultValue={defaultValue(viewLayoutData.time)} variant="standard" type="time" style={standardFieldStyle} onChange={(event)=>{handleChangeLayoutData("time", event.target.valueAsDate)}}/>
@@ -111,7 +111,7 @@ function UserMealLayout(props) {
             <LayoutSection
                 header={
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                        <div>Products</div>
+                        <div>{t('Products')}</div>
                         <TextField
                             id="standard-basic"
                             label={t('Search')}
@@ -127,7 +127,7 @@ function UserMealLayout(props) {
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead>
                             <TableRow>
-                                <TableCell>Image</TableCell>
+                                <TableCell>{t('Image')}</TableCell>
                                 <TableCell>{t('Name')}</TableCell>
                                 <TableCell align="right">{t('Quantity')}</TableCell>
                                 <TableCell align="right">{t('Add')}</TableCell>
@@ -162,7 +162,7 @@ function UserMealLayout(props) {
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
                         <TableRow>
-                            <TableCell>Image</TableCell>
+                            <TableCell>{t('Image')}</TableCell>
                             <TableCell>{t('Name')}</TableCell>
                             <TableCell align="right">{t('Quantity')}</TableCell>
                         </TableRow>
@@ -197,7 +197,7 @@ function UserMealLayout(props) {
             <LayoutSection
                 header={
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                        <div>Recipes</div>
+                        <div>{t('Recipes')}</div>
                         <TextField
                             id="standard-basic"
                             label={t('Search')}
@@ -213,7 +213,7 @@ function UserMealLayout(props) {
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead>
                             <TableRow>
-                                <TableCell>Image</TableCell>
+                                <TableCell>{t('Image')}</TableCell>
                                 <TableCell>{t('Name')}</TableCell>
                                 <TableCell align="right">{t('Quantity')}</TableCell>
                                 <TableCell align="right">{t('Add')}</TableCell>
@@ -250,7 +250,7 @@ function UserMealLayout(props) {
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
                         <TableRow>
-                            <TableCell>Image</TableCell>
+                            <TableCell>{t('Image')}</TableCell>
                             <TableCell>{t('Name')}</TableCell>
                             <TableCell align="right">{t('Quantity')}</TableCell>
                         </TableRow>

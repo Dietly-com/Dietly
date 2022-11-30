@@ -81,7 +81,7 @@ function ProductLayout(props) {
             }
             <LayoutGroup>
                 <LayoutSection
-                    header={"Basic information"}>
+                    header={t('Basic information')}>
                     <TextField id="standard-basic" label={t('Name')} defaultValue={defaultValue(viewLayoutData.name)} variant="standard" type="text" style={standardFieldStyle} onChange={(event)=>{handleChangeLayoutData("name", event.target.value)}}/>
                     <TextField id="standard-basic" label={t('Category')} defaultValue={defaultValue(viewLayoutData.category)} variant="standard" type="text" style={standardFieldStyle} onChange={(event)=>{handleChangeLayoutData("category", event.target.value)}}/>
                     <TextField id="standard-basic" label={t('Producer')} defaultValue={defaultValue(viewLayoutData.producer)} variant="standard" type="text" style={standardFieldStyle} onChange={(event)=>{handleChangeLayoutData("producer", event.target.value)}}/>
@@ -92,7 +92,7 @@ function ProductLayout(props) {
                     <TextField id="standard-basic" label={t('Description')} defaultValue={defaultValue(viewLayoutData.description)} multiline variant="standard" type="text" fullWidth onChange={(event)=>{handleChangeLayoutData("description", event.target.value)}}/>
                 </LayoutSection>
                 <LayoutSection
-                    header={"Additional information"}>
+                    header={t('Additional information')}>
                     <div style={{borderBottom: "1px solid black", width: standardFieldStyle.width}}>
                         {t('Vegan')}
                         <Checkbox id="standard-basic" label={t('Vegan')} defaultValue={defaultValue(viewLayoutData.vegan)} onChange={(event)=>{handleChangeLayoutData("vegan", event.target.checked)}}/>
@@ -101,11 +101,11 @@ function ProductLayout(props) {
                         {t('Vegetarian')}
                         <Checkbox id="standard-basic" label={t('Vegetarian')} defaultValue={defaultValue(viewLayoutData.vegetarian)} onChange={(event)=>{handleChangeLayoutData("vegetarian", event.target.checked)}}/>
                     </div>
-                    <TextField id="standard-basic" label={t('NutriScore')} defaultValue={defaultValue(viewLayoutData.nutriScore)} variant="standard" type="text" style={standardFieldStyle} onChange={(event)=>{handleChangeLayoutData("nutriScore", event.target.value)}}/>
+                    <TextField id="standard-basic" label={t('Nutri-Score')} defaultValue={defaultValue(viewLayoutData.nutriScore)} variant="standard" type="text" style={standardFieldStyle} onChange={(event)=>{handleChangeLayoutData("nutriScore", event.target.value)}}/>
                 </LayoutSection>
             </LayoutGroup>          
             <LayoutSection
-                header={"Nutrients"}>
+                header={t('Nutrients')}>
                 <TableContainer>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
@@ -120,7 +120,7 @@ function ProductLayout(props) {
                             key={row.nutrient.viewName}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                <TableCell component="th" scope="row">{row.nutrient.viewName}</TableCell>
+                                <TableCell component="th" scope="row">{t(row.nutrient.viewName)}</TableCell>
                                 <TableCell align="right">
                                     <InputBase
                                         id="standard-basic"

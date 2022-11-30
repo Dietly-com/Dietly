@@ -25,13 +25,17 @@ function DisplaySettings() {
 
     const languages = [
         {
-        value: 'pl',
-        label: t('Polish'),
+            value: 'pl',
+            label: t('Polish'),
         },
         {
-        value: 'en',
-        label: t('English')
-        }
+            value: 'en',
+            label: t('English')
+        },
+        {
+            value: 'es',
+            label: t('Spanish'),
+        },
     ];
     
       useEffect(()=>{

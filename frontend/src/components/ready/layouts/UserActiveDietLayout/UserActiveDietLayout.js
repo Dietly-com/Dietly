@@ -31,7 +31,7 @@ function UserActiveDietLayout(props) {
     return (
         <Layout>
             <LayoutSection
-                header={"Details"}>
+                header={t("Details")}>
                 <TextField id="standard-basic" label={t('Start time')} defaultValue={defaultValue(viewLayoutData.startTime)} variant="standard" type="date" style={standardFieldStyle} onChange={(event)=>{handleChangeLayoutData("startTime", event.target.valueAsDate)}}/>
                 <TextField id="standard-basic" label={t('End time')} defaultValue={defaultValue(viewLayoutData.endTime)} variant="standard" type="date" style={standardFieldStyle} onChange={(event)=>{handleChangeLayoutData("endTime", event.target.valueAsDate)}}/>
                 <div style={{borderBottom: "1px solid black", width: "100%"}}>
