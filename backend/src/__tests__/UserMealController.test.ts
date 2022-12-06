@@ -46,13 +46,13 @@ describe("CreateOne endpoint", () => {
                 .auth(auth, { type: "bearer" })
                 .send({
                     data: {
+                        userId: 1,
+                        name: "test",
                         day: 19,
-                        month: 12,
-                        year: 2022,
                         hour: 12,
                         minute: 10,
-                        name: "test",
-                        userId: 1
+                        month: 12,
+                        year: 2022
                     }
                 })
             expect(temp.status).toBe(201)

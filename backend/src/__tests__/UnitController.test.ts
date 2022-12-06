@@ -48,7 +48,8 @@ describe("CreateOne endpoint", () => {
                     data: {
                         name: "Gram",
                         quantity: 1,
-                        shortcut: "g"
+                        code: "g",
+                        viewName: "Gram"
                     }
                 })
             expect(temp.status).toBe(201)

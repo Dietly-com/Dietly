@@ -19,11 +19,11 @@ beforeAll(async () => {
 
 describe("Get endpoint", () => {
     describe("Given bad data", () => {
-        it("Should return 400", async () => {
+        it("Should return 404", async () => {
             const temp = await request
                 .get('/api/v1/me/69')
                 .auth(auth, { type: "bearer" })
-            expect(temp.status).toBe(400)
+            expect(temp.status).toBe(404)
         })
     })
 
@@ -40,7 +40,7 @@ describe("Get endpoint", () => {
 describe("Patch endpoint", () => {
 
     describe("Given bad data", () => {
-        it("Should return 400", async () => {
+        it("Should return 404", async () => {
             const temp = await request
                 .patch('/api/v1/me/ds')
                 .auth(auth, { type: "bearer" })
@@ -49,7 +49,7 @@ describe("Patch endpoint", () => {
                         fileId: "test"
                     }
                 })
-            expect(temp.status).toBe(400)
+            expect(temp.status).toBe(404)
         })
     })
 

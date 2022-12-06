@@ -7,7 +7,10 @@ import {
   STATUS_INTERNAL_SERVER_ERROR,
   MESSAGE_CREATED_RECORD,
   MESSAGE_INTERNAL_SERVER_ERROR,
-  MESSAGE_WRONG_LOGIN
+  MESSAGE_WRONG_LOGIN,
+  MESSAGE_USER_ALREADY_EXIST,
+  STATUS_BAD_REQUEST,
+  MESSAGE_BAD_REQUEST
 } from '../utils/ResponseUtils';
 
 const prisma = new PrismaClient();
@@ -21,11 +24,7 @@ export const createUser = async (req: Request, res: Response) => {
             },
           });
         if (user) {
-            res = new ResponseBuilder(res)
-            .withStatus(STATUS_CONFLICT)
-            .withResponseBodySuccess(false)
-            .withResponseBodyMessage(MESSAGE_WRONG_LOGIN)
-            .send();
+          throw MESSAGE_USER_ALREADY_EXIST;
         }
         const salt:string = await bcrypt.genSalt(Number(process.env.SALT));
         const hashPassword = await bcrypt.hash(req.body.data.password, salt);
@@ -39,10 +38,10 @@ export const createUser = async (req: Request, res: Response) => {
         .withResponseBodyMessage(MESSAGE_CREATED_RECORD)
         .send();
     } catch (error) {
-        res = new ResponseBuilder(res)
-        .withStatus(STATUS_INTERNAL_SERVER_ERROR)
-        .withResponseBodySuccess(false)
-        .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
-        .send();
+      res = new ResponseBuilder(res)
+              .withStatus(STATUS_BAD_REQUEST)
+              .withResponseBodySuccess(false)
+              .withResponseBodyMessage(MESSAGE_BAD_REQUEST)
+              .send();
     }
 }

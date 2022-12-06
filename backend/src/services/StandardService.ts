@@ -7,6 +7,7 @@ import {
     STATUS_CREATED,
     STATUS_INTERNAL_SERVER_ERROR,
     STATUS_NOT_FOUND,
+    STATUS_BAD_REQUEST,
     STATUS_OK,
     MESSAGE_CREATED_RECORD,
     MESSAGE_UPDATED_RECORD,
@@ -14,7 +15,8 @@ import {
     MESSAGE_FIND_RECORDS,
     MESSAGE_DELETED_RECORD,
     MESSAGE_INTERNAL_SERVER_ERROR,
-    MESSAGE_NOT_FOUND_RECORD
+    MESSAGE_NOT_FOUND_RECORD,
+    MESSAGE_BAD_REQUEST
 } from '../utils/ResponseUtils';
 
 export const createOne = async (req: Request, res: Response, object:  any) => {
@@ -31,9 +33,9 @@ export const createOne = async (req: Request, res: Response, object:  any) => {
                 .send();
     } catch (error) {
         res = new ResponseBuilder(res)
-                .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+                .withStatus(STATUS_BAD_REQUEST)
                 .withResponseBodySuccess(false)
-                .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+                .withResponseBodyMessage(MESSAGE_BAD_REQUEST)
                 .send();
     }
 }
@@ -61,9 +63,9 @@ export const updateOne = async (req: Request, res: Response, object:  any) => {
             .send();
     } catch (error) {
         res = new ResponseBuilder(res)
-                .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+                .withStatus(STATUS_BAD_REQUEST)
                 .withResponseBodySuccess(false)
-                .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+                .withResponseBodyMessage(MESSAGE_BAD_REQUEST)
                 .send();
     }
 }
@@ -113,9 +115,9 @@ export const findOne = async (req: Request, res: Response, object:  any, respons
                 .send();
     } catch (error) {
         res = new ResponseBuilder(res)
-                .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+                .withStatus(STATUS_BAD_REQUEST)
                 .withResponseBodySuccess(false)
-                .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+                .withResponseBodyMessage(MESSAGE_BAD_REQUEST)
                 .send();
     }
 }
@@ -163,9 +165,9 @@ export const findMany = async (req: Request, res: Response, object:  any, respon
                 .send();
     } catch (error) {
         res = new ResponseBuilder(res)
-                .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+                .withStatus(STATUS_BAD_REQUEST)
                 .withResponseBodySuccess(false)
-                .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+                .withResponseBodyMessage(MESSAGE_BAD_REQUEST)
                 .send();
     }
 }
@@ -187,9 +189,9 @@ export const deleteOne = async (req: Request, res: Response, object:  any) => {
                 .send();
     } catch (error) {
         res = new ResponseBuilder(res)
-                .withStatus(STATUS_INTERNAL_SERVER_ERROR)
+                .withStatus(STATUS_BAD_REQUEST)
                 .withResponseBodySuccess(false)
-                .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
+                .withResponseBodyMessage(MESSAGE_BAD_REQUEST)
                 .send();
     }
 }
@@ -228,9 +230,9 @@ export const search = async (req: Request, res: Response, object:any) => {
         .send();
     } catch (error) {
         res = new ResponseBuilder(res)
-        .withStatus(STATUS_INTERNAL_SERVER_ERROR)
-        .withResponseBodySuccess(false)
-        .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
-        .send();
+                .withStatus(STATUS_BAD_REQUEST)
+                .withResponseBodySuccess(false)
+                .withResponseBodyMessage(MESSAGE_BAD_REQUEST)
+                .send();
     }
 }
