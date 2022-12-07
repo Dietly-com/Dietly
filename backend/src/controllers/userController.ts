@@ -4,6 +4,7 @@ import {createOne, findOne, findMany, updateOne, deleteOne } from '../services/S
 import { PrismaClient} from '@prisma/client';
 import { verifyUser } from '../middlewares/AuthorizationMiddleware';
 import { RequestBuilder } from '../utils/RequestUtils';
+import { getUserTargetNutrients } from '../utils/NutrientsUtils';
 
 const object = new PrismaClient().user;
 const include = {
@@ -19,6 +20,7 @@ router.use(async (req, res, next) => {
     .get();
     next();
 })
+
 router.post("/", async (req, res) => {
     createUser(req, res);
 })

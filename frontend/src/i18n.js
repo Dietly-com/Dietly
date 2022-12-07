@@ -111,7 +111,13 @@ i18n
                 "Active":"Active",
                 "Disactive":"Disactive",
                 "Start time":"Start time",
-                "End time":"End time"
+                "End time":"End time",
+                'Target':'Target',
+                'Year of birth': 'Year of birth',
+                'Sex': 'Sex',
+                'Target Weight':'Target Weight',
+                'Male':'Male',
+                'Female':'Female'
             }
         },
         pl: {
@@ -220,7 +226,13 @@ i18n
                 "Active":"Aktywuj",
                 "Disactive":"Dezaktywuj",
                 "Start time":"Od",
-                "End time":"Do"
+                "End time":"Do",
+                'Target':'Cel',
+                'Year of birth': 'Rok urodzenia',
+                'Sex': 'Płeć',
+                'Target Weight':'Waga docelowa',
+                'Male':'Mężczyzna',
+                'Female':'Kobieta'
             }
         },
         es: {

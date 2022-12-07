@@ -10,12 +10,15 @@ export var useSignUp = () => {
     var [surname, setSurname] = useState();
     var [email, setEmail] = useState();
     var [phone, setPhone] = useState();
+    var [sex, setSex] = useState();
+    var [yearOfBirth, setYearOfBirth] = useState();
 
     var [login, setLogin] = useState();
     var [password, setPassword] = useState();
     
     var [height, setHeight] = useState();
     var [weight, setWeight] = useState();
+    var [targetWeight, setTargetWeight] = useState();
     var [activeLevel, setActiveLevel] = useState();
 
     var [filePath, setFilePath] = useState('https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745');
@@ -75,6 +78,17 @@ export var useSignUp = () => {
         }
       ];
 
+      const sexes = [
+        {
+            value: 'male',
+            label: t('Male'),
+        },
+        {
+            value: 'female',
+            label: t('Female'),
+        },
+    ];
+
       const steps = [
         t('Personal'),
         t('Login'),
@@ -85,12 +99,12 @@ export var useSignUp = () => {
 
     return [
         stage, setStage,
-        name, setName, surname, setSurname, email, setEmail, phone, setPhone,
+        name, setName, surname, setSurname, email, setEmail, phone, setPhone, yearOfBirth, setYearOfBirth, sex, setSex,
         password, setPassword, login, setLogin,
-        height, setHeight, weight, setWeight, activeLevel, setActiveLevel,
+        height, setHeight, weight, setWeight, targetWeight, setTargetWeight, activeLevel, setActiveLevel,
         filePath, setFilePath,
         displayTheme, setDisplayTheme, displayLanguage, setDisplayLanguage,
         signUp,
-        themes, languages, activeLevels, steps
+        themes, languages, activeLevels, steps, sexes
     ];
 }

@@ -43,7 +43,7 @@ export const updateMe = async (req: Request, res: Response, object:any) => {
     }
 }
 
-export const findMe = async (req: Request, res: Response, object:any) => {
+export const findMe = async (req: Request, res: Response, object:any, responseBodyDataProcessor: any = undefined) => {
     try {
         const id = req.body.authorization.id;
         await object.update({
@@ -79,6 +79,7 @@ export const findMe = async (req: Request, res: Response, object:any) => {
         res = new ResponseBuilder(res)
         .withStatus(STATUS_OK)
         .withResponseBodyData(record)
+        .withResponseBodyDataProcessor(responseBodyDataProcessor)
         .withResponseBodySuccess(true)
         .withResponseBodyMessage(MESSAGE_FIND_USER)
         .send();
