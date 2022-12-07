@@ -56,18 +56,10 @@ export const authUser = async (req: Request, res: Response) => {
         }
 
     } catch (error) {
-        if (error == MESSAGE_WRONG_LOGIN_DATA) {
-            res = new ResponseBuilder(res)
-                .withStatus(STATUS_UNAUTHORIZED)
-                .withResponseBodySuccess(false)
-                .withResponseBodyMessage(MESSAGE_WRONG_LOGIN_DATA)
-                .send();
-        } else {
-            res = new ResponseBuilder(res)
-                .withStatus(STATUS_INTERNAL_SERVER_ERROR)
-                .withResponseBodySuccess(false)
-                .withResponseBodyMessage(MESSAGE_INTERNAL_SERVER_ERROR)
-                .send();
-        }
+        res = new ResponseBuilder(res)
+            .withStatus(STATUS_UNAUTHORIZED)
+            .withResponseBodySuccess(false)
+            .withResponseBodyMessage(MESSAGE_WRONG_LOGIN_DATA)
+            .send();
     }
 }

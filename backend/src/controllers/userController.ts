@@ -1,6 +1,6 @@
 import express, { Router } from 'express';
 import { createUser } from '../services/UserService';
-import {createOne, findOne, findMany, updateOne, deleteOne } from '../services/StandardService';
+import { findOne, findMany, updateOne, deleteOne } from '../services/StandardService';
 import { PrismaClient} from '@prisma/client';
 import { verifyUser } from '../middlewares/AuthorizationMiddleware';
 import { RequestBuilder } from '../utils/RequestUtils';

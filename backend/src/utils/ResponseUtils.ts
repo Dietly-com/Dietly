@@ -96,11 +96,22 @@ export const MESSAGE_WRONG_TOKEN = {
     type: 'error',
     code: 'E4'
 }
+export const MESSAGE_USER_ALREADY_EXIST = {
+    text: 'Record not found',
+    type: 'error',
+    code: 'E5'
+}
 
 export const MESSAGE_NOT_FOUND_RECORD = {
     text: 'Record not found',
     type: 'error',
     code: 'E5'
+}
+
+export const MESSAGE_BAD_REQUEST = {
+    text: 'Bad request',
+    type: 'error',
+    code: 'E7'
 }
 
 export class ResponseBuilder {
