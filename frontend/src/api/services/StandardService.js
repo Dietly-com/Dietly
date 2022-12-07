@@ -79,11 +79,11 @@ export const getMany = async (path, params) => {
                 data: {}
               })
             .then(response => {
-                processGetResult(response.data.result);
+                // processGetResult(response.data.result);
                 resolve(response.data);
             })
             .catch(error => {
-                processResult(error.response.data.result);
+                // processResult(error.response.data.result);
                 reject(error.response.data);
             });
         } catch (error) {

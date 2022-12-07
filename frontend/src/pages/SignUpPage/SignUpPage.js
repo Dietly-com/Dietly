@@ -5,10 +5,10 @@ import Title from '../../components/ready/pages/startPage/Title/Title';
 import FormBox from '../../components/ready/pages/startPage/FormBox/FormBox';
 import { Button, MenuItem, Step, StepLabel, Stepper, TextField } from '@mui/material';
 import DragonFruit from '../../components/ready/pages/startPage/DragonFruit/DragonFruit';
-import { useSignOn } from '../../hooks/useSignOn';
+import { useSignUp } from '../../hooks/useSignUp';
 import { useTranslation } from "react-i18next";
 
-function SignOnPage() {
+function SignUpPage() {
   const { t } = useTranslation();
   var [
     stage, setStage,
@@ -17,12 +17,12 @@ function SignOnPage() {
     height, setHeight, weight, setWeight, activeLevel, setActiveLevel,
     filePath, setFilePath,
     displayTheme, setDisplayTheme, displayLanguage, setDisplayLanguage,
-    signOn,
+    signUp,
     themes, languages, activeLevels, steps
-  ] = useSignOn();
+  ] = useSignUp();
   
   return (
-    <div className="SignOnPage" style={{width: '100%'}}>
+    <div className="SignUpPage" style={{width: '100%'}}>
       <Page>
         <Column>
           <Title title='Dietly' subtitle={t('Health life')}/>
@@ -31,7 +31,7 @@ function SignOnPage() {
           <FormBox
             header={
               <div style={{display: 'flex', flexDirection: "column", gap: "32px"}}>
-                <div>{t('Sign on')}</div>
+                <div>{t('Sign up')}</div>
                 <Stepper activeStep={stage} alternativeLabel>
                   {steps.map((label) => (
                     <Step key={label}>
@@ -59,7 +59,7 @@ function SignOnPage() {
                         }
                       }
                     }
-                    signOn(data);
+                    signUp(data);
                   }}>{t('Submit')}</Button>
                 }
                 {stage>0 &&
@@ -128,4 +128,4 @@ function SignOnPage() {
   );
 }
 
-export default SignOnPage;
+export default SignUpPage;

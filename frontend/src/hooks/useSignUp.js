@@ -2,7 +2,7 @@ import { useState } from "react";
 import { postUser } from '../api/controllers/UserApi';
 import { useTranslation } from "react-i18next";
 
-export var useSignOn = () => {
+export var useSignUp = () => {
     const { t } = useTranslation();
     var [stage, setStage] = useState(0);
 
@@ -23,7 +23,7 @@ export var useSignOn = () => {
     var [displayTheme, setDisplayTheme] = useState();
     var [displayLanguage, setDisplayLanguage] = useState();
 
-    var signOn = (data) => {
+    var signUp = (data) => {
         postUser(data)
         .then(response => {
             window.location = '/sign-in'
@@ -90,7 +90,7 @@ export var useSignOn = () => {
         height, setHeight, weight, setWeight, activeLevel, setActiveLevel,
         filePath, setFilePath,
         displayTheme, setDisplayTheme, displayLanguage, setDisplayLanguage,
-        signOn,
+        signUp,
         themes, languages, activeLevels, steps
     ];
 }

@@ -18,8 +18,8 @@ function StandardPlatformBar() {
             }
             footer={
                 <div className="platform_bar_footer__inner">
-                    <Button variant="contained" style={{backgroundColor: '#CF113F'}} href='/sign-on'>
-                        {t('Sign on')}
+                    <Button variant="contained" style={{backgroundColor: '#CF113F'}} href='/sign-up'>
+                        {t('Sign up')}
                     </Button>
                     <Button variant="contained" style={{backgroundColor: '#349951'}} href='/sign-in'>
                         {t('Sign in')}

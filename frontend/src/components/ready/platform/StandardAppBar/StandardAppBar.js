@@ -22,25 +22,42 @@ function StandardAppBar() {
             }
             footer={
                 <div className="app_bar_footer__inner">
-                    <IconButton style={{width: 48, height: 48, borderRadius: 8}} onClick={()=>{
-                        removeToken();
-                        window.location = "/sign-in";
-                    }}>
-                        <LogoutIcon style={{color: "black"}}/>
+                    <IconButton
+                        style={{width: 48, height: 48, borderRadius: 8}}
+                        onClick={()=>{
+                            removeToken();
+                            window.location = "/sign-in";
+                        }}>
+                        <LogoutIcon
+                            style={{color: "black"}}/>
                     </IconButton>
-                    <IconButton style={{width: 48, height: 48, borderRadius: 8}} href='/settings'>
-                        <SettingsIcon style={{color: "black"}}/>
+                    <IconButton
+                        style={{width: 48, height: 48, borderRadius: 8}}
+                        href='/settings'>
+                        <SettingsIcon
+                            style={{color: "black"}}/>
                     </IconButton>
-                    <IconButton variant="contained" style={{width: 48, height: 48, borderRadius: 8}} href='/me'>
+                    <IconButton
+                        variant="contained"
+                        style={{width: 48, height: 48, borderRadius: 8}}
+                        href='/me'>
                         <MeIcon/>
                     </IconButton>
                 </div>
             }>
-            <IconButton variant="contained" style={{backgroundColor: "#212121", width: 48, height: 48, borderRadius: 8}} href='/home'>
-                <HomeIcon style={{color: "white"}}/>
+            <IconButton
+                variant="contained"
+                style={{backgroundColor: "#212121", width: 48, height: 48, borderRadius: 8}}
+                href='/home'>
+                <HomeIcon
+                    style={{color: "white"}}/>
             </IconButton>
-            <IconButton variant="contained" style={{backgroundColor: "#7C99DB", width: 48, height: 48, borderRadius: 8}} href='/meals'>
-                <RestaurantIcon style={{color: "white"}}/>
+            <IconButton
+                variant="contained"
+                style={{backgroundColor: "#7C99DB", width: 48, height: 48, borderRadius: 8}}
+                href='/meals'>
+                <RestaurantIcon
+                    style={{color: "white"}}/>
             </IconButton>
             <IconButton variant="contained" style={{backgroundColor: "#6D9EE6", width: 48, height: 48, borderRadius: 8}} href='/discover'>
                 <ExploreIcon style={{color: "white"}}/>

@@ -5,7 +5,8 @@ const schema = {
     dietMealId: Joi.number().required().label("Diet Meal"),
     productId: Joi.number().required().label("Product"),
     unitId: Joi.number().required().label("Unit"),
-    quantity: Joi.number().required().label("Quantity")    
+    quantity: Joi.number().required().label("Quantity"),
+    name: Joi.any().empty().label("Name")
 };
 const path = 'dietMealProduct';
 

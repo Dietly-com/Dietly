@@ -9,7 +9,7 @@ import StandardAppBar from './components/ready/platform/StandardAppBar/StandardA
 import StandardPlatformBar from './components/ready/platform/StandardPlatformBar/StandardPlatformBar';
 
 import SignInPage from './pages/SignInPage/SignInPage';
-import SignOnPage from './pages/SignOnPage/SignOnPage';
+import SignUpPage from './pages/SignUpPage/SignUpPage';
 import SettingsPage from './pages/SettingsPage/SettingsPage';
 import MePage from './pages/MePage/MePage';
 import SearchPage from './pages/SearchPage/SearchPage';
@@ -32,7 +32,7 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/sign-in" element={<SignInPage/>}/>
-              <Route path="/sign-on" element={<SignOnPage/>}/>
+              <Route path="/sign-up" element={<SignUpPage/>}/>
             </Routes>
           </BrowserRouter>
         }/>
